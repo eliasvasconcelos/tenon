@@ -170,7 +170,7 @@
                 <h1 class="fontzero">Pesquise por Categorias</h1>
                 <ul>
                     @forelse($categoria as $z)
-                    <a href="" class="fade_m"><li><i class="fa fa-paw fa-2x"></i><p>{{$z->nome}}</p></li></a>
+                    <a href="{{ url("categoria/{$z->categoria_id}") }}" class="fade_m"><li><i class="fa fa-{{$z->icon}} fa-2x"></i><p>{{$z->nome}}</p></li></a>
                     @empty
                         <li>Não há registro!</li>
                     @endforelse

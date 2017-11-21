@@ -25,7 +25,7 @@
                     <p class="sub_artigo">
                         {{$z->titulo}}
                     </p>
-                    <a href="{{ url("categoria/{$z->id}") }}">
+                    <a href="{{ url("categoria/{$z->categoria_id}/anuncio/{$z->id}") }}">
                         <center><img class="foto fade" src="img/upload/2.png" alt="Imagem"></center>
                     </a>  <p class="preco">
                         {{$z->preco}}
@@ -41,7 +41,7 @@
                     </div>
                 </article>
             @empty
-                <p class="text-center cor_black">Sem Anúncios Cadastrados!!</p>
+                <p class="text-center cor_black">Sem Anúncios!!</p>
             @endforelse
 
         </section>
