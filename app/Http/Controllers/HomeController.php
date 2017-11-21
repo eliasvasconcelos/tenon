@@ -20,7 +20,7 @@ class HomeController extends Controller
     public function index()
     {
         $categoria  = Categoria::orderBy('nome','ASC')->limit(7)->get();
-        $anuncio    = Anuncio::orderBY('id','DESC')->limit(4)->get();
+        $anuncio    = Anuncio::where('premium', 1)->inRandomOrder()->limit(4)->get();
 
         return view("$this->view.index", compact('categoria', 'anuncio'));
     }

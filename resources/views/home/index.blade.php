@@ -19,29 +19,27 @@
             <hr class="style12"></hr>
 
             @forelse($anuncio as $z)
-                @if($z->premium == 1)
                 <article class="item">
                     <h2 class="fontzero"> {{$z->titulo}}</h2>
 
                     <p class="sub_artigo">
                         {{$z->titulo}}
                     </p>
-                    <a href="#">
+                    <a href="{{ url("categoria/{$z->id}") }}">
                         <center><img class="foto fade" src="img/upload/2.png" alt="Imagem"></center>
                     </a>  <p class="preco">
                         {{$z->preco}}
                     </p>
                     <p class="desc_artigo">
-                        {{$z->descricao}}São 16 ovelhas prenhas de 04 meses..
+                        {{$z->conteudo_resumido}}
                     </p>
                     <div class="data">
-                        <date>7 jan, 2017</date>
+                        <date>{{$z->created_at}}</date>
                         <span class="estado">
-                                Espirito Santo <i class="fa fa-map-marker fa-1x"></i>
+                                {{$z->uf_id}} <i class="fa fa-map-marker fa-1x"></i>
                         </span>
                     </div>
                 </article>
-                @endif
             @empty
                 <p class="text-center cor_black">Sem Anúncios Cadastrados!!</p>
             @endforelse
