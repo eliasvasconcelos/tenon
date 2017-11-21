@@ -43,7 +43,7 @@
                 </article>
                 @endif
             @empty
-                <p class="text-center cor_black">Sem Anúncios</p>
+                <p class="text-center cor_black">Sem Anúncios Cadastrados!!</p>
             @endforelse
 
         </section>
