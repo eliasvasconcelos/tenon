@@ -29,10 +29,10 @@
                     <a href="#">
                         <center><img class="foto fade" src="img/upload/2.png" alt="Imagem"></center>
                     </a>  <p class="preco">
-                        R$ 2,000.000
+                        {{$z->preco}}
                     </p>
                     <p class="desc_artigo">
-                        São 16 ovelhas prenhas de 04 meses..
+                        {{$z->descricao}}São 16 ovelhas prenhas de 04 meses..
                     </p>
                     <div class="data">
                         <date>7 jan, 2017</date>
