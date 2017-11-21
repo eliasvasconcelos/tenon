@@ -1,0 +1,418 @@
+@media screen and (min-width: 480px){
+.topo{
+    height:240px;
+}
+.logo{
+    margin: 10px auto;
+    width: 134px;
+    background: url(../img/logo.png) center center/134px no-repeat;
+}
+.menu{
+    border-bottom: 1px solid #fff;
+    font-size: 0.93em;
+    padding-bottom: 15px;
+}
+.intro{	
+    width: 40%;
+    margin: 100px auto; 
+}
+.tagline{
+    margin: -100px auto;
+}
+#destaque .item{
+    margin-left: 2%;
+    width: 48%;
+    float: left;
+}
+#destaque .data{
+    width: 100%;
+}
+#destaque .desc_artigo{
+    width: 98%;
+    
+}
+#leiloes .item{
+    margin-left: 1%;
+    width: 49%;
+    float: left;
+}
+#destaque .v{
+    display:inline;
+}
+#leiloes .v{
+    display:inline;
+}
+#leiloes .data{
+    width: 96%;
+}
+#leiloes .hour{
+        font-size:1.4em;
+}
+
+}
+
+@media screen and (min-width: 640px){
+	
+.topo{
+    height:300px;
+}
+.logo{
+    margin: 5px auto;
+}
+	
+.menu{
+    width: 36%;
+	display: inline;
+	margin-top: 0px;
+}
+.menu_mobile{
+	display: none;
+}
+	
+.header_op{
+    margin-top:-100px;
+}
+.ofertas{
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+    margin-right: 25px;
+    width :25% ;
+	
+}
+.anunciar{
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+    width :25% ;
+}
+.anunciar2{
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+    margin-right: 25px;
+    width :25% ;
+}
+.bg_busca{
+    margin: 48px auto;
+    width: 97%;height : 87px ;
+    border-bottom-right-radius: 10px;
+    border-top-left-radius: 10px;
+    background-color: #00695c;
+}
+.busca_icon{
+    visibility:visible;
+}
+.busca{
+    position: relative;
+    top:5px;
+    right: -5px;
+    width: 100%;
+    border-bottom-right-radius: 10px;
+    border-top-left-radius: 10px;
+    border-style: solid;
+    border-width: 1px;
+    border-color: rgb(206, 206, 206);
+    background-color: rgb(255, 255, 255);
+    box-shadow: inset 0px 3px 7px 0px rgba(0, 0, 0, 0.35);
+    height: 85px;
+}
+.header_pesquisa{
+    width: 80%;
+    float: left;
+    border: none;
+    margin: 10px 5px 30px 0px;
+}
+.categorias{
+        margin-bottom: 10px;	
+}
+.btn_busca{
+    width: 100%;
+    margin: 0px 0px 0px 0px;
+}
+#destaque .item{
+    margin-left: 1.8%;
+    width: 31%;
+}
+#destaque .v{
+    display:none;
+}
+#leiloes .v{
+    display:none;
+}
+#leiloes .item{
+    margin-left: 1.8%;
+    width: 31%;
+}
+#leiloes .hour{
+    margin-top: 2px;
+        font-size:1.2em;
+}
+#rodape .empresa{
+	width: 30%;
+}
+#rodape .middle{
+	padding-top: 14px;
+	width: 55%;
+	height: 50px;
+}
+#rodape .right{
+    margin-top:-90px;
+}
+}
+
+@media screen and (min-width: 768px){	
+h1 { 
+    font-size: 2em;
+}
+.topo{
+    height:370px;
+}
+.logo{
+	float: none;
+}.menu{
+	margin-top: -40px;
+}
+.saudacao{
+    display: block;
+    width: 38%;
+    font-size: 1em;
+    margin-top: -45px;
+    float: left;
+    padding-bottom: 15px;
+}
+.intro{
+    width: 45%;
+    padding:10px;
+	margin-top:60px;
+}
+.tagline{
+    font-size: 1.3em;
+}	
+.btn_busca{
+    float: right;
+    width: 100px;
+    cursor: pointer;
+    text-align: left;
+    margin: 5px 5px 0px 0px;
+}
+.b_pes{
+    visibility:hidden;
+}
+.header_pesquisa{
+    width: 34%;
+    float: left;
+}
+.categorias{
+    float: left;
+    margin: 20px 10px 0px 0px;
+    width: 150px;
+    border: none;
+    margin-top: 10px;
+}
+.estados{
+    float: left;
+    margin-top: 10px;
+    border: none;
+    width: 140px;
+}
+.ofertas{
+    width :20% ;
+}
+.anunciar{
+    width :20% ;
+}
+.anunciar2{
+    width :20% ;
+}
+.header_op{
+    height:140px;
+}
+.mobile{
+    display:none;
+}
+.conteudo{
+        display:block;
+}
+#destaque .item{
+  width: 30%;
+	margin: auto;
+}
+#destaque .desc_artigo{
+    width: 234px;
+    
+}
+#leiloes .item{
+    width: 31%;
+}
+#leiloes .data{
+    width: 91%;
+}
+}
+
+@media screen and (min-width: 960px){
+	
+.topo{
+    height:400px;
+}
+.saudacao{
+    width: 40%;
+}
+.menu{
+    width: 40%;
+}	
+.header_pesquisa{
+    width: 45%;
+}
+
+.anunciar2{
+    margin-right: 60px;
+}
+.nome_cat{
+    margin-top: 0px;
+    display:inline;
+    margin-bottom: -10px;
+}
+.cat_principal{
+    display:inline;
+	margin-bottom: 10px;
+}
+#destaque .item{
+  width: 31%;
+}
+#leiloes .data{
+    width: 84%;
+}
+#leiloes .hour{
+        font-size:1.5em;
+}
+.oculta{
+	display: none;
+}
+}
+
+@media screen and (min-width: 1024px){
+	
+.oculta{
+	display: block;
+}
+.topo{
+    margin-top: -1px;
+    padding:  2% 5%;
+    height : 468px;
+}
+.menu{
+margin-top: -47px;
+}
+.intro{
+    width: 40%;
+	margin-top:100px;
+}	
+.saudacao{
+    margin-top: -50px;
+}
+.bg_busca{
+    width: 92%;
+	
+}
+.nome_cat{
+    margin-bottom: 0px;
+}
+.anunciar2{
+    margin-right: 75px;
+}
+.ofertas{
+    width :20% ;
+    margin: 0px 75px 0px 0px ;
+}
+.header_pesquisa{
+    width: 48%;
+}	
+#destaque .item{
+    width: 23%;
+    margin-left: 1.6%;
+}
+#destaque .desc_artigo{
+    width: 100%;
+}
+#destaque .v{
+    display:block;
+}
+#leiloes .item{
+    width: 23%;
+    margin-left: 1.6%;
+}
+#leiloes .data{
+    width: 91%;
+}
+#leiloes .v{
+    display:block;
+}
+}
+
+@media screen and (min-width: 1280px){
+	
+.topo{
+    width: 1280px;
+    margin-top: -1px;
+    float: none;padding:  2% 5%;
+}
+.saudacao{
+    width: 40%;
+    margin-top: -55px;
+}
+.menu{
+    width: 40%;
+    margin-top: -55px;
+    font-size: 1em;
+}
+.intro{
+    width: 45%;
+    padding:10px;
+    margin: 130px auto;
+}
+.tagline{
+    margin-top: -130px;
+    font-size: 1.3em;
+}	
+.bg_busca{
+    width: 1140px;
+	
+}
+.header_op{
+    float: none;
+    width: 1280px;
+}
+.ofertas{
+    margin: 0px 95px 0px 0px ;
+}
+.anunciar2{
+    margin-right: 95px;
+}
+.anunciar{
+}
+.header_pesquisa{
+    width: 58%;
+}
+.conteudo{
+    width: 1138px; 
+}
+#destaque{
+    margin: 10px auto;
+    width: 1138px;
+}
+#leiloes{
+    margin: 10px auto;
+    width: 1138px;
+}
+#destaque .item{
+    width: 23%;
+    margin-left: 1.6%;
+}
+#leiloes .data{
+    width: 93%;
+}.center{
+    width: 1138px;
+}
+.cat_principal{
+    width: 100%;
+	text-align: center;
+}
+}
