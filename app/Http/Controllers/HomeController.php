@@ -3,25 +3,14 @@
 namespace App\Http\Controllers;
 
 use App\Models\Anuncio;
-use App\Models\Categoria;
 use Illuminate\Http\Request;
 
-class HomeController extends Controller
+class HomeController extends DefaultController
 {
-    protected $model, $request;
-    protected $view = 'home';
-
-    function __construct(Categoria $model, Request $request)
-    {
-        $this->model = $model;
-        $this->request = $request;
-    }
-
     public function index()
     {
-        $categoria  = Categoria::orderBy('nome','ASC')->limit(7)->get();
-        $anuncio    = Anuncio::where('premium', 1)->inRandomOrder()->limit(4)->get();
+        $anuncio = Anuncio::orderBy('id','DESC')->limit(10)->get();
 
-        return view("$this->view.index", compact('categoria', 'anuncio'));
+        return view("home.index", compact('anuncio'));
     }
 }

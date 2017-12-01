@@ -22,11 +22,4 @@ class Anuncio extends Model
     {
         return $this->hasOne(Uf::class, 'id', 'uf_id');
     }
-
-    protected $appends = ['conteudo_resumido'];
-    public function getConteudoResumidoAttribute()
-    {
-        return str_limit($this->getAttribute('descricao'), 45, '...');
-    }
-
 }

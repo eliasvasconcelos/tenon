@@ -15,4 +15,10 @@ class AnuncioController extends DefaultController
         $this->model = $model;
         $this->request = $request;
     }
+    public function index()
+    {
+        $anuncio = Anuncio::orderBy('id','DESC')->limit(50)->get();
+
+        return view("$this->view.index", compact('data', 'anuncio'));
+    }
 }
