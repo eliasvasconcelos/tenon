@@ -19,6 +19,6 @@ class AnuncioController extends DefaultController
     {
         $anuncio = Anuncio::orderBy('id','DESC')->limit(50)->get();
 
-        return view("$this->view.index", compact('data', 'anuncio'));
+        return view("$this->view.index", compact( 'anuncio'));
     }
 }
