@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use App\Models\Categoria;
-use App\Models\Anuncio;
 use Illuminate\Http\Request;
 
 class CategoriaController extends DefaultController
@@ -16,13 +15,10 @@ class CategoriaController extends DefaultController
         $this->model = $model;
         $this->request = $request;
     }
-
     public function index()
     {
         $data = $this->model->orderBy('id','DESC')->limit(10)->get();
-
-        return view("$this->view.index", compact('data'));
-
+        return view("$this->view.index", compact('anuncio', 'estado','data'));
     }
 
 }

@@ -1,7 +1,8 @@
+<link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
 <h1>Categoria</h1>
 <ul>
         @forelse($data as $z)
-                <li>{{$z->nome}} // {{$z->created_at}}</li>
+                <li>{{$z->nome}}</li>
         @empty
                 <li>Não há registro!</li>
         @endforelse

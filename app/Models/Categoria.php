@@ -17,4 +17,8 @@ class Categoria extends Model
     {
         return $this->hasOne($this, 'id', 'categoria_id');
     }
+    public function anuncios()
+    {
+        return $this->hasMany(Anuncio::class, 'categoria_id', 'id');
+    }
 }

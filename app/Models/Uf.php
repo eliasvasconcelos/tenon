@@ -12,4 +12,10 @@ class Uf extends Model
     protected $dates = ['deleted_at'];
 
     protected $fillable = ['uf', 'sigla'];
+
+    public function uf()
+    {
+        return $this->hasOne(Uf::class, 'id', 'uf_id');
+    }
+
 }

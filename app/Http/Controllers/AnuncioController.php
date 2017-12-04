@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\Anuncio;
+use App\Models\UserTipo;
+use App\Models\Categoria;
 use Illuminate\Http\Request;
 
 class AnuncioController extends DefaultController
@@ -17,8 +19,10 @@ class AnuncioController extends DefaultController
     }
     public function index()
     {
-        $anuncio = Anuncio::orderBy('id','DESC')->limit(50)->get();
+        $categoria = Categoria::all();
+        $usuario = UserTipo::all();
+        $anuncio = Anuncio::orderBy('id','DESC')->paginate(30);
 
-        return view("$this->view.index", compact( 'anuncio'));
+        return view("$this->view.index", compact( 'usuario','categoria','anuncio'));
     }
 }

@@ -1,10 +1,13 @@
 
-<h3>{{$data->nome}}</h3>
+<link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
 
+<h3>Categoria Selecionada -> {{$data->nome}}</h3>
 
-<li>
-    @forelse($data as $z)
-        {{$data->categoria_id}}
+<ul>
+    @forelse($data->anuncios as $z)
+        <li>
+                <a href="../anuncio/{{$z->id}}">{{$z->titulo}}</a>
+        </li>
          @empty
     @endforelse
-</li>
+</ul>

@@ -1,3 +1,4 @@
+<link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
 <h1>Anuncio</h1>
 <ul>
     @forelse($anuncio as $z)
@@ -6,3 +7,11 @@
     <li>Não há registro!</li>
     @endforelse
 </ul>
+
+@if($anuncio)
+    @if($anuncio->links())
+        {!! $anuncio->links() !!}
+    @else
+
+    @endif
+@endif
