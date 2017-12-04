@@ -2,7 +2,7 @@
 <h1>Categoria</h1>
 <ul>
         @forelse($data as $z)
-                <li>{{$z->nome}}</li>
+        <li> <a href="categoria/{{$z->id}}">{{$z->nome}}</a></li>
         @empty
                 <li>Não há registro!</li>
         @endforelse

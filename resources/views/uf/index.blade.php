@@ -1,5 +1,6 @@
 <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
-<h2>Estados anuncios</h2>
+<h2>Estados anuncios
+    -> <a href="{{url('../')}}">Voltar</a></h2>
 <ul>
 @forelse($data as $z)
         <li>

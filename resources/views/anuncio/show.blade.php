@@ -1,6 +1,5 @@
-<a href="../anuncio">Voltar</a>
 @if($data->premium == 1)
-        <h2>Anuncio premium</h2>
+        <h2>Anuncio premium -> <a href="{{url('../anuncio')}}">Voltar</a></h2>
         <p>// ID do Anúncio : <b>{{$data->id}}</b></p>
         <p>// Titulo do Anúncio : <b>{{$data->titulo}}</b></p>
         <p>// Anunciante :
@@ -22,7 +21,7 @@
         <p>// Atualizado em : <b>{{$data->updated_at}}</b></p>
 
 @else
-        <h2>Anuncio normal</h2>
+        <h2>Anuncio normal -> <a href="{{url('../anuncio')}}">Voltar</a></h2>
         <p>// ID do Anúncio : <b>{{$data->id}}</b></p>
         <p>// Titulo do Anúncio : <b>{{$data->titulo}}</b></p>
         <p>// Anunciante :

@@ -1,8 +1,8 @@
 <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
 <h2>Buscar anuncios</h2>
-<form action="anuncio">
+<form action="{{url('pesquisa')}}" method="post">
     {!! csrf_field() !!}
-    <input type="text" name="pesquisa" placeholder="Digite aqui...">
+    <input type="text" name="texto" placeholder="Digite aqui...">
     <select name="estado">@forelse($estado as $z)
             <option>{{$z->uf}}</option>
         @empty
