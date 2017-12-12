@@ -12,6 +12,7 @@ class AnuncioController extends DefaultController
     protected $model, $request;
     protected $view = 'anuncio';
 
+
     function __construct(Anuncio $model, Request $request)
     {
         $this->model = $model;
@@ -25,4 +26,5 @@ class AnuncioController extends DefaultController
 
         return view("$this->view.index", compact( 'usuario','categoria','anuncio'));
     }
+
 }

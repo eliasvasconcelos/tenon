@@ -23,8 +23,19 @@ class Anuncio extends Model
     {
         return $this->hasOne(Uf::class, 'id', 'uf_id');
     }
+
     public function user()
     {
         return $this->hasOne(User::class, 'id', 'user_id');
+    }
+
+    public function fotos()
+    {
+        return $this->hasMany(AnuncioFoto::class, 'anuncio_id', 'id');
+    }
+
+    public function novo()
+    {
+
     }
 }

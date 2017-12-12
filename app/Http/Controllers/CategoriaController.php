@@ -14,11 +14,14 @@ class CategoriaController extends DefaultController
     {
         $this->model = $model;
         $this->request = $request;
+        $this->middleware('auth');
     }
+
     public function index()
     {
-        $data = $this->model->orderBy('id','DESC')->limit(10)->get();
+        $data = $this->model->where('categoria_id', 0)->get();
         return view("$this->view.index", compact('anuncio', 'estado','data'));
     }
 
 }
+

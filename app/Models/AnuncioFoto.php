@@ -13,8 +13,4 @@ class AnuncioFoto extends Model
 
     protected $fillable = ['anuncio_id', 'base64'];
 
-    public function anuncio()
-    {
-        return $this->hasOne(Anuncio::class, 'id', 'anuncio_id');
-    }
 }

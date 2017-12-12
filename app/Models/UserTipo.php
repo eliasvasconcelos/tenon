@@ -12,4 +12,6 @@ class UserTipo extends Model
     protected $dates = ['deleted_at'];
 
     protected $fillable = ['nome'];
+
+
 }

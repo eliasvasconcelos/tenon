@@ -1,0 +1,3 @@
+Profile
+
+    {{ $user->name }}

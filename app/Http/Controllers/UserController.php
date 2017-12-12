@@ -15,4 +15,11 @@ class UserController extends DefaultController
         $this->model = $model;
         $this->request = $request;
     }
+
+    public function show($id)
+    {
+        $usuario = User::all();
+        return view("$this->view.index", compact( 'usuario'));
+
+    }
 }

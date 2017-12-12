@@ -1,5 +1,7 @@
-<link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
-<h1>Categoria</h1>
+@extends('layouts.app')
+
+@section('content')
+    <h1>Categoria</h1>
 <ul>
         @forelse($data as $z)
         <li> <a href="categoria/{{$z->id}}">{{$z->nome}}</a></li>
@@ -20,8 +22,25 @@
 
     </ul>
 @endfor
+    <form id="form-categoria" class="form" style="display: none;"><br/>
+        {!! csrf_field() !!}
+        <input type="hidden" id="categoria_id" name="categoria_id" value="">
+        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+            <div class="form-group">
+                <div class="input-group">
+                    <div class="input-group-addon">Categoria</div>
+                    <input class="form-control" id="nome" name="nome" placeholder="Categoria" value="">
+                </div>
+            </div>
+        </div>
+        <a class="btn btn-success" onclick="save('categoria', '{{url('categoria')}}');"><i
+                    class="fa fa-save"></i>
+            Salvar
+        </a>
+    </form>
 
-<script>
+
+    <script>
     function captura(id, ul) {
         var metodo = 'GET';
         var link = '{{url('api/categoria/search')}}/' + id;
@@ -40,14 +59,14 @@
                 jQuery("#sub" + (j-1) + " li").css("background", "#ccc");
                 jQuery("#sub" + (j-1) + " li").css("color", "#000");
             }
-            jQuery("#form-category").fadeOut();
-            jQuery("#form-category #nome").val("");
-            jQuery("#form-category #categoria_id").val("");
+            jQuery("#form-categoria").fadeOut();
+            jQuery("#form-categoria #name").val("");
+            jQuery("#form-categoria #categoria_id").val("");
             if (data == "") {
                 jQuery("#"+id).css("background", "#07A68E");
                 jQuery("#"+id).css("color", "#FFF");
                 jQuery("#form-categoria").fadeIn();
-                jQuery("#form-categoria #nome").val(jQuery("#"+id).html());
+                jQuery("#form-categoria #name").val(jQuery("#"+id).html());
                 jQuery("#form-categoria #categoria_id").val(id);
             } else {
                 jQuery("#"+id).css("background", "#07A68E");
@@ -64,3 +83,4 @@
         });
     }
 </script>
+@endsection

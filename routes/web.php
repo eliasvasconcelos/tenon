@@ -14,6 +14,10 @@
 Route::resource('/', 'HomeController');
 
 Route::resource('anuncio', 'AnuncioController');
+Route::group(['prefix' => 'anuncio'], function () {
+    Route::post('/novo', 'AnuncioController@novo');
+});
+
 
 Route::resource('estado', 'UfController');
 
@@ -21,4 +25,6 @@ Route::resource('anuncio_foto', 'AnuncioFotoController', ['except'=> 'index', 'c
 
 Route::resource('categoria', 'CategoriaController');
 
-Route::resource('user', 'UserController');
+
+Auth::routes();
+Route::get('/home', 'HomeController@index')->name('home');

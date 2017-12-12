@@ -2,7 +2,6 @@
 
 namespace App;
 
-use App\Models\UserTipo;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
@@ -19,7 +18,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password', 'cpf', 'cnpj', 'tipo_id'
+        'name', 'email', 'password', 'tipo_id', 'cpf', 'cnpj'
     ];
 
     /**
@@ -31,8 +30,4 @@ class User extends Authenticatable
         'password', 'remember_token',
     ];
 
-    public function tipo()
-    {
-        return $this->hasOne(UserTipo::class, 'id', 'tipo_id');
-    }
 }

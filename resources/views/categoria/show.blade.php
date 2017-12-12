@@ -1,6 +1,7 @@
+@extends('layouts.app')
 
-<link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
-<h3>Categoria Selecionada -> {{$data->nome}}
+@section('content')
+        <h3>Categoria Selecionada -> {{$data->nome}}
         -> <a href="{{url('../categoria')}}">Voltar</a></h3>
 
 
@@ -12,3 +13,5 @@
          @empty
     @endforelse
 </ul>
+
+@endsection

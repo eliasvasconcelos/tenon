@@ -3,15 +3,15 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\DefaultController;
-use App\Models\Categoria;
+use App\Models\Uf;
 use Illuminate\Http\Request;
 
-class CategoriaController extends DefaultController
+class UfController extends DefaultController
 {
     protected $model, $request;
-    protected $view = 'categoria';
+    protected $view = 'uf';
 
-    function __construct(Categoria $model, Request $request)
+    function __construct(Uf $model, Request $request)
     {
         $this->model = $model;
         $this->request = $request;
@@ -19,7 +19,7 @@ class CategoriaController extends DefaultController
 
     public function api($id)
     {
-        $data = $this->model->where('categoria_id', $id)->get();
+        $data = $this->model->where('id', $id)->get();
         return response()->json($data);
     }
 }
