@@ -13,13 +13,13 @@
 
 Route::resource('/', 'HomeController');
 
-Route::resource('anuncio', 'AnuncioController');
-Route::group(['prefix' => 'anuncio'], function () {
-    Route::post('/novo', 'AnuncioController@novo');
-});
+Route::get('anuncio/novo_anuncio', 'AnuncioController@novo');
 
+Route::resource('anuncio', 'AnuncioController');
 
 Route::resource('estado', 'UfController');
+
+Route::resource('user', 'UserController');
 
 Route::resource('anuncio_foto', 'AnuncioFotoController', ['except'=> 'index', 'create', 'edit', 'show']);
 

@@ -1,9 +1,11 @@
 @extends('layouts.app')
 
 @section('content')
-        <a href="../anuncio">Voltar</a>
+<a href="../anuncio">Voltar</a>
 @if($data->premium == 1)
         <h2>Anuncio premium</h2>
+        <img src="{{$data->fotos->base64 or ''}}" alt="Imagem" width="250">
+        <br />
         <p>// ID do Anúncio : <b>{{$data->id}}</b></p>
         <p>// Titulo do Anúncio : <b>{{$data->titulo}}</b></p>
         <p>// <b>
@@ -11,6 +13,8 @@
                                 Sou Pessoa Jurídica
                         @elseif($data->user->tipo_id == '3')
                                 Sou Pessoa Física
+                        @elseif($data->user->tipo_id == '1')
+                            Sou da Equipe
                         @endif
                 </b>
         </p>
@@ -27,10 +31,11 @@
         <p>// Estado : <b><a href="../estado/{{$data->uf_id}}">{{$data->uf->uf or ''}} - {{$data->uf->sigla or ''}}</a></b></p>
         <p>// Criado em : <b>{{$data->created_at}}</b></p>
         <p>// Atualizado em : <b>{{$data->updated_at}}</b></p>
-        <p>// Album : <b>{{$anuncio_foto->fotos}}</b></p>
 
-@else
+@elseif($data->premium == 0)
         <h2>Anuncio normal</h2>
+        <img src="{{$data->fotos->base64 or ''}}" alt="Imagem" width="250">
+        <br />
         <p>// ID do Anúncio : <b>{{$data->id}}</b></p>
         <p>// Titulo do Anúncio : <b>{{$data->titulo}}</b></p>
         <p>// <b>
@@ -38,6 +43,8 @@
                                 Sou Pessoa Jurídica
                         @elseif($data->user->tipo_id == '3')
                                 Sou Pessoa Física
+                        @elseif($data->user->tipo_id == '1')
+                                Sou da Equipe
                         @endif
                 </b>
         </p>
@@ -54,5 +61,7 @@
         <p>// Estado : <b><a href="../estado/{{$data->uf_id}}">{{$data->uf->uf or ''}} - {{$data->uf->sigla or ''}}</a></b></p>
         <p>// Criado em : <b>{{$data->created_at}}</b></p>
         <p>// Atualizado em : <b>{{$data->updated_at}}</b></p>
+
 @endif
+
 @endsection

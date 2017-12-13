@@ -31,7 +31,7 @@ class Anuncio extends Model
 
     public function fotos()
     {
-        return $this->hasMany(AnuncioFoto::class, 'anuncio_id', 'id');
+        return $this->hasOne(AnuncioFoto::class, 'anuncio_id', 'id');
     }
 
     public function novo()

@@ -39,7 +39,6 @@
         </a>
     </form>
 
-
     <script>
     function captura(id, ul) {
         var metodo = 'GET';
@@ -83,4 +82,5 @@
         });
     }
 </script>
+
 @endsection

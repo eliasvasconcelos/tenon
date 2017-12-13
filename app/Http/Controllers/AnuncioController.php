@@ -27,4 +27,27 @@ class AnuncioController extends DefaultController
         return view("$this->view.index", compact( 'usuario','categoria','anuncio'));
     }
 
+    public function novo()
+    {
+        return view('anuncio.create');
+       /* $inserir = $this->model->create([
+            'user_id' =>   1,
+            'categoria_id' =>  4,
+            'titulo' =>   '',
+            'descricao' =>  '',
+            'uf_id' =>   2,
+            'premium' =>   0
+
+        ]);
+
+        if($inserir){
+           return view('anuncio.create');
+       /*     return "inserido com sucesso";
+        }else{
+            return view('anuncio.create');
+            return "Vixi, deu zebra";
+        }*/
+
+    }
+
 }
