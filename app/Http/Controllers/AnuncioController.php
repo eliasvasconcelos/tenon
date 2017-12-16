@@ -6,6 +6,7 @@ use App\Models\Anuncio;
 use App\Models\UserTipo;
 use App\Models\Categoria;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Input;
 
 class AnuncioController extends DefaultController
 {
@@ -14,10 +15,12 @@ class AnuncioController extends DefaultController
 
 
     function __construct(Anuncio $model, Request $request)
+
     {
         $this->model = $model;
         $this->request = $request;
     }
+
     public function index()
     {
         $categoria = Categoria::all();
@@ -26,6 +29,25 @@ class AnuncioController extends DefaultController
 
         return view("$this->view.index", compact( 'usuario','categoria','anuncio'));
     }
+
+    public function Pesquisar()
+    {
+        if(Input::has('texto')==false)
+        {
+            return redirect('/');
+        }
+        $texto = Input::get('texto');
+        $pesquisa = Anuncio::where('titulo', 'like', '%' . $texto . '%')
+            ->orWhere('descricao', 'like', '%' . $texto . '%')->get();
+
+        return view("$this->view.search")->with('result', $pesquisa);
+    }
+public function destroy($id)
+{
+    $deletar = Anuncio::find($id);
+
+    $deletar->delete();
+}
 
     public function novo()
     {
@@ -47,7 +69,5 @@ class AnuncioController extends DefaultController
             return view('anuncio.create');
             return "Vixi, deu zebra";
         }*/
-
     }
-
 }

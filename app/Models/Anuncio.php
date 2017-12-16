@@ -34,8 +34,8 @@ class Anuncio extends Model
         return $this->hasOne(AnuncioFoto::class, 'anuncio_id', 'id');
     }
 
-    public function novo()
+    public function album()
     {
-
+        return $this->hasMany(AnuncioFoto::class, 'anuncio_id', 'id');
     }
 }

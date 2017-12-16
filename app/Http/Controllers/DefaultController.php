@@ -34,7 +34,9 @@ class DefaultController extends BaseController
     public function show($id)
     {
         $data = $this->model->find($id);
-
+            if($data == null){
+                return "Erro";
+            }
         return view("$this->view.show", compact('data'));
     }
 

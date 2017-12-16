@@ -1,12 +1,11 @@
 @extends('layouts.app')
 
 @section('content')
-<h2>Estados anuncios
-    -> <a href="{{url('../')}}">Voltar</a></h2>
+<h2>Estados anuncios</h2>
 <ul>
 @forelse($data as $z)
         <li>
-            <a href="../estado/{{$z->id}}">{{$z->uf}}</a>
+            <a href="estado/{{$z->id}}">{{$z->uf}}</a>
         </li>
     @empty
     Nenhum estado cadastrado!!

@@ -1,13 +1,17 @@
 @extends('layouts.app')
 
 @section('content')
-<h2>anuncios -> <a href="{{url('../estado')}}">Voltar</a></h2>
+<h2>Anuncios</h2>
 
-      {{$data->uf}} - {{$data->sigla}}
+    {{$data->uf}} - {{$data->sigla}}
+        <br>
+    Total de Anuncios <b>
+    {{\App\Models\Anuncio::where('uf_id', $data->id)->count()}}</b> para <b>{{$data->uf}}</b>
+
 <hr>
 @forelse($anuncio as $z)
 
-    <img src="{{$z->fotos->base64 or ''}}" alt="Imagem" width="200">
+    <a href="../anuncio/{{$z->id}}"><img src="{{$z->fotos->base64 or ''}}" alt="Imagem" width="200"></a>
     <br/>
         <a href="../anuncio/{{$z->id}}">{{$z->titulo}}</a> // {{$z->descricao}}
         <br />Postado por: <b>{{$z->user->name or ''}}</b>

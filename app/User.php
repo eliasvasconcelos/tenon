@@ -31,4 +31,8 @@ class User extends Authenticatable
         'password', 'remember_token',
     ];
 
+    public function anuncios()
+    {
+        return $this->hasMany(Anuncio::class,'user_id','id');
+    }
 }

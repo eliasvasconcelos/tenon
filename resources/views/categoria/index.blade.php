@@ -9,7 +9,7 @@
                 <li>Não há registro!</li>
         @endforelse
 </ul>
-
+{{--
 <ul id="sub1">
     @foreach($data as $z)
         <li style="display: inline-table; margin-left: 10px; padding: 20px; background: #ccc; color: #000; border-radius: 6px; cursor: pointer;"
@@ -81,6 +81,6 @@
         }).fail(function () {
         });
     }
-</script>
+</script>--}}
 
 @endsection

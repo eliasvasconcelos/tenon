@@ -19,3 +19,4 @@ class HomeController extends DefaultController
         return view("home.index", compact('anuncio','anuncioP','estado', 'categoria'));
     }
 }
+

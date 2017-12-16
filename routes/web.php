@@ -11,9 +11,13 @@
 |
 */
 
+Auth::routes();
+
 Route::resource('/', 'HomeController');
 
-Route::get('anuncio/novo_anuncio', 'AnuncioController@novo');
+Route::group(['middleware' => ['auth']], function (){
+    Route::get('anuncio/novo_anuncio', 'AnuncioController@novo');
+});
 
 Route::resource('anuncio', 'AnuncioController');
 
@@ -25,6 +29,6 @@ Route::resource('anuncio_foto', 'AnuncioFotoController', ['except'=> 'index', 'c
 
 Route::resource('categoria', 'CategoriaController');
 
+Route::any('pesquisar','AnuncioController@pesquisar');
 
-Auth::routes();
 Route::get('/home', 'HomeController@index')->name('home');
