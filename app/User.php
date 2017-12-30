@@ -3,6 +3,7 @@
 namespace App;
 
 use App\Models\Anuncio;
+use App\Models\Endereco;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
@@ -19,7 +20,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password', 'tipo_id', 'cpf', 'cnpj'
+        'name', 'email', 'password', 'tipo_id', 'cpf', 'cnpj','telefone','foto_perfil','endereco_id'
     ];
 
     /**
@@ -34,5 +35,10 @@ class User extends Authenticatable
     public function anuncios()
     {
         return $this->hasMany(Anuncio::class,'user_id','id');
+    }
+
+    public function endereco()
+    {
+        return $this->hasOne(Endereco::class,'user_id', 'id');
     }
 }

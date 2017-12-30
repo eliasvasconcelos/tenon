@@ -1,6 +1,10 @@
 @extends('layouts.app')
 
 @section('content')
+
+
+    <main class="conteudo">
+        <section id="default2">
 <h2>Estados anuncios</h2>
 <ul>
 @forelse($data as $z)
@@ -19,6 +23,8 @@
     @endforeach
 </ul>
 
+        </section>
+    </main>
 <script>
     function captura(id, ul) {
         var metodo = 'GET';

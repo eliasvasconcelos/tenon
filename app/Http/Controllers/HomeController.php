@@ -13,8 +13,8 @@ class HomeController extends DefaultController
     {
         $estado = Uf::all();
         $categoria = Categoria::where('categoria_id', 0)->limit(8)->get();
-        $anuncio = Anuncio::where('premium', 0)->inRandomOrder()->limit(5)->get();
-        $anuncioP = Anuncio::where('premium', 1)->inRandomOrder()->limit(5)->get();
+        $anuncio = Anuncio::where('premium', 0)->inRandomOrder()->limit(4)->get();
+        $anuncioP = Anuncio::where('premium', 1)->inRandomOrder()->limit(4)->get();
 
         return view("home.index", compact('anuncio','anuncioP','estado', 'categoria'));
     }

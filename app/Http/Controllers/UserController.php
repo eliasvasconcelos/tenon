@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Anuncio;
+use App\Models\Endereco;
 use App\User;
 use Illuminate\Http\Request;
 
@@ -10,12 +11,14 @@ class UserController extends DefaultController
 {
     protected $model, $request;
     protected $anuncio;
+    protected $endereco;
     protected $view = 'user';
 
-    function __construct(User $model,Anuncio $anuncio, Request $request)
+    function __construct(User $model,Anuncio $anuncio, Request $request, Endereco $endereco)
     {
         $this->model = $model;
         $this->anuncio = $anuncio;
+        $this->endereco = $endereco;
         $this->request = $request;
     }
     public function index()

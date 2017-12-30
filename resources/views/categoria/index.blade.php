@@ -1,10 +1,12 @@
 @extends('layouts.app')
 
 @section('content')
+    <main class="conteudo">
+        <section id="default2">
     <h1>Categoria</h1>
 <ul>
         @forelse($data as $z)
-        <li> <a href="categoria/{{$z->id}}">{{$z->nome}}</a></li>
+        <li> <a class="cor_black" href="categoria/{{$z->id}}">{{$z->nome}}</a></li>
         @empty
                 <li>Não há registro!</li>
         @endforelse
@@ -82,5 +84,7 @@
         });
     }
 </script>--}}
+        </section>
+    </main>
 
 @endsection

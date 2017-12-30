@@ -15,8 +15,8 @@ class DatabaseSeeder extends Seeder
         $this->call(UfsTableSeeder::class);
         $this->call(UsersTableSeeder::class);
         $this->call(UserTiposTableSeeder::class);
-        factory(App\User::class, 9)->create();
-        factory(App\Models\Categoria::class, 100)->create();
-        factory(App\Models\Anuncio::class, 1000)->create();
+        factory(App\User::class, 10)->create();
+        factory(App\Models\Categoria::class, 20)->create();
+        factory(App\Models\Anuncio::class, 50)->create();
     }
 }

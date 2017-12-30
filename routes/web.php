@@ -27,7 +27,7 @@ Route::resource('user', 'UserController');
 
 Route::resource('anuncio_foto', 'AnuncioFotoController', ['except'=> 'index', 'create', 'edit', 'show']);
 
-Route::resource('categoria', 'CategoriaController');
+Route::resource('categoria', 'CategoriaController',['except'=> 'index', 'create', 'edit', 'show']);
 
 Route::any('pesquisar','AnuncioController@pesquisar');
 
