@@ -132,18 +132,22 @@
                     </div>
                 </div>
             </section>
-
             <section class="content">
+                <aside class="anuncios_ads">
+                    Anuncio ADS
+                    <p>728 x 90</p>
+                </aside>
                 @forelse($result as $z => $value)
                     <aside class="anuncios">
                         <div class="foto_anuncio">
                            <a href="{{url('anuncio')}}/{{$value->id}}"> <img src="{{$value->fotos->base64 or ''}}" width="200" height="146" alt="">
-                           </a></div>
+                           </a>
+                        </div>
                         <section class="desc_anuncio">
                             <h3 style="font-weight: 600;">{{$value->titulo}}</h3>
-                            <p class="descricao_anuncio">{{$value->descricao}}</p>
+                            <p class="descricao_anuncio">{{str_limit($value->descricao, 100)}}</p>
                             <p><i class="fa fa-map-marker fa-1x "></i> {{$value->uf->uf or ''}}-{{$value->uf->sigla or ''}}, Brasil</span></p>
-                            <span class="cat_anuncio">Categoria</span>
+                            <span class="cat_anuncio">Categoria</span> <a href="{{url("categoria")}}/{{$value->categoria->id or ''}}"><span class="cat_anuncio">{{$value->categoria->nome or ''}}</span></a>
                             <date class="data_anuncio"><i class="fa fa-calendar-check-o fa-2x data_post"></i>Postado em<p> {{$value->created_at->format('d/m/ Y')}}</p></date>
                         </section>
                         <i class="fa fa-share-alt-square fa-2x anuncio_icon"></i>
@@ -155,219 +159,27 @@
                         <p class="offer_anun">Ver oferta <i class="fa fa-angle-right fa-1x"></i> </p>
                     </aside>
                 @empty
-                    Sem resultado!!
-
+                    <aside class="anuncios_ads">
+                        Nenhum resultado!!
+                    </aside>
                 @endforelse
-
-                {{--<aside class="anuncios">
-                    <div class="foto_anuncio">
-                        <img src="img/upload/anuncio_02.jpg" alt="">
-                    </div>
-                    <section class="desc_anuncio">
-                        <h3 style="font-weight: 600;">Fazenda lagoa da serra</h3>
-                        <p class="descricao_anuncio">Por incrível que pareça, não se trata da primeira vez que um sistema de inteligência artificial ..</p>
-                        <p><i class="fa fa-map-marker fa-1x "></i> Vitória - ES, Brasil</span></p>
-                        <span class="cat_anuncio">Categoria</span>
-                        <date class="data_anuncio"><i class="fa fa-calendar-check-o fa-2x data_post"></i>Postado em<p> 07 Jan,2017</p></date>
-                    </section>
-                    <i class="fa fa-share-alt-square fa-2x anuncio_icon"></i>
-                    <p class="view">Visitas: 115</p>
-                    <price class="valor_produto">
-                        <h1>R$35.000</h1>
-                    </price>
-                    <p class="chat_anun"><i class="fa fa-comments-o fa-2x"></i> Chat</p>
-                    <p class="offer_anun">Ver oferta <i class="fa fa-angle-right fa-1x"></i> </p>
-                </aside>
-                <aside class="anuncios">
-                    <div class="foto_anuncio">
-                        <img src="img/upload/anuncio_03.jpg" alt="">
-                    </div>
-                    <section class="desc_anuncio">
-                        <h3 style="font-weight: 600; color:#333333">Fazenda lagoa da serra</h3>
-                        <p class="descricao_anuncio">Por incrível que pareça, não se trata da primeira vez que um sistema de inteligência artificial ..</p>
-                        <p><i class="fa fa-map-marker fa-1x "></i> Vitória - ES, Brasil</span></p>
-                        <span class="cat_anuncio">Categoria</span>
-                        <date class="data_anuncio"><i class="fa fa-calendar-check-o fa-2x data_post"></i>Postado em<p> 07 Jan,2017</p></date>
-                    </section>
-                    <i class="fa fa-share-alt-square fa-2x anuncio_icon"></i>
-                    <p class="view">Visitas: 115</p>
-                    <price class="valor_produto">
-                        <h1>R$395.000</h1>
-                    </price>
-                    <p class="chat_anun"><i class="fa fa-comments-o fa-2x"></i> Chat</p>
-                    <p class="offer_anun">Ver oferta <i class="fa fa-angle-right fa-1x"></i> </p>
-                </aside>--}}
-                {{--<aside class="anuncios">
-                    <div class="foto_anuncio">
-                        <img src="img/upload/anuncio_01.jpg" alt="">
-                    </div>
-                    <section class="desc_anuncio">
-                        <h3 style="font-weight: 600;">Fazenda lagoa da serra</h3>
-                        <p class="descricao_anuncio">Por incrível que pareça, não se trata da primeira vez que um sistema de inteligência artificial ..</p>
-                        <p><i class="fa fa-map-marker fa-1x "></i> Vitória - ES, Brasil</span></p>
-                        <span class="cat_anuncio">Categoria</span>
-                        <date class="data_anuncio"><i class="fa fa-calendar-check-o fa-2x data_post"></i>Postado em<p> 07 Jan,2017</p></date>
-                    </section>
-                    <i class="fa fa-share-alt-square fa-2x anuncio_icon"></i>
-                    <p class="view">Visitas: 115</p>
-                    <price class="valor_produto">
-                        <h1>R$15.000,00</h1>
-                    </price>
-                    <p class="chat_anun"><i class="fa fa-comments-o fa-2x"></i> Chat</p>
-                    <p class="offer_anun">Ver oferta <i class="fa fa-angle-right fa-1x"></i> </p>
-                </aside>
-                <aside class="anuncios">
-                    <div class="foto_anuncio">
-                        <img src="img/upload/anuncio_01.jpg" alt="">
-                    </div>
-                    <section class="desc_anuncio">
-                        <h3 style="font-weight: 600;">Fazenda lagoa da serra</h3>
-                        <p class="descricao_anuncio">Por incrível que pareça, não se trata da primeira vez que um sistema de inteligência artificial ..</p>
-                        <p><i class="fa fa-map-marker fa-1x "></i> Vitória - ES, Brasil</span></p>
-                        <span class="cat_anuncio">Categoria</span>
-                        <date class="data_anuncio"><i class="fa fa-calendar-check-o fa-2x data_post"></i>Postado em<p> 07 Jan,2017</p></date>
-                    </section>
-                    <i class="fa fa-share-alt-square fa-2x anuncio_icon"></i>
-                    <p class="view">Visitas: 115</p>
-                    <price class="valor_produto">
-                        <h1>R$325.000,000</h1>
-                    </price>
-                    <p class="chat_anun"><i class="fa fa-comments-o fa-2x"></i> Chat</p>
-                    <p class="offer_anun">Ver oferta <i class="fa fa-angle-right fa-1x"></i> </p>
-                </aside>--}}
                 <aside class="anuncios_ads">
                     Anuncio ADS
                     <p>728 x 90</p>
                 </aside>
-                {{--<aside class="anuncios">
-                    <div class="foto_anuncio">
-                        <img src="img/upload/anuncio_01.jpg" alt="">
-                    </div>
-                    <section class="desc_anuncio">
-                        <h3 style="font-weight: 600;">Fazenda lagoa da serra</h3>
-                        <p class="descricao_anuncio">Por incrível que pareça, não se trata da primeira vez que um sistema de inteligência artificial ..</p>
-                        <p><i class="fa fa-map-marker fa-1x "></i> Vitória - ES, Brasil</span></p>
-                        <span class="cat_anuncio">Categoria</span>
-                        <date class="data_anuncio"><i class="fa fa-calendar-check-o fa-2x data_post"></i>Postado em<p> 07 Jan,2017</p></date>
-                    </section>
-                    <i class="fa fa-share-alt-square fa-2x anuncio_icon"></i>
-                    <p class="view">Visitas: 115</p>
-                    <price class="valor_produto">
-                        <h1>R$5.000,000</h1>
-                    </price>
-                    <p class="chat_anun"><i class="fa fa-comments-o fa-2x"></i> Chat</p>
-                    <p class="offer_anun">Ver oferta <i class="fa fa-angle-right fa-1x"></i> </p>
-                </aside>
-                <aside class="anuncios">
-                    <div class="foto_anuncio">
-                        <img src="img/upload/anuncio_01.jpg" alt="">
-                    </div>
-                    <section class="desc_anuncio">
-                        <h3 style="font-weight: 600;">Fazenda lagoa da serra</h3>
-                        <p class="descricao_anuncio">Por incrível que pareça, não se trata da primeira vez que um sistema de inteligência artificial ..</p>
-                        <p><i class="fa fa-map-marker fa-1x "></i> Vitória - ES, Brasil</span></p>
-                        <span class="cat_anuncio">Categoria</span>
-                        <date class="data_anuncio"><i class="fa fa-calendar-check-o fa-2x data_post"></i>Postado em<p> 07 Jan,2017</p></date>
-                    </section>
-                    <i class="fa fa-share-alt-square fa-2x anuncio_icon"></i>
-                    <p class="view">Visitas: 115</p>
-                    <price class="valor_produto">
-                        <h1>R$50,000</h1>
-                    </price>
-                    <p class="chat_anun"><i class="fa fa-comments-o fa-2x"></i> Chat</p>
-                    <p class="offer_anun">Ver oferta <i class="fa fa-angle-right fa-1x"></i> </p>
-                </aside>
-                <aside class="anuncios">
-                    <div class="foto_anuncio">
-                        <img src="img/upload/anuncio_01.jpg" alt="">
-                    </div>
-                    <section class="desc_anuncio">
-                        <h3 style="font-weight: 600;">Fazenda lagoa da serra</h3>
-                        <p class="descricao_anuncio">Por incrível que pareça, não se trata da primeira vez que um sistema de inteligência artificial ..</p>
-                        <p><i class="fa fa-map-marker fa-1x "></i> Vitória - ES, Brasil</span></p>
-                        <span class="cat_anuncio">Categoria</span>
-                        <date class="data_anuncio"><i class="fa fa-calendar-check-o fa-2x data_post"></i>Postado em<p> 07 Jan,2017</p></date>
-                    </section>
-                    <i class="fa fa-share-alt-square fa-2x anuncio_icon"></i>
-                    <p class="view">Visitas: 115</p>
-                    <price class="valor_produto">
-                        <h1>R$3.000</h1>
-                    </price>
-                    <p class="chat_anun"><i class="fa fa-comments-o fa-2x"></i> Chat</p>
-                    <p class="offer_anun">Ver oferta <i class="fa fa-angle-right fa-1x"></i> </p>
-                </aside>
-                <aside class="anuncios">
-                    <div class="foto_anuncio">
-                        <img src="img/upload/anuncio_01.jpg" alt="">
-                    </div>
-                    <section class="desc_anuncio">
-                        <h3 style="font-weight: 600;">Fazenda lagoa da serra</h3>
-                        <p class="descricao_anuncio">Por incrível que pareça, não se trata da primeira vez que um sistema de inteligência artificial ..</p>
-                        <p><i class="fa fa-map-marker fa-1x "></i> Vitória - ES, Brasil</span></p>
-                        <span class="cat_anuncio">Categoria</span>
-                        <date class="data_anuncio"><i class="fa fa-calendar-check-o fa-2x data_post"></i>Postado em<p> 07 Jan,2017</p></date>
-                    </section>
-                    <i class="fa fa-share-alt-square fa-2x anuncio_icon"></i>
-                    <p class="view">Visitas: 115</p>
-                    <price class="valor_produto">
-                        <h1>R$35,00</h1>
-                    </price>
-                    <p class="chat_anun"><i class="fa fa-comments-o fa-2x"></i> Chat</p>
-                    <p class="offer_anun">Ver oferta <i class="fa fa-angle-right fa-1x"></i> </p>
-                </aside>
-                <aside class="anuncios">
-                    <div class="foto_anuncio">
-                        <img src="img/upload/anuncio_01.jpg" alt="">
-                    </div>
-                    <section class="desc_anuncio">
-                        <h3 style="font-weight: 600;">Fazenda lagoa da serra</h3>
-                        <p class="descricao_anuncio">Por incrível que pareça, não se trata da primeira vez que um sistema de inteligência artificial ..</p>
-                        <p><i class="fa fa-map-marker fa-1x "></i> Vitória - ES, Brasil</span></p>
-                        <span class="cat_anuncio">Categoria</span>
-                        <date class="data_anuncio"><i class="fa fa-calendar-check-o fa-2x data_post"></i>Postado em<p> 07 Jan,2017</p></date>
-                    </section>
-                    <i class="fa fa-share-alt-square fa-2x anuncio_icon"></i>
-                    <p class="view">Visitas: 115</p>
-                    <price class="valor_produto">
-                        <h1>R$35.000</h1>
-                    </price>
-                    <p class="chat_anun"><i class="fa fa-comments-o fa-2x"></i> Chat</p>
-                    <p class="offer_anun">Ver oferta <i class="fa fa-angle-right fa-1x"></i> </p>
-                </aside>
-                <aside class="anuncios">
-                    <div class="foto_anuncio">
-                        <img src="img/upload/anuncio_01.jpg" alt="">
-                    </div>
-                    <section class="desc_anuncio">
-                        <h3 style="font-weight: 600;">Fazenda lagoa da serra</h3>
-                        <p class="descricao_anuncio">Por incrível que pareça, não se trata da primeira vez que um sistema de inteligência artificial ..</p>
-                        <p><i class="fa fa-map-marker fa-1x "></i> Vitória - ES, Brasil</span></p>
-                        <span class="cat_anuncio">Categoria</span>
-                        <date class="data_anuncio"><i class="fa fa-calendar-check-o fa-2x data_post"></i>Postado em<p> 07 Jan,2017</p></date>
-                    </section>
-                    <i class="fa fa-share-alt-square fa-2x anuncio_icon"></i>
-                    <p class="view">Visitas: 115</p>
-                    <price class="valor_produto">
-                        <h1>R$35.000,000</h1>
-                    </price>
-                    <p class="chat_anun"><i class="fa fa-comments-o fa-2x"></i> Chat</p>
-                    <p class="offer_anun">Ver oferta <i class="fa fa-angle-right fa-1x"></i> </p>
-                </aside>--}}
+
                 <div class="carregar">
-                    <a href=""><p>Carregar mais</p></a>
-{{--
                     @if($result)
                         @if($result->links())
                             {!! $result->links() !!}
                         @else
 
                         @endif
-                    @endif--}}
+                    @endif
                 </div>
             </section>
         </section>
     </main>
-
 {{--
     <main class="conteudo">
         <section id="default">

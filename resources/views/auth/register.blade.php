@@ -2,7 +2,8 @@
 
 @section('content')
     <main class="conteudo">
-        <section id="login">
+        <section id="default2">
+            <section id="login">
                 <div class="login">
                     <form class="form-horizontal" method="POST" action="{{ route('register') }}">
                         {{ csrf_field() }}
@@ -101,6 +102,7 @@
                                 </button>
                     </form>
                 </div>
+            </section>
         </section>
     </main>
 @endsection

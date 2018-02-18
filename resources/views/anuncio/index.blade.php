@@ -130,7 +130,7 @@
                             <h3 style="font-weight: 600;">{{$z->titulo}}</h3>
                             <p class="descricao_anuncio">{{str_limit($z->descricao, 100)}}</p>
                             <p><i class="fa fa-map-marker fa-1x "></i> {{$z->uf->uf or ''}}-{{$z->uf->sigla or ''}}, Brasil</span></p>
-                            <span class="cat_anuncio">Categoria</span>
+                            <span class="cat_anuncio">Categoria</span> <a href="{{url("categoria")}}/{{$z->categoria->id or ''}}"><span class="cat_anuncio">{{$z->categoria->nome or ''}}</span></a>
                             <date class="data_anuncio"><i class="fa fa-calendar-check-o fa-2x data_post"></i>Postado em<p> {{$z->created_at->format('d/m/ Y')}}</p></date>
                         </section>
                         <i class="fa fa-share-alt-square fa-2x anuncio_icon"></i>
@@ -157,6 +157,4 @@
             </section>
         </section>
     </main>
-
-
 @endsection

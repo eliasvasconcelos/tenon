@@ -23,7 +23,7 @@ Route::resource('anuncio', 'AnuncioController');
 
 Route::resource('estado', 'UfController');
 
-Route::resource('user', 'UserController');
+Route::resource('user', 'UserController', ['except'=> 'index']);
 
 Route::resource('anuncio_foto', 'AnuncioFotoController', ['except'=> 'index', 'create', 'edit', 'show']);
 

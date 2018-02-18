@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Anuncio;
 use App\Models\Categoria;
+use http\Url;
 use Illuminate\Http\Request;
 
 class CategoriaController extends DefaultController

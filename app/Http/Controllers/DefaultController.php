@@ -14,7 +14,9 @@ class DefaultController extends BaseController
     public function index()
     {
         $data = $this->model->all();
-
+        if($data == null){
+            return "Erro";
+        }
         return view("$this->view.index", compact('data'));
     }
 
@@ -27,7 +29,9 @@ class DefaultController extends BaseController
     {
         $data = $this->request->all();
         $this->model->create($data);
-
+        if($data == null){
+            return "Erro";
+        }
         return 1;
     }
 
@@ -43,7 +47,9 @@ class DefaultController extends BaseController
     public function edit($id)
     {
         $data = $this->model->find($id);
-
+        if($data == null){
+            return "Erro";
+        }
         return view("$this->view.cad", compact('data'));
     }
 

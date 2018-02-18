@@ -35,7 +35,7 @@
                     {{$z->titulo}}
                 </p>
                 <a href="{{url('anuncio')}}/{{$z->id}}">
-                   <img class="foto fade" width="250"src="{{$z->fotos->base64 or ''}}" alt="Imagem">
+                   <img class="foto fade" width="250" height="160" src="{{$z->fotos->base64 or ''}}" alt="Imagem">
                 </a>
                 <p class="preco">
                     R$ 2,000.000
@@ -144,7 +144,7 @@
                         {{$z->titulo}}
                     </p>
                     <a href="{{url('anuncio')}}/{{$z->id}}">
-                        <img class="foto fade" width="250" src="{{$z->fotos->base64 or ''}}" alt="Imagem">
+                        <img class="foto fade" width="250" height="160" src="{{$z->fotos->base64 or ''}}" alt="Imagem">
                     </a>
                     <p class="preco">
                         R$ 2,000.000
@@ -172,26 +172,18 @@
         </section>
         <!--Fim Ultimos Anuncios-->
 
-        {{--<section id="lojas">
+        <section id="lojas">
             <h1 style="color:#000;text-transform: uppercase">// lojas oficiais</h1>
             <div class="tamanho">
+                @forelse($lojas as $z)
                 <figure class="img">
-                    <a href="#"><img src="img/lojas/logo2.jpg" title="Loja" class="fade"></a>
+                    <a href="{{url('user')}}/{{$z->id}}"><img src="{{$z->foto_perfil or ''}}" width="200" height="146"  title="Loja" class="fade"></a>
                 </figure>
-                <figure class="img">
-                    <a href="#"><img src="img/lojas/logo2.jpg" title="Loja" class="fade"></a>
-                </figure>
-                <figure class="img">
-                    <a href="#"><img src="img/lojas/logo2.jpg" title="Loja" class="fade"></a>
-                </figure>
-                <figure class="img">
-                    <a href="#"><img src="img/lojas/logo2.jpg" title="Loja" class="fade"></a>
-                </figure>
-                <figure class="img v">
-                    <a href="#"><img src="img/lojas/logo2.jpg" title="Loja" class="fade"></a>
-                </figure>
+                @empty
+
+                @endforelse
             </div>
-        </section>--}}
+        </section>
 
         <!--        <section id="depoimentos">
                         <h1 style="color:#000; text-transform: uppercase;font-size: 17px;">// depoimentos</h1>

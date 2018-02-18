@@ -57,12 +57,12 @@
             <div class="logo swing fade"><h1>Tenon - Tudo do meio Rural em um só local</h1></div>
         </a>
         <span class="saudacao">
-    @guest
-        Olá! <a href="{{ route('login') }}">Entre</a> ou <a href="{{ route('register') }}">cadastre-se</a>
-    @else
-        Olá, {{ Auth::user()->name }}
-    @endguest
-                </span>
+            @guest
+                Olá! <a href="{{ route('login') }}">Entre</a> ou <a href="{{ route('register') }}">cadastre-se</a>
+            @else
+               Olá,  <b>{{ Auth::user()->name }}</b>
+            @endguest
+        </span>
         <!-- MENU MOBILE -->
         <ul class="menu_mobile">
             <h1 class="fontzero">Menu Mobile - Tenon</h1>
@@ -81,12 +81,14 @@
 --}}
 
                 <a title="Desconectar" class="botao" href="{{ route('logout') }}"
-                   onclick="event.preventDefault(); document.getElementById('logout-form').submit();"><i class="fa fa-close  fa-lg"></i> &nbsp; Sair </a>
+                   onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                <i class="fa fa-close fa-lg"></i> Sair </a>
 
                 <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
                     {{ csrf_field() }}
                 </form>
-                <a title="Acesse nossa plataforma" class="botao" href="{{url ('user')}}/{{Auth::user()->id}}"><i class="fa fa-user-circle-o  fa-lg"></i> &nbsp; Minha Conta </a>
+                <a title="Acesse nossa plataforma" class="botao" href="{{url ('user')}}/{{Auth::user()->id}}">
+                    <i class="fa fa-user-circle-o  fa-lg"></i> Minha Conta </a>
                 @else
 
                     <a title="Acesse nossa plataforma" class="botao visivel" href="{{ url('/') }}"><i class="fa fa-home fa-lg chat"></i> &nbsp; Home </a><span class="visivel">|</span>
@@ -127,17 +129,17 @@
             <div class="busca">
                 <i class="fa fa-search fa-3x busca_icon"></i>
                 <form action="{{url('pesquisar')}}" method="get">
-                    <input id="busca-cursor" type="text" name="texto" class="header_pesquisa element">
-                    <select class="categorias">
-                        <option value="all" selected>O que é?</option>
+                    <input id="busca-cursor" type="text" name="texto"  value="{{request()->get('texto')}}" class="header_pesquisa element">
+                    <select class="categorias" name="categoria">
+                        <option value="" selected>O que é?</option>
                         @forelse(\App\Models\Categoria::orderBy('id')->where('categoria_id',0)->get() as $z)
                             <option value="{{$z->id}}">{{$z->nome}}</option>
                         @empty
                             <li class="cor_black">Sem Categoria</li>
                         @endforelse
                     </select>
-                    <select name="id_estados" class="estados" id="id_estados">
-                        <option value="all" selected>Qual local?
+                    <select name="estado" class="estados" id="id_estados">
+                        <option value="" selected>Qual local?
                         </option>
                         @forelse(\App\Models\Uf::orderBy('id')->get() as $z)
                              <option value="{{$z->sigla}}">{{$z->uf}}</option>
@@ -145,7 +147,7 @@
                             <li class="cor_black">Sem Categoria</li>
                         @endforelse
                     </select>
-                    <button name="botao" class="btn_busca"><i class="fa fa-search fa-lg b_pes"></i> pesquisar</button>
+                    <button class="btn_busca"><i class="fa fa-search fa-lg b_pes"></i> pesquisar</button>
                 </form>
             </div>
         </div>

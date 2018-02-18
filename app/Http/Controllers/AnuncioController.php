@@ -6,6 +6,7 @@ use App\Models\Anuncio;
 use App\Models\AnuncioFoto;
 use App\Models\UserTipo;
 use App\Models\Categoria;
+use DeepCopy\f001\A;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Input;
 
@@ -32,16 +33,14 @@ class AnuncioController extends DefaultController
 
     public function Pesquisar()
     {
-        if (Input::has('texto') == false) {
+        /*if (Input::has('texto') == false) {
             return redirect('/');
-        }
-        $texto = Input::get('texto');
-        $estado = Input::get('id_estados');
-        $pesquisa = Anuncio::where('titulo', 'like', '%' . $texto . '%')
-            ->orWhere('descricao', 'like', '%' . $texto . '%')
-            ->orWhere('uf_id', 'like', '%' . $estado . '%')->orderBy('id', 'DESC')->paginate(10);
+        }*/
+        $t = Input::get('texto');
+        $busca = Anuncio::where('titulo', 'LIKE', '%' . $t . '%')
+            ->orWhere('descricao', 'LIKE', '%' . $t. '%')->orderBy('id', 'desc')->paginate(10);
+        return view("$this->view.search")->with('result', $busca);
 
-        return view("$this->view.search")->with('result', $pesquisa);
     }
 
     public function destroy($id)
