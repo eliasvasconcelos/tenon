@@ -138,7 +138,7 @@
                             <p class="descricao_anuncio">{{str_limit($z->descricao, 160)}}</p>
                             <p><i class="fa fa-map-marker fa-1x "></i> {{$z->uf->uf or ''}}-{{$z->uf->sigla or ''}}, Brasil</span></p>
                             <span class="cat_anuncio">Categoria</span>
-                            <date class="data_anuncio"><i class="fa fa-calendar-check-o fa-2x data_post"></i>Postado em<p> {{$z->created_at->format('d/m/ Y')}}</p></date>
+                            <date class="data_anuncio"><i class="fa fa-calendar-check-o fa-2x data_post"></i>Postado em<p> {{$z->created_at->format('d/m/Y')}}</p></date>
                         </section>
                         <i class="fa fa-share-alt-square fa-2x anuncio_icon"></i>
                         <p class="view">Visitas: 115</p>

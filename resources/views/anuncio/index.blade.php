@@ -151,9 +151,15 @@
                     <p>728 x 90</p>
                 </aside>
 
-                <div class="carregar">
-                    <a href=""><p>Carregar mais</p></a>
-                </div>
+                    <div class="carregar">
+                        @if($result)
+                            @if($result->links())
+                                {!! $result->links() !!}
+                            @else
+
+                            @endif
+                        @endif
+                    </div>
             </section>
         </section>
     </main>

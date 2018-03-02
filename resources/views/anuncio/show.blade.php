@@ -56,7 +56,7 @@
                 @endforelse
             @endif
         </div>
-        <div class=" premium_anuncio right" style="width: 35%;padding: 20px 30px">
+        <div class="premium_anuncio right" style="width: 35%;padding: 20px 30px">
 
             @if($data->premium == 1)
                 <h2 style="text-transform:uppercase;font-weight: normal">{{$data->titulo}} [{{$data->id}}]</h2>
