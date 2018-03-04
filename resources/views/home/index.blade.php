@@ -49,7 +49,7 @@
                 <div class="data">
                     <date><i class="fa fa-calendar"></i> {{$z->created_at->format('d/m/ Y')}}</date>
                     <span class="estado">
-                        <a class="cor_black" href="{{url('estado')}}/{{$z->uf->id or ''}}">{{$z->uf->uf or ''}}-{{$z->uf->sigla or ''}}</a> <i class="fa fa-map-marker fa-1x"></i>
+                        <a class="cor_black" href="{{url('estado')}}/{{$z->uf->sigla or ''}}">{{$z->uf->uf or ''}}-{{$z->uf->sigla or ''}}</a> <i class="fa fa-map-marker fa-1x"></i>
                     </span>
                 </div>
             </article>
@@ -158,7 +158,7 @@
                     <div class="data">
                         <date><i class="fa fa-calendar"></i> {{$z->created_at->format('d/m/ Y')}}</date>
                         <span class="estado">
-                        <a class="cor_black" href="{{url('estado')}}/{{$z->uf->id or ''}}">{{$z->uf->uf or ''}}-{{$z->uf->sigla or ''}}</a> <i class="fa fa-map-marker fa-1x"></i>
+                        <a class="cor_black" href="{{url('estado')}}/{{$z->uf->sigla or ''}}">{{$z->uf->uf or ''}}-{{$z->uf->sigla or ''}}</a> <i class="fa fa-map-marker fa-1x"></i>
                     </span>
                     </div>
                 </article>

@@ -111,7 +111,7 @@ R$ 2.000,00
                 <h2>Anuncio normal</h2>
                 <h2 style="text-transform:uppercase;font-weight: normal">{{$data->titulo}} [{{$data->id}}]</h2>
                 <h4>
-                    <p><a class="cor_black" href="../estado/{{$data->uf_id}}">{{$data->uf->uf or ''}} - {{$data->uf->sigla or ''}}</a></p>
+                    <p><a class="cor_black" href="../estado/{{$data->uf->sigla}}">{{$data->uf->uf or ''}} - {{$data->uf->sigla or ''}}</a></p>
                 </h4>
 
                 <p style="font-size: 11px;"> (Anúncio publicado em {{date( 'd/m/Y' , strtotime($data->created_at))}})</p>
@@ -234,7 +234,7 @@ R$ 2.000,00
                     <div class="data">
                         <date><i class="fa fa-calendar"></i> {{$value->created_at->format('d/m/ Y')}}</date>
                         <span class="estado">
-                        <a class="cor_black">{{$value->uf->uf}} - {{$value->uf->sigla}}</a> <i class="fa fa-map-marker fa-1x"></i>
+                        <span class="cor_black">{{$value->uf->uf}} - {{$value->uf->sigla}}</span> <i class="fa fa-map-marker fa-1x"></i>
                     </span>
                     </div>
                 </article>

@@ -9,7 +9,7 @@
 <ul>
 @forelse($data as $z)
         <li>
-            <a href="estado/{{$z->id}}">{{$z->uf}}</a>
+            <a href="{{$z->sigla}}">{{$z->uf}}</a>
         </li>
     @empty
     Nenhum estado cadastrado!!

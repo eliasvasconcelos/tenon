@@ -27,10 +27,17 @@ class UserController extends DefaultController
         return view("$this->view.index", compact(  'usuario'));
     }
 
-    public function show($id)
+    /*public function show($id)
     {
         $usuario = $this->model->find($id);
         $anuncio = $this->anuncio->where('user_id', $id)->orderBy('id','DESC')->paginate(10);
+        return view("$this->view.show", compact( 'anuncio','usuario'));
+    }
+    */
+    public function show($id)
+    {
+        $usuario = $this->model->where("name",$id)->first();
+        $anuncio = $this->anuncio->where('user_id', $usuario->id)->orderBy('id','DESC')->paginate(10);
         return view("$this->view.show", compact( 'anuncio','usuario'));
     }
 }

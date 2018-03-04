@@ -26,9 +26,8 @@ class UfController extends DefaultController
     }
     public function show($id)
     {
-        $data = $this->model->find($id);
-        $anuncio = $this->anuncio->where('uf_id', $id)->orderBy('id','DESC')->paginate(10);
+        $data = $this->model->where("sigla",$id)->first();
+        $anuncio = $this->anuncio->where('uf_id', $data->id)->orderBy('id','DESC')->paginate(10);
         return view("$this->view.show", compact( 'anuncio', 'data'));
     }
-
 }

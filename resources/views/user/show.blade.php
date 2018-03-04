@@ -12,6 +12,7 @@
         @endif
     @endif
 
+        <h1 style="font-size: 2em">Meu Perfil</h1>
         <ul class="menu_u" style="margin-top:-25px;">
             <li class="text-right">
                 <a title="Assinatura" class="botao cor_black" href="?pg=assinatura"><i class="fa fa-star fa-lg"></i> &nbsp; Assinatura </a>|
