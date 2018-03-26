@@ -11,10 +11,10 @@
 
                         <p class="text-muted text-center">Faça login em sua conta</p><br />
 
-                        <label for="name">Email</label>
+                        <label for="name" class="form-texto">Email</label>
                         <input type="text" name="email" id="email" class="form-control" required value="Digite seu email">
 
-                        <label for="name">Senha</label>
+                        <label for="name" class="form-texto">Senha</label>
                         <input type="password" name="password" id="password" class="form-control">
                         @if ($errors->has('email'))
                             <div class="error">

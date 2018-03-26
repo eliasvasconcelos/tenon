@@ -54,11 +54,9 @@
                 </div>
             </article>
             @empty
-                <article class="item">
-                <p>
+                <p class="text-center cor_black">
                     Não há registro!
                 </p>
-                </article>
             @endforelse
 
         </section>
@@ -163,15 +161,12 @@
                     </div>
                 </article>
             @empty
-                <article class="item">
-                    <p>
-                        Não há registro!
-                    </p>
-                </article>
+                <p class="text-center cor_black">
+                    Não há registro!
+                </p>
             @endforelse
         </section>
         <!--Fim Ultimos Anuncios-->
-
         <section id="lojas">
             <h1 style="color:#000;text-transform: uppercase">// lojas oficiais</h1>
             <div class="tamanho">
@@ -184,7 +179,6 @@
                 @endforelse
             </div>
         </section>
-
         <!--        <section id="depoimentos">
                         <h1 style="color:#000; text-transform: uppercase;font-size: 17px;">// depoimentos</h1>
                         <hr class="style1">
