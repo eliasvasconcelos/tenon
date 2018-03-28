@@ -125,7 +125,8 @@
                     <aside class="anuncios">
                         <div class="foto_anuncio">
                             <a href="{{url('anuncio')}}/{{$z->id}}"> <img src="{{$z->fotos->base64 or ''}}" width="200" height="146" alt="">
-                            </a></div>
+                            </a>
+                        </div>
                         <section class="desc_anuncio">
                             <h3 style="font-weight: 600;">{{$z->titulo}}</h3>
                             <p class="descricao_anuncio">{{str_limit($z->descricao, 100)}}</p>

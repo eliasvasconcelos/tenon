@@ -20,12 +20,12 @@
     <script src="{{ asset('js/valida.js') }}"></script>
     <script src="{{ asset('js/app.js') }}"></script>
     <script>
-        document.addEventListener('DOMContentLoaded', function(){
+     /*   document.addEventListener('DOMContentLoaded', function(){
             Typed.new('.element', {
                 strings: [" pesquise aqui....", " ex: vaca nuvilha"],
                 typeSpeed: 0
             });
-        });
+        });*/
         $(document).ready(function() {
             var nav = $('.top_esq');
             $(window).scroll(function () {
@@ -87,7 +87,7 @@
                 <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
                     {{ csrf_field() }}
                 </form>
-                <a title="Acesse nossa plataforma" class="botao" href="{{url ('user')}}/{{Auth::user()->id}}">
+                <a title="Acesse nossa plataforma" class="botao" href="{{url ('user')}}/{{Auth::user()->name}}">
                     <i class="fa fa-user-circle-o  fa-lg"></i> Minha Conta </a>
                 @else
 
@@ -105,13 +105,19 @@
     <section class="header_op">
         <h1 class="fontzero"> Pesquisar produtos na plataforma Tenon </h1>
         @if(Auth::user())
-        <a href="{{url ('user')}}/{{Auth::user()->id}}">
-
-            <span class="ofertas swing">
-                <i class="fa fa-user fa-lg"></i> Meus anúncios
-            </span>
-
-        </a>
+            @if(Auth::user()->loja_link != '')
+                <a href="{{url ('loja')}}/{{Auth::user()->loja_link}}">
+                    <span class="ofertas swing">
+                        <i class="fa fa-user fa-lg"></i> Meus anúncios
+                    </span>
+                </a>
+            @else
+            <a href="{{url ('user')}}/{{Auth::user()->name}}">
+                <span class="ofertas swing">
+                    <i class="fa fa-user fa-lg"></i> Meus anúncios
+                </span>
+            </a>
+            @endif
         <a href="{{url ('anuncio/novo_anuncio')}}">
 
             <span class="anunciar swing">

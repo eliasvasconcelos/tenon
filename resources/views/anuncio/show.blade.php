@@ -1,6 +1,12 @@
 @extends('layouts.app')
 
 @section('content')
+    <!-- 1. Link to jQuery (1.8 or later), -->
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script> <!-- 33 KB -->
+
+    <!-- fotorama.css & fotorama.js. -->
+    <link  href="http://cdnjs.cloudflare.com/ajax/libs/fotorama/4.6.4/fotorama.css" rel="stylesheet"> <!-- 3 KB -->
+    <script src="http://cdnjs.cloudflare.com/ajax/libs/fotorama/4.6.4/fotorama.js"></script> <!-- 16 KB -->
 
     <main class="conteudo">
         <section id="leiloes">
@@ -32,30 +38,34 @@
         <section id="default2" style="background: url('http://www.ncsolucoes.com.br//wp-content/uploads/2017/03/agro_business.jpg') fixed center;">
 --}}
         <section id="default2">
-
-
-        <div class="img_anuncio left">
-            @if($data->premium == 1)
-                <h3>{{$data->titulo}}</h3><br />
-                <a href="{{url ('anuncio')}}/{{$data->id}}"><img src="{{$data->fotos->base64 or ''}}" alt="Imagem" class="img"  width="600"></a><br /><br />
-                @forelse($data->album as $z)
-                    {{$z->album->base64 or ''}}
-                <img src="{{$z->base64 or ''}}" alt="Imagem" height="100" width="150">
-                @empty
-            @endforelse
-            @elseif($data->premium == 0)
-                <h3>{{$data->titulo}}</h3>
-                <br />
-                <a href="{{url ('anuncio')}}/{{$data->id}}">
-                    <img src="{{$data->fotos->base64 or ''}}" alt="Imagem" class="img" width="600"></a>
-                <br /><br />
-                @forelse($data->album as $z)
-                    {{$z->album->base64 or ''}}
+            <div class="img_anuncio left">
+                @if($data->premium == 1)
+                    <h3>{{$data->titulo}}</h3><br />
+                    <a href="{{url ('anuncio')}}/{{$data->id}}">
+                        <img src="{{$data->fotos->base64 or ''}}" alt="Imagem" class="img"  width="600">
+                    </a><br /><br />
+                    @forelse($data->album as $z)
+                        {{$z->album->base64 or ''}}
                     <img src="{{$z->base64 or ''}}" alt="Imagem" height="100" width="150">
-                @empty
+                    @empty
                 @endforelse
-            @endif
-        </div>
+                @elseif($data->premium == 0)
+                    <h3>{{$data->titulo}}</h3>
+                    <br />
+                    <div class="fotorama"  data-autoplay="true"
+                         data-width="700"
+                         data-maxwidth="100%"
+                         data-ratio="16/9"
+                         data-allowfullscreen="true"
+                         data-nav="thumbs">
+                            @forelse($data->album as $z)
+                                <img src="{{$z->base64 or ''}}">
+                                </img>
+                            @empty
+                            @endforelse
+                    </div>
+                @endif
+            </div>
         <div class="premium_anuncio right" style="width: 35%;padding: 20px 30px">
 
             @if($data->premium == 1)
@@ -70,19 +80,17 @@
             <p>
                 Valor
             </p>
-            <h1 style="">
-R$ 2.000,00
-            </h1>
-                {{--<p>//<b>
-                    @if($data->user->tipo_id == "2" || $data->user->tipo_id == "4")
-                        Sou Pessoa Jurídica
-                    @elseif($data->user->tipo_id == '3')
-                        Sou Pessoa Física
-                    @elseif($data->user->tipo_id == '1')
-                        Sou da Equipe
-                    @endif
-                </b>
-                </p>--}}
+            <h1>2.000,00</h1>
+            {{--<p>//<b>
+                @if($data->user->tipo_id == "2" || $data->user->tipo_id == "4")
+                    Sou Pessoa Jurídica
+                @elseif($data->user->tipo_id == '3')
+                    Sou Pessoa Física
+                @elseif($data->user->tipo_id == '1')
+                    Sou da Equipe
+                @endif
+            </b>
+            </p>--}}
            {{-- <p>// Anunciante :
                 <b>
                     <a href="../user/{{$data->user_id}}">
@@ -90,7 +98,7 @@ R$ 2.000,00
                     </a>
                 </b>
             </p>--}}
-                <br/>
+            <br/>
             @if(Auth::user())
                 @if(($data)->user->telefone == 0)
                         <button class="btn" type="button">

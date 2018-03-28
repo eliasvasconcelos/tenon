@@ -44,6 +44,8 @@ class DefaultController extends BaseController
         return view("$this->view.show", compact('data'));
     }
 
+
+
     public function edit($id)
     {
         $data = $this->model->find($id);

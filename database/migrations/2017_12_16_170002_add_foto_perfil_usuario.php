@@ -14,8 +14,9 @@ class AddFotoPerfilUsuario extends Migration
     public function up()
     {
         Schema::table('users', function (Blueprint $table) {
-            $table->text('foto_perfil')->after('telefone')->nullable();
+            $table->longText('foto_perfil')->after('telefone')->nullable();
             $table->integer('endereco_id')->after('foto_perfil')->default(0);
+
         });
     }
 

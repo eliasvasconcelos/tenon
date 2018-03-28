@@ -120,7 +120,7 @@
                         <div class="form-group{{ $errors->has('loja') ? ' has-error' : '' }}" id="loja">
                             <label for="loja" class="col-md-4 control-label form-texto">Minha Loja</label>
 
-                            <input id="loja" type="text" class="form-control" name="loja" value="{{ old('loja') }}">
+                            <input id="loja" type="text" class="form-control" name="loja_link" value="{{ old('loja') }}">
 
                             @if ($errors->has('loja'))
                                 <span class="help-block">
@@ -128,6 +128,8 @@
                         </span>
                             @endif
                         </div>
+
+                <input id="loja" type="text" class="form-control" hidden name="rand_link" value="{{ old('loja') }}">
 
                 <button type="submit" class="btn btn-secondary px-4">
                     Criar Conta

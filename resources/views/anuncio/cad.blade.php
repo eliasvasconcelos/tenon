@@ -20,6 +20,7 @@
                     <div class="cor_black notify2">
                         <b>{{Auth::user()->name}}</b> lembre-se, de sempre manter seus dados atualizados, para melhor contato!!
                     </div>
+
                 <h1 style="font-size: 2em">Novo Anúncio</h1>
                 <ul class="menu_u" style="margin-top:-25px;">
                     <li class="text-right">
@@ -63,13 +64,13 @@
                             <div class="form-group">
                                 <div class="input-group">
                                     <div class="input-group-addon">Titulo</div>
-                                    <input type="text" class="form-control" id="titulo" name="titulo" placeholder="Titulo">
+                                    <input value="{{$data->titulo or ''}}" type="text" class="form-control" id="titulo" name="titulo" placeholder="Titulo">
                                 </div>
                             </div>
                             <div class="form-group">
                                 <div class="input-group">
                                     <div class="input-group-addon">Descricao</div>
-                                    <textarea rows="5" class="form-control" id="descricao" name="descricao" placeholder="Ex: alguma coisa.."></textarea>
+                                    <textarea rows="5" class="form-control" id="descricao" name="descricao" placeholder="Ex: alguma coisa..">{{$data->descricao or ''}}</textarea>
                                 </div>
                             </div>
 
@@ -167,10 +168,16 @@
                             <img type="button" id="img_click" style="border:2px dashed #ccc;padding:2px; cursor:pointer;" height="135" src="{{asset ('img/sem_imagem.png')}}">
 
                         </div>
-                        <a class="btn btn-success" onclick="save('anuncio', '{{url('anuncio')}}');"><i
-                                    class="fa fa-save"></i>
+                        <br>
+                        <a class="btn btn-success" onclick="save('anuncio', '{{url('anuncio')}}');"><i class="fa fa-save"></i>
                             Salvar
                         </a>
+
+                        <br>
+                        <br>
+                        <div class="text-center" id="sucesso" style="display:none;margin-bottom:10px;padding:20px;background-color: #63d3f8;border:1px solid #18aecb">
+                            Seu Anúncio foi cadastrado com sucesso!!
+                        </div>
                     </form>
 
                     <script>
@@ -204,8 +211,15 @@
                                     alert("Descrição Obrigatória");
                                     return false;
                                 }
+                                @if(isset($data))
+                                $("#editado").css("display", "block");
+                                @else
                                 $("#sucesso").css("display", "block");
-                                refresh();
+                                @endif
+
+                                if(window.top==window) {
+                                    window.setTimeout('location.reload()', 3000);
+                                }
                             }).fail(function () {
 
                             });
@@ -287,7 +301,6 @@
                                 }
                             }
                         });
-
 
                         function refresh() {
                             window.location.reload();

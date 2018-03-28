@@ -48,6 +48,8 @@ class AnuncioController extends DefaultController
         $deletar = Anuncio::find($id);
 
         $deletar->delete();
+
+        return redirect()->back();
     }
 
     public function novo()
@@ -84,7 +86,6 @@ class AnuncioController extends DefaultController
 
         $data['anuncio_id'] = $store->id;
         AnuncioFoto::create($data);
-
 
         return 1;
     }

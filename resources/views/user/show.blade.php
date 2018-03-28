@@ -21,7 +21,7 @@
 
                 <a title="Leilão" class="botao cor_black" href="?pg=leilao"><i class="fa fa-legal  fa-lg"></i> &nbsp; Leilão </a>|
 
-                <a title="Configurações" class="botao cor_black" href="?pg=configuracoes"><i class="fa fa-cog  fa-lg"></i> &nbsp; Configurações </a>
+                <a title="Configurações" class="botao cor_black" href="{{url('user')}}/{{$usuario->name}}/edit"><i class="fa fa-cog  fa-lg"></i> &nbsp; Configurações </a>
 
             </li>
         </ul>
@@ -32,6 +32,26 @@
 <main class="conteudo">
 
     <section id="leiloes">
+        @if(request()->route()->getName() == 'user.edit')
+        <div class="user_anuncio">
+            <img src="@if($usuario->foto_perfil == null) {{asset ('img/sem-foto.png')}} @else {{$usuario->foto_perfil}} @endif">
+        </div>
+        <div class="descricao_anuncio" style="margin-left:170px">
+            <form id="form-user"><br/>
+                {!! csrf_field() !!}
+                {{ csrf_field() }}
+        <input id="loja" type="text" class="form-control" name="loja_link" value="{{$usuario->loja_link}}">
+            <input  type="text" class="form-control" name="email" value="{{$usuario->email}}">
+            <input  type="text" class="form-control" name="cpf" value="{{$usuario->cpf}}">
+            <input  type="text" class="form-control" name="razao" value="{{$usuario->razao}}">
+            <input  type="text" class="form-control" name="cnpj" value="{{$usuario->cnpj}}">
+            <input  type="text" class="form-control" name="name" value="{{$usuario->name}}">
+                <a class="btn btn-success" onclick="save('user', '{{url('user')}}');"><i class="fa fa-save"></i>
+                    Salvar
+                </a>
+            </form>
+        </div>
+            @else
         <div class="user_anuncio">
             <img src="@if($usuario->foto_perfil == null) {{asset ('img/sem-foto.png')}} @else {{$usuario->foto_perfil}} @endif">
         </div>
@@ -49,8 +69,10 @@
                 <h1 style="font-size: 2em">Minha Loja</h1>
             @endif
         </div>
+        @endif
     </section>
-
+    @if(request()->route()->getName() == 'user.edit')
+        @else
     @if($usuario->tipo_id == '1')
 
     @else
@@ -101,9 +123,9 @@
                         @auth
                              {{$z->user_id}} - {{auth()->user()->id}}
                             @if(auth()->user()->id == $z->user_id)
-                                <a href="{{url ('user')}}/{{$z->id}}/edit">Editar</a> |
+                                <a href="{{url ('anuncio')}}/{{$z->id}}/edit">Editar</a> |
 
-                                <a href="{{url ('user')}}/{{$z->id}}/delete">Deletar</a>
+                                <a href="{{url ('anuncio')}}/{{$z->id}}/delete" class="delete">Deletar</a>
                             @endif
 
                         @endauth
@@ -115,25 +137,31 @@
                 @elseif($usuario->tipo_id == "2")
                    <hr>
                    <h2>Meus Anuncios na plataforma</h2>
+                    <br/><br/>
                    @forelse($anuncio as $z)
+                        <aside class="anuncios">
+                            <div class="left" style="background-color: #f5f5f5;padding: 2px;border: 1px dotted #ccc">
+                            <a href="../anuncio/{{$z->id}}"><img src="{{$z->fotos->base64 or ''}}" alt="Imagem" height="140px" width="200"></a>
+                            </div>
+                            <div style="height: 140px;margin-left:230px">
+                                <h3 style="font-weight: 600;text-color:#000;">{{$z->titulo}}</h3>
+                                 // {{$z->descricao}}
+                            <br />Postado por: <b>{{$z->user->name or ''}}</b>
+                            <br />Data: <b>{{$z->user->created_at or ''}}</b>
+                            <br/><br/>
+                            @auth
+{{--
+                                {{$z->user_id}} - {{auth()->user()->id}}
+--}}
+                                @if(auth()->user()->id == $z->user_id)
+                                    <a class="cor_black" style="padding: 10px 20px;background-color: #2ab27b;border-color: #0d3625" href="{{url ('anuncio')}}/{{$z->id}}/edit">Editar</a> |
 
-                       <a href="../anuncio/{{$z->id}}"><img src="{{$z->fotos->base64 or ''}}" alt="Imagem" width="200"></a>
-                       <br/>
-                       <a href="../anuncio/{{$z->id}}">{{$z->titulo}}</a> // {{$z->descricao}}
-                       <br />Postado por: <b>{{$z->user->name or ''}}</b>
-                       <br />Data: <b>{{$z->user->created_at or ''}}</b>
-                       <br/>
+                                    <a class="cor_black" style="padding: 10px 20px;background-color: #f86c6b;border-color: #c7254e" href="{{url ('anuncio')}}/{{$z->id}}/delete" class="delete">Deletar</a>
+                                @endif
 
-                       @auth
-                            {{$z->user_id}} - {{auth()->user()->id}}
-                           @if(auth()->user()->id == $z->user_id)
-                               <a href="{{url ('user')}}/{{$z->id}}/edit">Editar</a> |
-
-                               <a href="{{url ('user')}}/{{$z->id}}/delete">Deletar</a>
-                           @endif
-
-                       @endauth
-                       <hr>
+                            @endauth</div>
+                        </aside>
+                       <hr class="style12">
                    @empty
                        Não há registro!
                    @endforelse
@@ -150,9 +178,9 @@
                             {{-- {{$z->user_id}} - {{auth()->user()->id}}--}}
                             @if(auth()->user()->id == $usuario->user_id)
                                 1
-                                <a href="{{url ('user')}}/{{$usuario->id}}/edit">Editar</a> |
+                                <a href="{{url ('anuncio')}}/{{$z->id}}/edit">Editar</a> |
 
-                                <a href="{{url ('user')}}/{{$usuario->id}}/destroy">Deletar</a>
+                                <a href="{{url ('anuncio')}}/{{$z->id}}/delete" class="delete">Deletar</a>
                             @endif
                         @endauth
                     </div>
@@ -177,5 +205,29 @@
                  </div>
        </section>
     @endif
+    @endif
    </main>
+<script>
+    function save(form, link) {
+        var dataForm = $('#form-' + form).serialize();
+        var metodo = 'update';
+        ajax(link, metodo, dataForm);
+    }
+    function ajax(link, metodo, dataForm) {
+        jQuery.ajax({
+            url: link,
+            data: dataForm,
+            cache: false,
+            method: metodo,
+        }).done(function (data) {
+
+        }).fail(function () {
+
+        });
+    }
+
+$(".delete").click(function() {
+    alert("ALERTA SEU USUARIO.");
+});
+</script>
 @endsection

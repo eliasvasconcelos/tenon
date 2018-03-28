@@ -20,10 +20,14 @@ Route::group(['middleware' => ['auth']], function (){
 });
 
 Route::resource('anuncio', 'AnuncioController');
+Route::get('anuncio/{id}/delete', 'AnuncioController@destroy');
 
 Route::resource('estado', 'UfController');
 
 Route::resource('user', 'UserController', ['except'=> 'index']);
+Route::get('user/{id}/edit', 'UserController@edit');
+
+Route::resource('loja', 'LojaController', ['except'=> 'index']);
 
 Route::resource('anuncio_foto', 'AnuncioFotoController', ['except'=> 'index', 'create', 'edit', 'show']);
 
