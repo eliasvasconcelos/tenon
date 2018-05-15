@@ -17,15 +17,15 @@ Route::resource('/', 'HomeController');
 
 Route::group(['middleware' => ['auth']], function (){
     Route::get('anuncio/novo_anuncio', 'AnuncioController@novo');
+    Route::put('user/{id}', 'UserController@update');
+    Route::get('anuncio/{id}/delete', 'AnuncioController@destroy');
 });
 
 Route::resource('anuncio', 'AnuncioController');
-Route::get('anuncio/{id}/delete', 'AnuncioController@destroy');
 
 Route::resource('estado', 'UfController');
 
 Route::resource('user', 'UserController', ['except'=> 'index']);
-Route::get('user/{id}/edit', 'UserController@edit');
 
 Route::resource('loja', 'LojaController', ['except'=> 'index']);
 
@@ -36,3 +36,9 @@ Route::resource('categoria', 'CategoriaController',['except'=> 'index', 'create'
 Route::any('pesquisar','AnuncioController@pesquisar');
 
 Route::get('/home', 'HomeController@index')->name('home');
+Route::get('/user', function () {
+    return redirect('home');
+});
+Route::get('/estado', function () {
+    return redirect('home');
+});

@@ -21,6 +21,7 @@ class CreateAnunciosTable extends Migration
             $table->text('descricao')->nullable();
             $table->integer('uf_id')->default(0);
             $table->boolean('premium')->default(0);
+            $table->string('status')->default('pendente');
             $table->timestamps();
             $table->softDeletes();
         });

@@ -11,7 +11,6 @@ class UserTipo extends Model
 
     protected $dates = ['deleted_at'];
 
-    protected $fillable = ['nome'];
-
+    protected $fillable = ['name', 'sobrenome', 'email', 'password', 'cpf', 'cnpj', 'telefone','foto_perfil','razao'];
 
 }

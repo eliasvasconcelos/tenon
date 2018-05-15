@@ -41,10 +41,14 @@ class UserController extends DefaultController
         return view("$this->view.show", compact( 'anuncio','usuario'));
     }
 
-    public function edit($id)
+    public function update($id)
     {
+        $data = $this->request->all();
+
         $usuario = $this->model->where("name", $id)->first();
-        $anuncio = $this->anuncio->where('user_id', $usuario->id)->orderBy('id','DESC')->paginate(10);
+        $usuario->update($data);
+
         return view("$this->view.show", compact( 'anuncio','usuario'));
     }
+
 }

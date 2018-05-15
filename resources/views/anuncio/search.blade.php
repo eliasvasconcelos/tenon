@@ -6,9 +6,10 @@
         <div class="nome_cat">
             <img src="img/arrow.png" alt="" class="left top_5" width="40px">
             \\ categorias
-        </div><div class="thumb">
-            <i class="fa fa-home fa-1x"></i><a href="#"> Home</a> <i class="fa fa-angle-right fa-1x"></i> <a href="#">Animais</a>
         </div>
+        {{--<div class="thumb">
+            <i class="fa fa-home fa-1x"></i><a href="#"> Home</a> <i class="fa fa-angle-right fa-1x"></i> <a href="#">Animais</a>
+        </div>--}}
         <section id="destaque">
             <div class="top_esq">
                 <form action="?pagina=resultado" method="post">
@@ -20,18 +21,18 @@
                     <h2><i class="fa fa-angle-right fa-1x"></i> SubCategoria </h2>
                     <div class="lista_cat">
                         <ul>
-                            <!--                    <li> <a href="#" class="b"><i class="fa fa-paw fa-2x"></i> Animal </a></li>
-                                                <li> <a href="#" class="b"><i class="fa fa-file-picture-o fa-2x"></i> Artesanato </a></li>
-                                                <li> <a href="#" class="b"><i class="fa fa-graduation-cap fa-2x"></i> Curso </a></li>
-                                                <li> <a href="#" class="b"><i class="fa fa-map fa-2x"></i> Equitação </a></li>
-                                                <li> <a href="#" class="b"><i class="fa fa-camera-retro fa-2x"></i> Eventos </a></li>
-                                                <li> <a href="#" class="b"><i class="fa fa-home fa-2x"></i> Imóveis </a></li>
-                                                <li> <a href="#" class="b"><i class="fa fa-truck fa-2x"></i> Maquinário</p> </a></li>
-                                                <li> <a href="#" class="b"><i class="fa fa-leaf fa-2x"></i> Mudas </a></li>
-                                                <li> <a href="#" class="b"><i class="fa fa-lemon-o fa-2x"></i> <p> Sementes </a></li>
-                                                <li> <a href="#" class="b"><i class="fa fa-shopping-basket fa-2x"></i> Suprimentos </a></li>
-                                                <li> <a href="#" class="b"><i class="fa fa-scissors fa-2x"></i> Vestimentas </a></li>
-                                                <li> <a href="#" class="b"><i class="fa fa-car fa-2x"></i> Veículos </a></li>-->
+                            {{--<li> <a href="#" class="b"><i class="fa fa-paw fa-2x"></i> Animal </a></li>
+                            <li> <a href="#" class="b"><i class="fa fa-file-picture-o fa-2x"></i> Artesanato </a></li>
+                            <li> <a href="#" class="b"><i class="fa fa-graduation-cap fa-2x"></i> Curso </a></li>
+                            <li> <a href="#" class="b"><i class="fa fa-map fa-2x"></i> Equitação </a></li>
+                            <li> <a href="#" class="b"><i class="fa fa-camera-retro fa-2x"></i> Eventos </a></li>
+                            <li> <a href="#" class="b"><i class="fa fa-home fa-2x"></i> Imóveis </a></li>
+                            <li> <a href="#" class="b"><i class="fa fa-truck fa-2x"></i> Maquinário</p> </a></li>
+                            <li> <a href="#" class="b"><i class="fa fa-leaf fa-2x"></i> Mudas </a></li>
+                            <li> <a href="#" class="b"><i class="fa fa-lemon-o fa-2x"></i> <p> Sementes </a></li>
+                            <li> <a href="#" class="b"><i class="fa fa-shopping-basket fa-2x"></i> Suprimentos </a></li>
+                            <li> <a href="#" class="b"><i class="fa fa-scissors fa-2x"></i> Vestimentas </a></li>
+                            <li> <a href="#" class="b"><i class="fa fa-car fa-2x"></i> Veículos </a></li>--}}
                             <li> <a href="#" class="b"><i class="fa fa-angle-right fa-1x"></i> Animal </a></li>
                             <li> <a href="#" class="b"><i class="fa fa-angle-right fa-1x"></i> Artesanato </a></li>
                             <li> <a href="#" class="b"><i class="fa fa-angle-right fa-1x"></i> Curso </a></li>
@@ -43,71 +44,40 @@
                         </ul>
                     </div>
                 </div>
-                <div class="pesquisa_avancada">
+                {{--<div class="pesquisa_avancada">
                     Mais filtros
-                </div>
+                </div>--}}
             </div>
             <div class="top_dir">
                 <select class="listagem">
                     <option value="all" selected>
-                        País
-                    </option>
-                </select>
-                <select class="listagem">
-                    <option value="all" selected>
                         Estado
                     </option>
-                    <option value="AC">Acre</option>
-                    <option value="AL">Alagoas</option>
-                    <option value="AP">Amapá</option>
-                    <option value="AM">Amazonas</option>
-                    <option value="BA">Bahia</option>
-                    <option value="CE">Ceará</option>
-                    <option value="DF">Distrito Federal</option>
-                    <option value="ES">Espirito Santo</option>
-                    <option value="GO">Goiás</option>
-                    <option value="MA">Maranhão</option>
-                    <option value="MT">Mato Grosso</option>
-                    <option value="MS">Mato Grosso do Sul</option>
-                    <option value="MG">Minas Gerais</option>
-                    <option value="PA">Pará</option>
-                    <option value="PB">Paraiba</option>
-                    <option value="PR">Paraná</option>
-                    <option value="PE">Pernambuco</option>
-                    <option value="PI">Piauí</option>
-                    <option value="RJ">Rio de Janeiro</option>
-                    <option value="RN">Rio Grande do Norte</option>
-                    <option value="RS">Rio Grande do Sul</option>
-                    <option value="RO">Rondônia</option>
-                    <option value="RR">Roraima</option>
-                    <option value="SC">Santa Catarina</option>
-                    <option value="SP">São Paulo</option>
-                    <option value="SE">Sergipe</option>
-                    <option value="TO">Tocantis</option>
+                    @forelse(\App\Models\Uf::orderBy('id')->get() as $z)
+                        <option value="{{$z->sigla}}">{{$z->uf}}</option>
+                    @empty
+                        <li class="cor_black">Sem Categoria</li>
+                    @endforelse
                 </select>
                 <select class="listagem c">
                     <option value="all" selected>
                         Cidade
                     </option>
                     <option value="">Nome</option>
-                    <option value="">Nome</option>
-                    <option value="">Nome</option>
-                    <option value="">Nome</option>
-                    <option value="">Nome</option>
                 </select>
-                <select class="listagem">
+               {{-- <select class="listagem right">
                     <option value="all" selected>Filtrar por Data</option>
                     <option value="">por Hora</option>
                     <option value="">por Valor</option>
                     <option value="">por Visualizações</option>
-                </select>
-                <select class="listagem">
+                </select>--}}
+                {{--<select class="listagem right">
                     <option value="all" selected>Compartilhar</option>
                     <option value="">Facebook</option>
                     <option value="">Twitter</option>
                     <option value="">Youtube</option>
                     <option value="">Outros</option>
-                </select>
+                </select>--}}
             </div>
             <section class="content">
                 <div class="premium">
@@ -167,7 +137,6 @@
                     Anuncio ADS
                     <p>728 x 90</p>
                 </aside>
-
                 <div class="carregar">
                     @if($result)
                         @if($result->links())

@@ -22,6 +22,7 @@ function exibir_ocultar(){
         $("#cpf").hide();
         $("#select").hide();
         $("#alert_pf").hide();
+        document.getElementById("cpf").value = "";
     } else {
         $("#cnpj").hide();
         $("#loja").hide();
@@ -29,5 +30,6 @@ function exibir_ocultar(){
         $("#cpf").show();
         $("#select").hide();
         $("#alert_pf").show();
+        document.getElementById("cnpj").value = "";
     }
 };

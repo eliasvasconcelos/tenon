@@ -1,10 +1,6 @@
 @extends('layouts.app')
 
 @section('content')
-    <!-- 1. Link to jQuery (1.8 or later), -->
-    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script> <!-- 33 KB -->
-
-    <!-- fotorama.css & fotorama.js. -->
     <link  href="http://cdnjs.cloudflare.com/ajax/libs/fotorama/4.6.4/fotorama.css" rel="stylesheet"> <!-- 3 KB -->
     <script src="http://cdnjs.cloudflare.com/ajax/libs/fotorama/4.6.4/fotorama.js"></script> <!-- 16 KB -->
 
@@ -13,9 +9,9 @@
             <div class="user_anuncio">
                 <img src="@if($data->user->foto_perfil == null) {{asset ('img/sem-foto.png')}} @else {{$data->user->foto_perfil}} @endif">
             </div>
+            @if($data->user->tipo_id == "2" || $data->user->tipo_id == "4")
             <div class="descricao_anuncio" style="margin-left:170px">
                 <h3>Olá, sou {{$data->user->name}}</h3>
-            @if($data->user->tipo_id == "2" || $data->user->tipo_id == "4")
                 Sou Pessoa Jurídica
             @elseif($data->user->tipo_id == '3')
                 Sou Pessoa Física
@@ -230,9 +226,11 @@
 
                     <p class="sub_artigo">{{$value->titulo}}
                     </p>
-                    <a href="{{url ('anuncio')}}/{{$value->id}}">
-                        <img src="{{$value->fotos->base64 or ''}}" class="foto fade" width="250"src="" alt="Imagem">
-                    </a>
+                    <div class="foto fade" style="width:250px;height: 160px;">
+                        <a href="{{url('anuncio')}}/{{$value->id}}">
+                            <img src="{{$value->fotos->base64 or ''}}" alt="Imagem">
+                        </a>
+                    </div>
                     <p class="preco">
                         R$ 2,000.000
                         <span class="cor_black" style="font-size:13px;"> /animal  </span>
@@ -251,7 +249,6 @@
                         Não há registro!
                     </p>
             @endforelse
-
         </section>
     </main>
 @endsection

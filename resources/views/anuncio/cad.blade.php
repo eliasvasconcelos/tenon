@@ -1,26 +1,25 @@
 @extends('layouts.app')
 
 @section('content')
-    @if(Auth::user())
+    @if(Auth::user()->where('id', auth()->user()->id))
         @forelse(\App\Models\Endereco::where('id', auth()->user()->id)->where('rua', null)->get() as $z)
             @if($z->rua == null)
-           <div class="center info_cfg">
-                <div class="cor_black notify">
-                    Desculpe, <b>{{Auth::user()->name}}</b> atualize suas informações para poder postar anúncio, é rápido :(
-                    <p>
-                        <a href="#" class="cor_black">
-                            <b> Clique Aqui  </b>
-                        </a>
-                    </p>
-                </div>
-           </div>
+               <div class="center info_cfg">
+                    <div class="cor_black notify">
+                        Desculpe, <b>{{Auth::user()->name}}</b> atualize suas informações para poder postar anúncio, é rápido :(
+                        <p>
+                            <a href="#" class="cor_black">
+                                <b> Clique Aqui  </b>
+                            </a>
+                        </p>
+                    </div>
+               </div>
             @endif
         @empty
             <div class="center info_cfg">
                     <div class="cor_black notify2">
                         <b>{{Auth::user()->name}}</b> lembre-se, de sempre manter seus dados atualizados, para melhor contato!!
                     </div>
-
                 <h1 style="font-size: 2em">Novo Anúncio</h1>
                 <ul class="menu_u" style="margin-top:-25px;">
                     <li class="text-right">
@@ -56,9 +55,14 @@
                     <form id="form-anuncio" class="form" style="display: none;"><br/>
                         {!! csrf_field() !!}
                         <input type="hidden" id="categoria_id" name="categoria_id" value="">
+                        <input type="hidden" id="status" name="status" value="0">
                         <input type="hidden" id="user_id" name="user_id" value="{{auth()->user()->id}}">
-                        <input type="file" id="imagem_base64" name="base64" class="file" style="display: none">
-                        <input type="hidden" id="base64" name="base64" value="">
+                        <input type="file" id="imagem_base64" name="base64[]" class="file" style="display: none">
+                        <input type="hidden" id="base64" name="base64[]" value="">
+                        <input type="file" id="imagem_base64_2" name="base64[]" class="file" style="display: none">
+                        <input type="hidden" id="base64_2" name="base64[]" value="">
+                        <input type="file" id="imagem_base64_3" name="base64[]" class="file" style="display: none">
+                        <input type="hidden" id="base64_3" name="base64[]" value="">
 
                         <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                             <div class="form-group">
@@ -166,6 +170,8 @@
                             </div>
 
                             <img type="button" id="img_click" style="border:2px dashed #ccc;padding:2px; cursor:pointer;" height="135" src="{{asset ('img/sem_imagem.png')}}">
+                            <img type="button" id="img_click_2" style="border:2px dashed #ccc;padding:2px; cursor:pointer;" height="135" src="{{asset ('img/sem_imagem.png')}}">
+                            <img type="button" id="img_click_3" style="border:2px dashed #ccc;padding:2px; cursor:pointer;" height="135" src="{{asset ('img/sem_imagem.png')}}">
 
                         </div>
                         <br>
@@ -274,6 +280,64 @@
 
                         $(document).on('click', '#img_click', function () {
                             $('#imagem_base64').click();
+                        });
+                        $(document).on('click', '#img_click_2', function () {
+                            $('#imagem_base64_2').click();
+                        });
+                        $(document).on('click', '#img_click_3', function () {
+                            $('#imagem_base64_3').click();
+                        });
+                        $(document).on('change', '#imagem_base64_3', function () {
+                            /*
+                                                console.log($('#imagem_base64').val());
+                                                console.log("ENTROU?");
+                            */
+
+                            console.log(this.files);
+                            if (this.files && this.files[0]) {
+
+                                if (this.files[0].type == "image/png" || this.files[0].type == "image/jpeg" || this.files[0].type == "image/gif") {
+                                    $("#erro_imagem").css("display", "none");
+                                    var FR = new FileReader();
+
+                                    FR.addEventListener("load", function (e) {
+                                        document.getElementById("img_click_3").src = e.target.result;
+                                        document.getElementById("base64_3").value = e.target.result;
+                                    });
+
+                                    FR.readAsDataURL(this.files[0]);
+                                } else {
+                                    document.getElementById("img_click_3").src = "{{asset('img/sem_imagem.png')}}";
+                                    document.getElementById("base64_3").value = "";
+                                    $("#erro_imagem").css("display", "block");
+                                }
+                            }
+                        });
+                        $(document).on('change', '#imagem_base64_2', function () {
+                            /*
+                                                console.log($('#imagem_base64').val());
+                                                console.log("ENTROU?");
+                            */
+
+                            console.log(this.files);
+                            if (this.files && this.files[0]) {
+
+                                if (this.files[0].type == "image/png" || this.files[0].type == "image/jpeg" || this.files[0].type == "image/gif") {
+                                    $("#erro_imagem").css("display", "none");
+                                    var FR = new FileReader();
+
+                                    FR.addEventListener("load", function (e) {
+                                        document.getElementById("img_click_2").src = e.target.result;
+                                        document.getElementById("base64_2").value = e.target.result;
+                                    });
+
+                                    FR.readAsDataURL(this.files[0]);
+                                } else {
+                                    document.getElementById("img_click_2").src = "{{asset('img/sem_imagem.png')}}";
+                                    document.getElementById("base64_2").value = "";
+                                    $("#erro_imagem").css("display", "block");
+                                }
+                            }
                         });
                         $(document).on('change', '#imagem_base64', function () {
                             /*

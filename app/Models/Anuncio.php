@@ -12,7 +12,7 @@ class Anuncio extends Model
 
     protected $dates = ['deleted_at'];
 
-    protected $fillable = ['user_id', 'categoria_id', 'titulo', 'descricao', 'uf_id', 'premium'];
+    protected $fillable = ['user_id', 'categoria_id', 'titulo', 'descricao', 'uf_id', 'premium', 'status'];
 
     public function categoria()
     {

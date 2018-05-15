@@ -5,22 +5,31 @@
         <section id="default2">
             <form class="form-horizontal" method="POST" action="{{ route('register') }}">
                 {{ csrf_field() }}
-
                 <h1 class="text-center">Cadastre-se</h1>
                 <p class="text-muted text-center">Simples e rápido ;)</p>
             <section id="login_left">
                 <label for="name" class="form-texto">Nome</label>
-                <input type="text" name="name" pattern="[a-zA-Z\s]+$" class="form-control" placeholder="ex: João Ferreira">
+                <input type="text" name="name" pattern="[a-zA-Z\s]+$" class="form-control" placeholder="ex: João">
                 <br />
                 @if ($errors->has('name'))
-                    <span class="help-block">
+                    <span style="float:left;color: #FFFFFF;background-color: #f86c6b;padding:10px; width:100%; border-color: #c7254e 1px solid">
                             <strong>{{ $errors->first('name') }}</strong>
-                        </span>
+                    </span>
+                @endif
+
+                <label for="name" class="form-texto">Sobre Nome</label>
+                <input type="text" name="sobrenome" pattern="[a-zA-Z\s]+$" class="form-control" placeholder="ex: Ferreira">
+                <br />
+                @if ($errors->has('name'))
+                    <span style="float:left;color: #FFFFFF;background-color: #f86c6b;padding:10px; width:100%; border-color: #c7254e 1px solid">
+                            <strong>{{ $errors->first('sobrenome') }}</strong>
+                    </span>
                 @endif
                 <label for="name" class="form-texto">E-mail</label>
+
                 <input type="email" name="email" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$" class="form-control" placeholder="meunome@email.com">
                 @if ($errors->has('email'))
-                    <span class="help-block">
+                    <span style="float:left;color: #FFFFFF;background-color: #f86c6b;padding:10px; width:100%; border-color: #c7254e 1px solid">
                             <strong>{{ $errors->first('email') }}</strong>
                         </span>
                 @endif
@@ -31,7 +40,7 @@
                     <input id="password" type="password" class="form-control" name="password" required>
 
                     @if ($errors->has('password'))
-                        <span class="help-block">
+                        <span style="float:left;color: #FFFFFF;background-color: #f86c6b;padding:10px; width:100%; border-color: #c7254e 1px solid">
                             <strong>{{ $errors->first('password') }}</strong>
                         </span>
                     @endif
@@ -67,12 +76,12 @@
                             <label for="tipo_user" class="col-md-4 control-label form-texto">Tipo de Conta</label>
 
                             <select id="tipo_id" name="tipo_id"  value="{{ old('tipo_id') }}" class="form-control" onchange="exibir_ocultar(this)">
-                                <option value="" id="select" selected>Selecione</option>
+                                <option id="select" selected>Selecione</option>
                                 <option value="2">Pessoa Física</option>
                                 <option value="3">Pessoa Jurídica</option>
                             </select>
                             @if ($errors->has('tipo_id'))
-                                <span class="help-block">
+                        <span class="help-block">
                             <strong>{{ $errors->first('tipo_id') }}</strong>
                         </span>
                             @endif
@@ -87,7 +96,7 @@
                             <input id="cpf" type="text" class="form-control" name="cpf" value="{{ old('cpf') }}">
 
                             @if ($errors->has('cpf'))
-                                <span class="help-block">
+                                <span style="float:left;color: #FFFFFF;background-color: #f86c6b;padding:10px; width:100%; border-color: #c7254e 1px solid">
                             <strong>{{ $errors->first('cpf') }}</strong>
                         </span>
                             @endif
@@ -99,7 +108,7 @@
                             <input id="cnpj" type="text" class="form-control" name="cnpj" value="{{ old('cnpj') }}">
 
                             @if ($errors->has('cnpj'))
-                                <span class="help-block">
+                                <span style="float:left;color: #FFFFFF;background-color: #f86c6b;padding:10px; width:100%; border-color: #c7254e 1px solid">
                             <strong>{{ $errors->first('cnpj') }}</strong>
                         </span>
                             @endif
@@ -111,7 +120,7 @@
                             <input id="razao" type="text" class="form-control" name="razao" value="{{ old('razao') }}">
 
                             @if ($errors->has('razao'))
-                                <span class="help-block">
+                                <span style="float:left;color: #FFFFFF;background-color: #f86c6b;padding:10px; width:100%; border-color: #c7254e 1px solid">
                                     <strong>{{ $errors->first('razao') }}</strong>
                                 </span>
                             @endif
@@ -123,14 +132,11 @@
                             <input id="loja" type="text" class="form-control" name="loja_link" value="{{ old('loja') }}">
 
                             @if ($errors->has('loja'))
-                                <span class="help-block">
-                            <strong>{{ $errors->first('loja') }}</strong>
-                        </span>
+                                <span style="float:left;color: #FFFFFF;background-color: #f86c6b;padding:10px; width:100%; border-color: #c7254e 1px solid">
+                                     <strong>{{ $errors->first('loja') }}</strong>
+                                </span>
                             @endif
                         </div>
-
-                <input id="loja" type="text" class="form-control" hidden name="rand_link" value="{{ old('loja') }}">
-
                 <button type="submit" class="btn btn-secondary px-4">
                     Criar Conta
                 </button>

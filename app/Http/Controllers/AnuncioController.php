@@ -6,7 +6,6 @@ use App\Models\Anuncio;
 use App\Models\AnuncioFoto;
 use App\Models\UserTipo;
 use App\Models\Categoria;
-use DeepCopy\f001\A;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Input;
 
@@ -21,7 +20,6 @@ class AnuncioController extends DefaultController
         $this->model = $model;
         $this->request = $request;
     }
-
     public function index()
     {
         $categoria = Categoria::all();
@@ -46,9 +44,7 @@ class AnuncioController extends DefaultController
     public function destroy($id)
     {
         $deletar = Anuncio::find($id);
-
         $deletar->delete();
-
         return redirect()->back();
     }
 
@@ -81,12 +77,23 @@ class AnuncioController extends DefaultController
     */
     public function store()
     {
-        $data = $this->request->all();
+        $store = $this->model->create($this->request->all());
+
+        foreach(request()->get('base64') as $z){
+        $data =[];
+        $data['base64'] = $z;
+        $data['anuncio_id'] = $store->id;
+        AnuncioFoto::create($data);
+    }
+
+    return 1;
+
+       /* $data = $this->request->all();
         $store = $this->model->create($data);
 
         $data['anuncio_id'] = $store->id;
         AnuncioFoto::create($data);
 
-        return 1;
+        return 1;*/
     }
 }

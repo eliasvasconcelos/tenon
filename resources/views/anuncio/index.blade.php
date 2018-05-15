@@ -105,7 +105,7 @@
             <section class="content">
                 <div class="premium">
                     <h2 class="cabeca"><i class="fa fa-arrow-right fa-1x"></i> Anuncie Aqui</h2>
-                    @forelse($anuncio->where('premium',1)->random(3) as $z)
+                    @forelse(\App\Models\Anuncio::where('premium',1)->inRandomOrder(3)->get() as $z)
                         <div class="premium_an">
                             <a href="#">
                                 <a href="{{url('anuncio')}}/{{$z->id}}"> <img  style="border:1px solid #ccc;border-radius: 3px; width: 114px; height:85px;" src="{{$z->fotos->base64 or ''}}" width="200" height="146" alt="">
@@ -151,16 +151,17 @@
                     Anuncio ADS
                     <p>728 x 90</p>
                 </aside>
-
+{{--
                     <div class="carregar">
-                        @if($result)
+                      --}}{{--  @if($result)
                             @if($result->links())
                                 {!! $result->links() !!}
                             @else
 
                             @endif
                         @endif
-                    </div>
+                        --}}{{--
+                    </div>--}}
             </section>
         </section>
     </main>

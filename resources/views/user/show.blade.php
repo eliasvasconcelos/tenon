@@ -32,25 +32,45 @@
 <main class="conteudo">
 
     <section id="leiloes">
-        @if(request()->route()->getName() == 'user.edit')
         <div class="user_anuncio">
             <img src="@if($usuario->foto_perfil == null) {{asset ('img/sem-foto.png')}} @else {{$usuario->foto_perfil}} @endif">
         </div>
         <div class="descricao_anuncio" style="margin-left:170px">
+            <form id="form-user">
+                {!! csrf_field() !!}
+                <br/>
+                <input type="text" class="form-control" name="name" value="{{$usuario->name}}">
+                <input type="text" class="form-control" name="sobrenome" value="{{$usuario->sobrenome}}">
+                <input type="text" class="form-control" name="email" value="{{$usuario->email}}">
+                <input type="text" class="form-control" name="password" value="">
+                <input type="text" class="form-control" name="cpf" value="{{$usuario->cpf}}">
+                <input type="text" class="form-control" name="cnpj" value="{{$usuario->cnpj}}">
+                <input type="text" class="form-control" name="telefone" value="{{$usuario->telefone}}">
+                <input type="text" class="form-control" name="status" value="{{$usuario->status}}">
+                <input type="text" class="form-control" name="loja_link" value="{{$usuario->loja_link}}">
+                <input type="text" class="form-control" name="razao" value="{{$usuario->razao}}">
+                <a class="btn btn-success" onclick="save('user', '{{url('user')}}');">
+                    <i class="fa fa-save"></i> Salvar
+                </a>
+            </form>
+        </div>
+    </section>
+    <section id="leiloes">
+        @if(request()->route()->getName() == 'user.edit')
+        <div class="user_anuncio">
+            <img src="@if($usuario->foto_perfil == null) {{asset ('img/sem-foto.png')}} @else {{$usuario->foto_perfil}} @endif">
+        </div>
+        {{--<div class="descricao_anuncio" style="margin-left:170px">
             <form id="form-user"><br/>
                 {!! csrf_field() !!}
-                {{ csrf_field() }}
-        <input id="loja" type="text" class="form-control" name="loja_link" value="{{$usuario->loja_link}}">
-            <input  type="text" class="form-control" name="email" value="{{$usuario->email}}">
-            <input  type="text" class="form-control" name="cpf" value="{{$usuario->cpf}}">
-            <input  type="text" class="form-control" name="razao" value="{{$usuario->razao}}">
-            <input  type="text" class="form-control" name="cnpj" value="{{$usuario->cnpj}}">
-            <input  type="text" class="form-control" name="name" value="{{$usuario->name}}">
+                <input id="loja" type="text" class="form-control" name="loja_link" value="{{$usuario->loja_link}}">
+                <input  type="text" class="form-control" name="email" value="{{$usuario->email}}">
+                <input  type="text" class="form-control" name="name" value="{{$usuario->name}}">
                 <a class="btn btn-success" onclick="save('user', '{{url('user')}}');"><i class="fa fa-save"></i>
                     Salvar
                 </a>
             </form>
-        </div>
+        </div>--}}
             @else
         <div class="user_anuncio">
             <img src="@if($usuario->foto_perfil == null) {{asset ('img/sem-foto.png')}} @else {{$usuario->foto_perfil}} @endif">
@@ -208,9 +228,11 @@
     @endif
    </main>
 <script>
+
     function save(form, link) {
+        var link = "{{url('user')}}/{{$usuario->name}}";
         var dataForm = $('#form-' + form).serialize();
-        var metodo = 'update';
+        var metodo = 'POST';
         ajax(link, metodo, dataForm);
     }
     function ajax(link, metodo, dataForm) {
