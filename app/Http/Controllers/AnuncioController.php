@@ -6,6 +6,7 @@ use App\Models\Anuncio;
 use App\Models\AnuncioFoto;
 use App\Models\UserTipo;
 use App\Models\Categoria;
+use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Input;
 
@@ -24,7 +25,7 @@ class AnuncioController extends DefaultController
     {
         $categoria = Categoria::all();
         $usuario = UserTipo::all();
-        $anuncio = Anuncio::orderBy('id', 'DESC')->paginate(30);
+        $anuncio = Anuncio::where('status', 1)->orderBy('id', 'DESC')->paginate(30);
 
         return view("$this->view.index", compact('usuario', 'categoria', 'anuncio'));
     }
@@ -35,7 +36,7 @@ class AnuncioController extends DefaultController
             return redirect('/');
         }*/
         $t = Input::get('texto');
-        $busca = Anuncio::where('titulo', 'LIKE', '%' . $t . '%')
+        $busca = Anuncio::where('status', 1)->where('titulo', 'LIKE', '%' . $t . '%')
             ->orWhere('descricao', 'LIKE', '%' . $t. '%')->orderBy('id', 'desc')->paginate(10);
         return view("$this->view.search")->with('result', $busca);
 

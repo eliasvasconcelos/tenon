@@ -58,23 +58,27 @@
                         <input type="hidden" id="status" name="status" value="0">
                         <input type="hidden" id="user_id" name="user_id" value="{{auth()->user()->id}}">
                         <input type="file" id="imagem_base64" name="base64[]" class="file" style="display: none">
-                        <input type="hidden" id="base64" name="base64[]" value="">
+                        <input type="hidden" id="base64" required="required" name="base64[]" value="">
                         <input type="file" id="imagem_base64_2" name="base64[]" class="file" style="display: none">
                         <input type="hidden" id="base64_2" name="base64[]" value="">
                         <input type="file" id="imagem_base64_3" name="base64[]" class="file" style="display: none">
                         <input type="hidden" id="base64_3" name="base64[]" value="">
+                        <input type="file" id="imagem_base64_4" name="base64[]" class="file" style="display: none">
+                        <input type="hidden" id="base64_4" name="base64[]" value="">
+                        <input type="file" id="imagem_base64_5" name="base64[]" class="file" style="display: none">
+                        <input type="hidden" id="base64_5" name="base64[]" value="">
 
                         <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                             <div class="form-group">
                                 <div class="input-group">
                                     <div class="input-group-addon">Titulo</div>
-                                    <input value="{{$data->titulo or ''}}" type="text" class="form-control" id="titulo" name="titulo" placeholder="Titulo">
+                                    <input value="{{$data->titulo or ''}}" type="text" required="required" class="form-control" id="titulo" name="titulo" placeholder="Titulo">
                                 </div>
                             </div>
                             <div class="form-group">
                                 <div class="input-group">
                                     <div class="input-group-addon">Descricao</div>
-                                    <textarea rows="5" class="form-control" id="descricao" name="descricao" placeholder="Ex: alguma coisa..">{{$data->descricao or ''}}</textarea>
+                                    <textarea rows="5" class="form-control" id="descricao" required="required" name="descricao" placeholder="Ex: alguma coisa..">{{$data->descricao or ''}}</textarea>
                                 </div>
                             </div>
 
@@ -169,9 +173,17 @@
                                 </div>
                             </div>
 
-                            <img type="button" id="img_click" style="border:2px dashed #ccc;padding:2px; cursor:pointer;" height="135" src="{{asset ('img/sem_imagem.png')}}">
+                            <img type="button" id="img_click" required="required" style="border:2px dashed #ccc;padding:2px; cursor:pointer;" height="135" src="{{asset ('img/sem_imagem.png')}}">
+                            <br>
+                            <div class="form-group">
+                                <div class="input-group">
+                                    <div class="input-group-addon">Album de fotos:</div>
+                                </div>
+                            </div>
                             <img type="button" id="img_click_2" style="border:2px dashed #ccc;padding:2px; cursor:pointer;" height="135" src="{{asset ('img/sem_imagem.png')}}">
                             <img type="button" id="img_click_3" style="border:2px dashed #ccc;padding:2px; cursor:pointer;" height="135" src="{{asset ('img/sem_imagem.png')}}">
+                            <img type="button" id="img_click_4" style="border:2px dashed #ccc;padding:2px; cursor:pointer;" height="135" src="{{asset ('img/sem_imagem.png')}}">
+                            <img type="button" id="img_click_5" style="border:2px dashed #ccc;padding:2px; cursor:pointer;" height="135" src="{{asset ('img/sem_imagem.png')}}">
 
                         </div>
                         <br>
@@ -287,6 +299,12 @@
                         $(document).on('click', '#img_click_3', function () {
                             $('#imagem_base64_3').click();
                         });
+                        $(document).on('click', '#img_click_4', function () {
+                            $('#imagem_base64_4').click();
+                        });
+                        $(document).on('click', '#img_click_5', function () {
+                            $('#imagem_base64_5').click();
+                        });
                         $(document).on('change', '#imagem_base64_3', function () {
                             /*
                                                 console.log($('#imagem_base64').val());
@@ -309,6 +327,59 @@
                                 } else {
                                     document.getElementById("img_click_3").src = "{{asset('img/sem_imagem.png')}}";
                                     document.getElementById("base64_3").value = "";
+                                    $("#erro_imagem").css("display", "block");
+                                }
+                            }
+                        });
+                        $(document).on('change', '#imagem_base64_4', function () {
+                            /*
+                                                console.log($('#imagem_base64').val());
+                                                console.log("ENTROU?");
+                            */
+
+                            console.log(this.files);
+                            if (this.files && this.files[0]) {
+
+                                if (this.files[0].type == "image/png" || this.files[0].type == "image/jpeg" || this.files[0].type == "image/gif") {
+                                    $("#erro_imagem").css("display", "none");
+                                    var FR = new FileReader();
+
+                                    FR.addEventListener("load", function (e) {
+                                        document.getElementById("img_click_4").src = e.target.result;
+                                        document.getElementById("base64_4").value = e.target.result;
+                                    });
+
+                                    FR.readAsDataURL(this.files[0]);
+                                } else {
+                                    document.getElementById("img_click_4").src = "{{asset('img/sem_imagem.png')}}";
+                                    document.getElementById("base64_4").value = "";
+                                    $("#erro_imagem").css("display", "block");
+                                }
+                            }
+                        });
+
+                        $(document).on('change', '#imagem_base64_5', function () {
+                            /*
+                                                console.log($('#imagem_base64').val());
+                                                console.log("ENTROU?");
+                            */
+
+                            console.log(this.files);
+                            if (this.files && this.files[0]) {
+
+                                if (this.files[0].type == "image/png" || this.files[0].type == "image/jpeg" || this.files[0].type == "image/gif") {
+                                    $("#erro_imagem").css("display", "none");
+                                    var FR = new FileReader();
+
+                                    FR.addEventListener("load", function (e) {
+                                        document.getElementById("img_click_5").src = e.target.result;
+                                        document.getElementById("base64_5").value = e.target.result;
+                                    });
+
+                                    FR.readAsDataURL(this.files[0]);
+                                } else {
+                                    document.getElementById("img_click_5").src = "{{asset('img/sem_imagem.png')}}";
+                                    document.getElementById("base64_5").value = "";
                                     $("#erro_imagem").css("display", "block");
                                 }
                             }

@@ -110,7 +110,7 @@
                 @forelse($result as $z => $value)
                     <aside class="anuncios">
                         <div class="foto_anuncio">
-                           <a href="{{url('anuncio')}}/{{$value->id}}"> <img src="{{$value->fotos->base64 or ''}}" width="200" height="146" alt="">
+                           <a href="{{url('anuncio')}}/{{$value->id}}"> <img src="{{$value->fotos->base64 or '../img/image.jpeg'}}" width="200" height="146" alt="">
                            </a>
                         </div>
                         <section class="desc_anuncio">

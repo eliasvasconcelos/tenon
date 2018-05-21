@@ -57,9 +57,25 @@
             <section id="default2">
                 <div class="perfil_user_cat left cor_black">
                     <h3>Anuncios do Vendedor</h3>
-                    <p>
-                        {{$usuario->anuncios->count()}} resultados
-                    </p>
+                    @if(Auth::user())
+                    @if($usuario->loja_link != null)
+                        <p>
+                        <h5 style="background-color: #96caff;padding: 10px;margin:1px;border-radius:3px;"><b>{{\App\Models\Anuncio::withTrashed()->where('user_id', auth()->user()->id)->count() + \App\Models\Anuncio::where('user_id', auth()->user()->id)->where('status', 0)->where('status', 1)->where('status', 2)->where('status', 3)->count()}} </b> Total</h5>
+                        </p>
+                        <p>
+                        <h5 style="background-color: #c596ff;padding: 10px;margin:1px;border-radius:3px;"><b>{{\App\Models\Anuncio::where('user_id', auth()->user()->id)->where('premium', 1)->count()}}</b> Premium</h5>
+                        </p>
+                        <p>
+                        <h5 style="background-color: #f49c9c;padding: 10px;margin:1px;border-radius:3px;"><b>{{\App\Models\Anuncio::where('user_id', auth()->user()->id)->where('status', 0)->count()}}</b>  Desativado</h5>
+                        </p>
+                        <p>
+                        <h5 style="background-color: #24f489;padding: 10px;margin:1px;border-radius:3px;"><b>{{\App\Models\Anuncio::where('user_id', auth()->user()->id)->where('status', 1)->count()}}</b> Ativado</h5>
+                        </p>
+                        <p>
+                        <h5 style="background-color: #ffc863;padding: 10px;margin:1px;border-radius:3px;"><b>{{\App\Models\Anuncio::where('user_id', auth()->user()->id)->where('status', 2)->count()}}</b> Pendente</h5>
+                        </p>
+                    @endif
+                    @endif
                     @if($usuario->tipo_id == "4")
                         <p>
                             Membro Desde : <b>{{$usuario->created_at->format('d/m/Y')}}</b>
@@ -90,9 +106,9 @@
                                 Logradouro :<b>{{$usuario->endereco->logradouro or ''}}</b><br/>
                                 Estado :<b>{{$usuario->endereco->uf_id->sigla or ''}}</b><br/>
                                 <hr><h2>Meus Anuncios na plataforma</h2>
-                                @forelse($anuncio as $z)
+                                @forelse($anuncio->where('status', 1) as $z)
 
-                                    <a href="../anuncio/{{$z->id}}"><img src="{{$z->fotos->base64 or ''}}" alt="Imagem" width="200"></a>
+                                    <a href="../anuncio/{{$z->id}}"><img src="{{$z->fotos->base64 or '../img/image.jpeg'}}" alt="Imagem" height="130px"  width="200"></a>
                                     <br/>
                                     <a href="../anuncio/{{$z->id}}">{{$z->titulo}}</a> // {{$z->descricao}}
                                     <br />Postado por: <b>{{$z->user->name or ''}}</b>
@@ -116,10 +132,10 @@
                             <hr>
                             <h2>Meus Anuncios na plataforma</h2>
                             <br/><br/>
-                            @forelse($anuncio as $z)
+                            @forelse($anuncio->where('status', 1) as $z)
                                 <aside class="anuncios">
                                     <div class="left" style="background-color: #f5f5f5;padding: 2px;border: 1px dotted #ccc">
-                                        <a href="../anuncio/{{$z->id}}"><img src="{{$z->fotos->base64 or ''}}" alt="Imagem" height="140px" width="200"></a>
+                                        <a href="../anuncio/{{$z->id}}"><img src="{{$z->fotos->base64 or '../img/image.jpeg'}}" alt="Imagem" height="130px" width="200"></a>
                                     </div>
                                     <div style="height: 140px;margin-left:230px">
                                         <h3 style="font-weight: 600;text-color:#000;">{{$z->titulo}}</h3>
@@ -146,8 +162,8 @@
 
                         @endif
                     @elseif($usuario->tipo_id == "4")
-                        @forelse($anuncio as $z)
-                            <a href="../anuncio/{{$z->id}}"><img src="{{$z->fotos->base64 or ''}}" alt="Imagem" width="200"></a>
+                        @forelse($anuncio->where('status', 1) as $z)
+                            <a href="../anuncio/{{$z->id}}"><img src="{{$z->fotos->base64 or '../img/image.jpeg'}}" alt="Imagem" height="130px"  width="200"></a>
                             <div class="perfil_user_anuncio right cor_black" style="width: 70%;padding:20px;height: 137px">
                                 <a href="../anuncio/{{$z->id}}" class="cor_black"><h4>{{$z->titulo}}</h4></a>// {{$z->descricao}}
                                 <br />Postado por: <b>{{$z->user->name or ''}}</b>

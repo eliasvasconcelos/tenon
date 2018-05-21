@@ -1,7 +1,8 @@
 @extends('layouts.app')
 
 @section('content')
-    <link  href="http://cdnjs.cloudflare.com/ajax/libs/fotorama/4.6.4/fotorama.css" rel="stylesheet"> <!-- 3 KB -->
+    <!-- fotorama.css & fotorama.js. -->
+    <link  href="{{asset ('css')}}/fotorama.css" rel="stylesheet"> <!-- 3 KB -->
     <script src="http://cdnjs.cloudflare.com/ajax/libs/fotorama/4.6.4/fotorama.js"></script> <!-- 16 KB -->
 
     <main class="conteudo">
@@ -32,38 +33,57 @@
         </section>
 {{--
         <section id="default2" style="background: url('http://www.ncsolucoes.com.br//wp-content/uploads/2017/03/agro_business.jpg') fixed center;">
---}}
+--}}<!-- Fotorama -->
+
         <section id="default2">
             <div class="img_anuncio left">
                 @if($data->premium == 1)
-                    <h3>{{$data->titulo}}</h3><br />
-                    <a href="{{url ('anuncio')}}/{{$data->id}}">
-                        <img src="{{$data->fotos->base64 or ''}}" alt="Imagem" class="img"  width="600">
-                    </a><br /><br />
-                    @forelse($data->album as $z)
-                        {{$z->album->base64 or ''}}
-                    <img src="{{$z->base64 or ''}}" alt="Imagem" height="100" width="150">
-                    @empty
-                @endforelse
+                    <h3>{{$data->titulo}}</h3>
+                    <br />
+                    <div class="fotorama"
+                         data-width="100%"
+                         data-autoplay="true"
+                         data-loop="true"
+                         data-shuffle="true"
+                         data-fit="contain"
+                         data-arrows="false"
+                         data-trackpad="false"
+                         data-swipe="false"
+                         data-transition="crossfade"
+                         data-ratio="16/9"
+                         data-click="true"
+                         data-allowfullscreen="true"
+                         data-nav="thumbs">
+                        @forelse($data->album as $z)
+                            <img src="{{$z->base64 or '../img/image.jpeg'}}">
+                        @empty
+                        @endforelse
+                    </div>
                 @elseif($data->premium == 0)
                     <h3>{{$data->titulo}}</h3>
                     <br />
-                    <div class="fotorama"  data-autoplay="true"
-                         data-width="700"
-                         data-maxwidth="100%"
+                    <div class="fotorama"
+                         data-width="100%"
+                         data-autoplay="true"
+                         data-loop="true"
+                         data-shuffle="true"
+                         data-fit="contain"
+                         data-arrows="false"
+                         data-trackpad="false"
+                         data-swipe="false"
+                         data-transition="crossfade"
                          data-ratio="16/9"
+                         data-click="true"
                          data-allowfullscreen="true"
                          data-nav="thumbs">
                             @forelse($data->album as $z)
-                                <img src="{{$z->base64 or ''}}">
-                                </img>
+                                <img src="{{$z->base64 or '../img/image.jpeg'}}">
                             @empty
                             @endforelse
                     </div>
                 @endif
             </div>
         <div class="premium_anuncio right" style="width: 35%;padding: 20px 30px">
-
             @if($data->premium == 1)
                 <h2 style="text-transform:uppercase;font-weight: normal">{{$data->titulo}} [{{$data->id}}]</h2>
                 <h4>
@@ -128,6 +148,15 @@
                     R$ 2.000,00
                 </h1>
                 <br/>
+            @if(Auth::user())
+                @if(auth()->user()->id == $data->user->id)
+                    <a href="{{$data->id}}/edit" class="btn" style="background-color: #14c18b;border: 1px solid #63d3f8;" type="button">
+                        Editar Anúncio
+                    </a>
+                    <br>
+                    <br>
+                @endif
+            @endif
                 @if(Auth::user())
                     @if(($data)->user->telefone == 0)
                         <button class="btn" type="button">
@@ -146,7 +175,6 @@
             @endif
         </div>
             <div class="premium_anuncio right" style="width: 35%;padding: 20px 30px">
-
                 @if($data->premium == 1)
                     // Categoria : <a href="../categoria/{{$data->categoria_id}}" class="cor_black">{{$data->categoria->nome or ''}}</a>
 
@@ -220,7 +248,7 @@
             </span>
 
             <hr class="style12">
-            @forelse(\App\Models\Anuncio::where('categoria_id', $data->categoria->id)->orderByRaw('RAND()')->take(4)->get() as $z => $value)
+            @forelse(\App\Models\Anuncio::where('status', 1)->where('categoria_id', $data->categoria->id)->orderByRaw('RAND()')->take(4)->get() as $z => $value)
                 <article class="item">
                     <h2 class="fontzero">Outros Anuncios</h2>
 
@@ -228,7 +256,7 @@
                     </p>
                     <div class="foto fade" style="width:250px;height: 160px;">
                         <a href="{{url('anuncio')}}/{{$value->id}}">
-                            <img src="{{$value->fotos->base64 or ''}}" alt="Imagem">
+                            <img src="{{$value->fotos->base64 or '../img/image.jpeg'}}" alt="Imagem">
                         </a>
                     </div>
                     <p class="preco">

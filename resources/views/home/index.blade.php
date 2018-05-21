@@ -16,10 +16,14 @@
             @if(Auth::user())
                  <div class="cor_black @if(\App\Models\Anuncio::where('user_id', auth()->user()->id)->count() == 0)notify @else notify2 @endif">
                      @if(\App\Models\Anuncio::where('user_id', auth()->user()->id)->get())
-                         @if(\App\Models\Anuncio::where('user_id', auth()->user()->id)->count() == 0)
-                             Ei, <b>{{Auth::user()->name}}<b> crie agora seu primeiro anúncio é Grátis
-                             @else
-                             Você possui {{\App\Models\Anuncio::where('user_id', auth()->user()->id)->count()}} Publicados na plataforma
+                         @if(auth()->user()->tipo_id == '1')
+                             Olá, <b>Administrador - {{auth()->user()->name}}</b> temos {{\App\Models\Anuncio::where('status', 1)->where('user_id', auth()->user()->id)->count()}} Publicados na plataforma
+                         @else
+                             @if(\App\Models\Anuncio::where('user_id', auth()->user()->id)->count() == 0)
+                                 Ei, <b>{{Auth::user()->name}}<b> crie agora seu primeiro anúncio é Grátis
+                                 @else
+                                 Você possui {{\App\Models\Anuncio::where('user_id', auth()->user()->id)->count()}} Publicados na plataforma
+                             @endif
                          @endif
                      @endif
                  </div>
@@ -43,7 +47,7 @@
                  </p>
                  <div class="foto fade" style="width:250px;height: 160px;">
                      <a href="{{url('anuncio')}}/{{$z->id}}">
-                         <img src="{{$z->fotos->base64 or ''}}" alt="Imagem">
+                         <img src="{{$z->fotos->base64 or '../img/image.jpeg'}}" alt="Imagem">
                      </a>
                  </div>
                  <p class="preco">
@@ -142,9 +146,7 @@
                      <i class="fa fa-bullhorn fa-lg"></i> últimos anúncios
                  </h3>
              </span>
-
              <hr class="style12">
-
              @forelse($anuncio as $z)
                  <article class="item">
                      <h2 class="fontzero">Destaque 1</h2>
@@ -154,7 +156,7 @@
                      </p>
                      <div class="foto fade" style="width:250px;height: 160px;">
                          <a href="{{url('anuncio')}}/{{$z->id}}">
-                             <img src="{{$z->fotos->base64 or ''}}" alt="Imagem">
+                             <img src="{{$z->fotos->base64 or '../img/image.jpeg'}}" alt="Imagem">
                          </a>
                      </div>
                      <p class="preco">
