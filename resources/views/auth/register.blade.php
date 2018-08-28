@@ -126,17 +126,6 @@
                             @endif
                         </div>
 
-                        <div class="form-group{{ $errors->has('loja') ? ' has-error' : '' }}" id="loja">
-                            <label for="loja" class="col-md-4 control-label form-texto">Minha Loja</label>
-
-                            <input id="loja" type="text" class="form-control" name="loja_link" value="{{ old('loja') }}">
-
-                            @if ($errors->has('loja'))
-                                <span style="float:left;color: #FFFFFF;background-color: #f86c6b;padding:10px; width:100%; border-color: #c7254e 1px solid">
-                                     <strong>{{ $errors->first('loja') }}</strong>
-                                </span>
-                            @endif
-                        </div>
                 <button type="submit" class="btn btn-secondary px-4">
                     Criar Conta
                 </button>

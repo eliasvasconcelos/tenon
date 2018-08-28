@@ -17,12 +17,12 @@
                  <div class="cor_black @if(\App\Models\Anuncio::where('user_id', auth()->user()->id)->count() == 0)notify @else notify2 @endif">
                      @if(\App\Models\Anuncio::where('user_id', auth()->user()->id)->get())
                          @if(auth()->user()->tipo_id == '1')
-                             Olá, <b>Administrador - {{auth()->user()->name}}</b> temos {{\App\Models\Anuncio::where('status', 1)->where('user_id', auth()->user()->id)->count()}} Publicados na plataforma
+                             Olá, <b>Administrador - {{auth()->user()->name}}</b> temos <b>{{\App\Models\Anuncio::where('status', 1)->count()}}</b> Publicados na plataforma
                          @else
                              @if(\App\Models\Anuncio::where('user_id', auth()->user()->id)->count() == 0)
-                                 Ei, <b>{{Auth::user()->name}}<b> crie agora seu primeiro anúncio é Grátis
+                                 Olá, <b>{{Auth::user()->name}}</b> crie agora seu primeiro anúncio é Grátis
                                  @else
-                                 Você possui {{\App\Models\Anuncio::where('user_id', auth()->user()->id)->count()}} Publicados na plataforma
+                                 Você possui <b>{{\App\Models\Anuncio::where('user_id', auth()->user()->id)->count()}}</b> Publicados na plataforma
                              @endif
                          @endif
                      @endif
@@ -156,7 +156,20 @@
                      </p>
                      <div class="foto fade" style="width:250px;height: 160px;">
                          <a href="{{url('anuncio')}}/{{$z->id}}">
-                             <img src="{{$z->fotos->base64 or '../img/image.jpeg'}}" alt="Imagem">
+                             <span class="hidden" style="display: none">{{$aa = 0}}</span>
+                             @forelse($z->album as $x)
+                                @if($x->base64 == null)
+                                    @else
+                                        <span class="hidden" style="display: none">{{$aa = 1}}</span>
+                                        <img src="{{$x->base64}}" alt="Imagem">
+                                    @break
+                                @endif
+                             @empty
+                                <img src="{{'../img/image.jpeg'}}" alt="Imagem">
+                             @endforelse
+                             @if($aa == 0)
+                                <img src="{{'../img/image.jpeg'}}" alt="Imagem">
+                             @endif
                          </a>
                      </div>
                      <p class="preco">
@@ -266,7 +279,7 @@
                  <p>Aproveite para aumentar a visibilidade do seu anúncio
                      compartilhe na WEB com os seus amigos ;)</p><br /><br />
                 <span class="novo_anuncio">
-		            <a href="?pg=login">criar anúncio grátis</a>
+		            <a href="register">criar anúncio grátis</a>
 	            </span>
             </div>
         </div>

@@ -15,10 +15,14 @@ class CreateAnuncioFotosTable extends Migration
     {
         Schema::create('anuncio_fotos', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('anuncio_id')->default(0);
+            $table->integer('anuncio_id')->unsigned()->default(0);
             $table->longText('base64')->nullable();
             $table->timestamps();
             $table->softDeletes();
+        });
+
+        Schema::table('anuncio_fotos', function($table) {
+            $table->foreign('anuncio_id')->references('id')->on('anuncios')->onDelete('cascade');
         });
     }
 

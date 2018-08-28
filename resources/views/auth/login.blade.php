@@ -1,5 +1,4 @@
 @extends('layouts.app')
-
 @section('content')
     <main class="conteudo">
         <section id="default2">
@@ -11,11 +10,11 @@
 
                         <p class="text-muted text-center">Faça login em sua conta</p><br />
 
-                        <label for="name" class="form-texto">Email</label>
-                        <input type="text" name="email" id="email" class="form-control" required value="Digite seu email">
+                        <label for="name" class="form-texto">Email :</label>
+                        <input type="text" name="email" class="form-control" placeholder="Digite seu email">
 
-                        <label for="name" class="form-texto">Senha</label>
-                        <input type="password" name="password" id="password" class="form-control">
+                        <label for="name" class="form-texto">Senha :</label>
+                        <input type="password" name="password" id="password" placeholder="Digite sua senha" class="form-control">
                         @if ($errors->has('email'))
                             <div class="error">
                                 <strong>{{ $errors->first('email') }}</strong>
@@ -30,7 +29,7 @@
                             <input type="checkbox" name="remember" {{ old('remember') ? 'checked' : '' }}> Remember Me
     --}}
 
-                        <button type="submit" class="btn btn-secondary px-4 right">Entrar</button>
+                        <button type="submit" id="bota" class="btn btn-secondary px-4 right">Entrar</button>
                         <a href="{{ route('password.request') }}">Esqueceu sua senha?</a><br />
                         <br />
                         <p class="text-center"><a href="{{ route('register') }}">Criar conta</a></p>

@@ -1,24 +1,27 @@
 @extends('layouts.app')
 
 @section('content')
-    <!-- fotorama.css & fotorama.js. -->
     <link  href="{{asset ('css')}}/fotorama.css" rel="stylesheet"> <!-- 3 KB -->
     <script src="http://cdnjs.cloudflare.com/ajax/libs/fotorama/4.6.4/fotorama.js"></script> <!-- 16 KB -->
 
     <main class="conteudo">
         <section id="leiloes">
-            <div class="user_anuncio">
-                <img src="@if($data->user->foto_perfil == null) {{asset ('img/sem-foto.png')}} @else {{$data->user->foto_perfil}} @endif">
+            <div class="user_anuncio fade" style="width:115px">
+                    <a href="{{url('user')}}/{{$data->id}}">
+                        {{--   <img src="{{$value->fotos->base64 or '../img/image.jpeg'}}" alt="Imagem">
+                          --}}
+                        <img src="@if($data->user->foto_perfil == null) {{asset ('img/sem-foto.png')}} @else {{$data->user->foto_perfil}} @endif">
+                    </a>
             </div>
-            @if($data->user->tipo_id == "2" || $data->user->tipo_id == "4")
             <div class="descricao_anuncio" style="margin-left:170px">
-                <h3>Olá, sou {{$data->user->name}}</h3>
-                Sou Pessoa Jurídica
-            @elseif($data->user->tipo_id == '3')
-                Sou Pessoa Física
-            @elseif($data->user->tipo_id == '1')
-                Sou da Equipe {{$data->user->id}} {{$data->user->tipo_id}}
-            @endif
+                @if($data->user->tipo_id == "2" || $data->user->tipo_id == "4")
+                    <h3>Olá, sou {{$data->user->name}}</h3>
+                    Pessoa Jurídica
+                @elseif($data->user->tipo_id == '3')
+                    Pessoa Física
+                @elseif($data->user->tipo_id == '1')
+                    Equipe {{$data->user->id}} {{$data->user->tipo_id}}
+                @endif
                 <br />
                 <br />
                 <br />
@@ -34,7 +37,6 @@
 {{--
         <section id="default2" style="background: url('http://www.ncsolucoes.com.br//wp-content/uploads/2017/03/agro_business.jpg') fixed center;">
 --}}<!-- Fotorama -->
-
         <section id="default2">
             <div class="img_anuncio left">
                 @if($data->premium == 1)
@@ -93,10 +95,10 @@
                 <p style="font-size: 11px;"> (Anúncio publicado em {{date( 'd/m/Y' , strtotime($data->created_at))}})</p>
                 <br/>
                 <br/>
-            <p>
-                Valor
-            </p>
-            <h1>2.000,00</h1>
+                <p>
+                    Valor
+                </p>
+                <h1>2.000,00</h1>
             {{--<p>//<b>
                 @if($data->user->tipo_id == "2" || $data->user->tipo_id == "4")
                     Sou Pessoa Jurídica
@@ -114,12 +116,12 @@
                     </a>
                 </b>
             </p>--}}
-            <br/>
+                <br/>
             @if(Auth::user())
                 @if(($data)->user->telefone == 0)
-                        <button class="btn" type="button">
-                            <b>Contato Indisponível</b>
-                        </button>
+                    <button class="btn" type="button">
+                        <b>Contato Indisponível</b>
+                    </button>
                 @else
                     <button class="btn" type="button">
                         <span class="badge">{{$data->user->telefone or ''}}</span>
@@ -137,7 +139,6 @@
                 <h4>
                     <p><a class="cor_black" href="../estado/{{$data->uf->sigla}}">{{$data->uf->uf or ''}} - {{$data->uf->sigla or ''}}</a></p>
                 </h4>
-
                 <p style="font-size: 11px;"> (Anúncio publicado em {{date( 'd/m/Y' , strtotime($data->created_at))}})</p>
                 <br/>
                 <br/>
@@ -204,7 +205,7 @@
                 @elseif($data->premium == 0)
                     <p>// Anunciante :
                         <b>
-                            <a href="../user/{{$data->user_id}}" class="cor_black">
+                            <a href="../user/{{$data->user->name}}" class="cor_black">
                                 {{$data->user->name or ''}}
                             </a>
                         </b>
@@ -256,8 +257,23 @@
                     </p>
                     <div class="foto fade" style="width:250px;height: 160px;">
                         <a href="{{url('anuncio')}}/{{$value->id}}">
-                            <img src="{{$value->fotos->base64 or '../img/image.jpeg'}}" alt="Imagem">
-                        </a>
+                            {{--   <img src="{{$value->fotos->base64 or '../img/image.jpeg'}}" alt="Imagem">
+                              --}}
+                        <span class="hidden" style="display: none">{{$aa = 0}}</span>
+                        @forelse($value->album as $x)
+                            @if($x->base64 == null)
+                            @else
+                                <span class="hidden" style="display: none">{{$aa = 1}}</span>
+                                <img src="{{$x->base64}}" alt="Imagem">
+                                @break
+                            @endif
+                        @empty
+                            <img src="{{'../img/image.jpeg'}}" alt="Imagem">
+                        @endforelse
+                        @if($aa == 0)
+                            <img src="{{'../img/image.jpeg'}}" alt="Imagem">
+                        @endif
+                         </a>
                     </div>
                     <p class="preco">
                         R$ 2,000.000

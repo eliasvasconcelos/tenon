@@ -13,7 +13,7 @@ use Faker\Generator as Faker;
 |
 */
 
-/*$factory->define(App\User::class, function (Faker $faker) {
+$factory->define(App\User::class, function (Faker $faker) {
     static $password;
 
     return [
@@ -30,9 +30,10 @@ use Faker\Generator as Faker;
 $factory->define(App\Models\Categoria::class, function (Faker $faker) {
     return [
         'nome' => $faker->name,
+        'icon' => $faker->name,
         'categoria_id' => rand(0, 3),
     ];
-});*/
+});
 
 $factory->define(App\Models\Anuncio::class, function (Faker $faker) {
     return [

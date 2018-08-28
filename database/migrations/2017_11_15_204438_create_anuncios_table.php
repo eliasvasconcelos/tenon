@@ -15,7 +15,7 @@ class CreateAnunciosTable extends Migration
     {
         Schema::create('anuncios', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('user_id')->default(0);
+            $table->integer('user_id')->unsigned()->default(0);
             $table->integer('categoria_id')->default(0);
             $table->string('titulo')->nullable();
             $table->text('descricao')->nullable();
@@ -24,6 +24,10 @@ class CreateAnunciosTable extends Migration
             $table->string('status')->default('pendente');
             $table->timestamps();
             $table->softDeletes();
+        });
+
+        Schema::table('anuncios', function($table) {
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
         });
     }
 

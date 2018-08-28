@@ -21,6 +21,7 @@ class AnuncioController extends DefaultController
         $this->model = $model;
         $this->request = $request;
     }
+
     public function index()
     {
         $categoria = Categoria::all();
@@ -37,16 +38,24 @@ class AnuncioController extends DefaultController
         }*/
         $t = Input::get('texto');
         $busca = Anuncio::where('status', 1)->where('titulo', 'LIKE', '%' . $t . '%')
-            ->orWhere('descricao', 'LIKE', '%' . $t. '%')->orderBy('id', 'desc')->paginate(10);
+            ->orWhere('descricao', 'LIKE', '%' . $t . '%')->orderBy('id', 'desc')->paginate(10);
         return view("$this->view.search")->with('result', $busca);
 
     }
 
     public function destroy($id)
     {
-        $deletar = Anuncio::find($id);
-        $deletar->delete();
-        return redirect()->back();
+        if (auth()->check()) {
+            $deletar = Anuncio::find($id);
+            if ($deletar->user_id == auth()->user()->id) {
+                $deletar->delete();
+                return redirect()->back();
+            } else {
+                return "nao autorizado";
+            }
+        } else {
+            return "usuario nao logado";
+        }
     }
 
     public function novo()
@@ -80,21 +89,29 @@ class AnuncioController extends DefaultController
     {
         $store = $this->model->create($this->request->all());
 
-        foreach(request()->get('base64') as $z){
-        $data =[];
-        $data['base64'] = $z;
-        $data['anuncio_id'] = $store->id;
-        AnuncioFoto::create($data);
+        foreach (request()->get('base64') as $z) {
+            $data = [];
+            $data['base64'] = $z;
+            $data['anuncio_id'] = $store->id;
+            AnuncioFoto::create($data);
+        }
+
+        return 1;
+
+        /* $data = $this->request->all();
+         $store = $this->model->create($data);
+
+         $data['anuncio_id'] = $store->id;
+         AnuncioFoto::create($data);
+
+         return 1;*/
     }
 
-    return 1;
-
-       /* $data = $this->request->all();
-        $store = $this->model->create($data);
-
-        $data['anuncio_id'] = $store->id;
-        AnuncioFoto::create($data);
-
-        return 1;*/
+    public function anuncio_update($id)
+    {
+        $anuncio = $this->model->find($id);
+        $anuncio->update($this->request->all());
+        return redirect()->back();
     }
+
 }

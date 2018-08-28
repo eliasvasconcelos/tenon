@@ -1,10 +1,10 @@
-$(document).ready(function(){
+/*$(document).ready(function(){
     $("#email").click(function(){
        if($(this).val()=='Digite seu email'){
            $(this).val('');
        }; 
     });
-});
+});*/
 $(document).ready(function(){
     document.getElementById('cnpj').style.display = 'none';
     document.getElementById('razao').style.display = 'none';

@@ -22,7 +22,7 @@ class CreateUsersTable extends Migration
             $table->integer('tipo_id')->default(0);
             $table->bigInteger('cpf')->nullable();
             $table->bigInteger('cnpj')->nullable();
-            $table->string('status')->default('pendente');
+            $table->string('status')->default(0);
             $table->string('loja_link')->unique()->nullable();
             $table->string('razao')->nullable();
             $table->rememberToken();

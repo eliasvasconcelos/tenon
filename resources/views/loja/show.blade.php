@@ -134,8 +134,10 @@
                             <br/><br/>
                             @forelse($anuncio->where('status', 1) as $z)
                                 <aside class="anuncios">
-                                    <div class="left" style="background-color: #f5f5f5;padding: 2px;border: 1px dotted #ccc">
-                                        <a href="../anuncio/{{$z->id}}"><img src="{{$z->fotos->base64 or '../img/image.jpeg'}}" alt="Imagem" height="130px" width="200"></a>
+                                    <div class="left foto fade" style="padding: 2px;border: 1px dotted #ccc;width: 200px;height: 130px">
+                                        <a href="../anuncio/{{$z->id}}">
+                                            <img src="{{$z->fotos->base64 or '../img/image.jpeg'}}" alt="Imagem"  width="200px" height="130px">
+                                        </a>
                                     </div>
                                     <div style="height: 140px;margin-left:230px">
                                         <h3 style="font-weight: 600;text-color:#000;">{{$z->titulo}}</h3>

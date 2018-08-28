@@ -82,7 +82,7 @@
                 <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
                     {{ csrf_field() }}
                 </form>
-                <a title="Acesse nossa plataforma" class="botao" href="{{url ('user')}}/{{Auth::user()->name}}">
+                <a title="Acesse nossa plataforma" class="botao" href="{{url ('user')}}/{{Auth::user()->id}}">
                     <i class="fa fa-user-circle-o  fa-lg"></i> Minha Conta </a>
                 @else
 
@@ -101,9 +101,9 @@
         <h1 class="fontzero"> Pesquisar produtos na plataforma Tenon </h1>
     @if(Auth::user())
        @if(Auth::user()->tipo_id == '1')
-           <a href="{{url ('')}}/">
+           <a href="{{url ('/painel')}}">
                <span class="ofertas swing">
-                   <i class="fa fa-cog fa-lg"></i> Configuraçoes
+                   <i class="fa fa-cog fa-lg"></i> Administração
                </span>
            </a>
        @elseif(Auth::user()->tipo_id == "2" || Auth::user()->tipo_id == "4")
@@ -114,7 +114,7 @@
                </span>
            </a>
            @else
-           <a href="{{url ('user')}}/{{Auth::user()->name}}">
+           <a href="{{url ('user')}}/{{Auth::user()->id}}">
                <span class="ofertas swing">
                    <i class="fa fa-user fa-lg"></i> Meus anúncios
                </span>
@@ -126,7 +126,7 @@
                </span>
            </a>
        @else
-           <a href="{{url ('user')}}/{{Auth::user()->name}}">
+           <a href="{{url ('user')}}/{{Auth::user()->id}}">
                <span class="ofertas swing">
                    <i class="fa fa-user fa-lg"></i> Meus anúncios
                </span>

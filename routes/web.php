@@ -17,15 +17,30 @@ Route::resource('/', 'HomeController');
 
 Route::group(['middleware' => ['auth']], function (){
     Route::get('anuncio/novo_anuncio', 'AnuncioController@novo');
+    Route::get('anuncio/{id}/update', 'AnuncioController@anuncio_update');
+
     Route::put('user/{id}', 'UserController@update');
+    Route::put('user/anuncio', 'UserController@anuncio');
     Route::get('anuncio/{id}/delete', 'AnuncioController@destroy');
+});
+
+Route::group(['prefix' => 'painel'], function () {
+    Route::resource('/', 'AdminController');
+    Route::get('/user', 'AdminController@user');
+
 });
 
 Route::resource('anuncio', 'AnuncioController');
 
+Route::get('user/{id}/update', 'UserController@usuario_update');
+Route::get('user/{id}/delete', 'UserController@destroy');
+
 Route::resource('estado', 'UfController');
 
-Route::resource('user', 'UserController', ['except'=> 'index']);
+Route::resource('configuracao', 'ConfigController');
+Route::resource('configuracao/anuncio', 'ConfigController@anuncio');
+
+Route::resource('user', 'UserController');
 
 Route::resource('loja', 'LojaController', ['except'=> 'index']);
 
@@ -36,9 +51,7 @@ Route::resource('categoria', 'CategoriaController',['except'=> 'index', 'create'
 Route::any('pesquisar','AnuncioController@pesquisar');
 
 Route::get('/home', 'HomeController@index')->name('home');
-Route::get('/user', function () {
-    return redirect('home');
-});
+
 Route::get('/estado', function () {
     return redirect('home');
 });

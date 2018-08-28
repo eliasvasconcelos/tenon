@@ -1,5 +1,19 @@
 @extends('layouts.app')
+<script src="https://cdn.jsdelivr.net/npm/jquery-validation@1.17.0/dist/jquery.validate.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/jquery-validation@1.17.0/dist/additional-methods.js"></script>
+<script type="text/css">
+    #msg {
+        color:red;
+    }
 
+    el.error{
+        background-color: red;
+    }
+
+    el.ok {
+        color: green;
+    }
+</script>
 @section('content')
     @if(Auth::user()->where('id', auth()->user()->id))
         @forelse(\App\Models\Endereco::where('id', auth()->user()->id)->where('rua', null)->get() as $z)
@@ -17,9 +31,6 @@
             @endif
         @empty
             <div class="center info_cfg">
-                    <div class="cor_black notify2">
-                        <b>{{Auth::user()->name}}</b> lembre-se, de sempre manter seus dados atualizados, para melhor contato!!
-                    </div>
                 <h1 style="font-size: 2em">Novo Anúncio</h1>
                 <ul class="menu_u" style="margin-top:-25px;">
                     <li class="text-right">
@@ -29,10 +40,13 @@
 
                         <a title="Leilão" class="botao cor_black" href="?pg=leilao"><i class="fa fa-legal  fa-lg"></i> &nbsp; Leilão </a>|
 
-                        <a title="Configurações" class="botao cor_black" href="?pg=configuracoes"><i class="fa fa-cog  fa-lg"></i> &nbsp; Configurações </a>
+                        <a title="Configurações" class="botao cor_black" href="config"><i class="fa fa-cog  fa-lg"></i> &nbsp; Configurações </a>
 
                     </li>
                 </ul>
+                <div class="cor_black notify2" style="margin-top:10px;">
+                    <b>{{Auth::user()->name}}</b> lembre-se, de sempre manter seus dados atualizados, para melhor contato!!
+                </div>
             </div>
             <main class="conteudo">
                 <section id="default2">
@@ -43,7 +57,7 @@
                             <li style="display: inline-table; margin-left: 10px; padding: 20px; background: #ccc; color: #000; border-radius: 6px; cursor: pointer;"
                                 {{--
                                                         id="{{$z->id}}" onclick="captura({{$z->id}}, 2)">{{$z->nome}}</li>
-                                --}}                        id="{{$z->id}}" onclick="captura({{$z->id}},2)">{{$z->nome}}</li>
+                                --}}                    id="{{$z->id}}" onclick="captura({{$z->id}},2)">{{$z->nome}}</li>
 
                         @endforeach
                     </ul>
@@ -72,20 +86,26 @@
                             <div class="form-group">
                                 <div class="input-group">
                                     <div class="input-group-addon">Titulo</div>
-                                    <input value="{{$data->titulo or ''}}" type="text" required="required" class="form-control" id="titulo" name="titulo" placeholder="Titulo">
+                                    <input value="{{$data->titulo or ''}}" type="text" class="form-control" id="titulo" name="titulo" placeholder="Titulo">
                                 </div>
                             </div>
                             <div class="form-group">
                                 <div class="input-group">
                                     <div class="input-group-addon">Descricao</div>
-                                    <textarea rows="5" class="form-control" id="descricao" required="required" name="descricao" placeholder="Ex: alguma coisa..">{{$data->descricao or ''}}</textarea>
+                                    <textarea rows="5" class="form-control" id="descricao" name="descricao" placeholder="Ex: alguma coisa..">{{$data->descricao or ''}}</textarea>
                                 </div>
                             </div>
+{{--
+                            <div class="form-group">
+                                <div class="input-group">
+                                    <div class="input-group-addon">Preço</div>
+                                    <input value="{{$data->preco or ''}}" type="text" required="required" class="form-control" id="titulo" name="titulo" placeholder="Titulo">
+                                </div>
+                            </div>--}}
 
                             <div class="form-group">
                                 <div class="input-group">
                                     <div class="input-group-addon">Localização</div>
-
                                     <select  class="form-control" name="uf_id" id="uf_id">
                                         @forelse(\App\Models\Uf::all() as $z)
                                             @if($z->id == auth()->user()->id)
@@ -174,12 +194,6 @@
                             </div>
 
                             <img type="button" id="img_click" required="required" style="border:2px dashed #ccc;padding:2px; cursor:pointer;" height="135" src="{{asset ('img/sem_imagem.png')}}">
-                            <br>
-                            <div class="form-group">
-                                <div class="input-group">
-                                    <div class="input-group-addon">Album de fotos:</div>
-                                </div>
-                            </div>
                             <img type="button" id="img_click_2" style="border:2px dashed #ccc;padding:2px; cursor:pointer;" height="135" src="{{asset ('img/sem_imagem.png')}}">
                             <img type="button" id="img_click_3" style="border:2px dashed #ccc;padding:2px; cursor:pointer;" height="135" src="{{asset ('img/sem_imagem.png')}}">
                             <img type="button" id="img_click_4" style="border:2px dashed #ccc;padding:2px; cursor:pointer;" height="135" src="{{asset ('img/sem_imagem.png')}}">
@@ -199,6 +213,7 @@
                     </form>
 
                     <script>
+
                         function captura(id, ul) {
                             var metodo = 'GET';
                             var link = '{{url('api/categoria/search')}}/' + id;

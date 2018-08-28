@@ -70,7 +70,7 @@ class RegisterController extends Controller
             'razao' => $data['razao'],
             'cpf' => $data['cpf'],
             'cnpj' => $data['cnpj'],
-            'loja_link' => $data['loja_link'],
+            'loja_link' => str_pad(mt_rand(0, 999999), 6, '0', STR_PAD_LEFT),
         ]);
     }
 }
