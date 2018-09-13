@@ -1,23 +1,8 @@
 @extends('layouts.app')
-<script src="https://cdn.jsdelivr.net/npm/jquery-validation@1.17.0/dist/jquery.validate.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/jquery-validation@1.17.0/dist/additional-methods.js"></script>
-<script type="text/css">
-    #msg {
-        color:red;
-    }
-
-    el.error{
-        background-color: red;
-    }
-
-    el.ok {
-        color: green;
-    }
-</script>
 @section('content')
     @if(Auth::user()->where('id', auth()->user()->id))
         @forelse(\App\Models\Endereco::where('id', auth()->user()->id)->where('rua', null)->get() as $z)
-            @if($z->rua == null)
+           {{-- @if($z->rua == null)
                <div class="center info_cfg">
                     <div class="cor_black notify">
                         Desculpe, <b>{{Auth::user()->name}}</b> atualize suas informações para poder postar anúncio, é rápido :(
@@ -28,18 +13,18 @@
                         </p>
                     </div>
                </div>
-            @endif
+            @endif--}}
         @empty
             <div class="center info_cfg">
                 <h1 style="font-size: 2em">Novo Anúncio</h1>
                 <ul class="menu_u" style="margin-top:-25px;">
                     <li class="text-right">
-                        <a title="Assinatura" class="botao cor_black" href="?pg=assinatura"><i class="fa fa-star fa-lg"></i> &nbsp; Assinatura </a>|
+                       {{-- <a title="Assinatura" class="botao cor_black" href="?pg=assinatura"><i class="fa fa-star fa-lg"></i> &nbsp; Assinatura </a>|
 
                         <a title="Depoimento" class="botao cor_black" href="?pg=feedback"><i class="fa fa-list-alt  fa-lg"></i> &nbsp; Feedback </a>|
 
                         <a title="Leilão" class="botao cor_black" href="?pg=leilao"><i class="fa fa-legal  fa-lg"></i> &nbsp; Leilão </a>|
-
+--}}
                         <a title="Configurações" class="botao cor_black" href="config"><i class="fa fa-cog  fa-lg"></i> &nbsp; Configurações </a>
 
                     </li>
@@ -49,10 +34,10 @@
                 </div>
             </div>
             <main class="conteudo">
-                <section id="default2">
-                    <h3 class="text-center">Qual Categoria?
-                    </h3>
-                    <ul id="sub1">
+                <section id="default2" style="padding:50px 100px;">
+                    <h3 class="text-center">Qual Categoria?</h3>
+                        <section style="width: 100%;padding:50px 100px;margin-top:40px;background-color: #f7f7f7;border-radius:3px;border:1px solid #f5f5f5">
+                    <ul id="sub1" style="margin:auto;text-align: center">
                         @foreach(\App\Models\Categoria::where('categoria_id', 0)->get() as $z)
                             <li style="display: inline-table; margin-left: 10px; padding: 20px; background: #ccc; color: #000; border-radius: 6px; cursor: pointer;"
                                 {{--
@@ -62,156 +47,164 @@
                         @endforeach
                     </ul>
                     @for($i=2; $i<=100; $i++)
-                        <ul id="sub{{$i}}">
+                        <ul id="sub{{$i}}" style="text-align: center">
 
                         </ul>
                     @endfor
-                    <form id="form-anuncio" class="form" style="display: none;"><br/>
-                        {!! csrf_field() !!}
-                        <input type="hidden" id="categoria_id" name="categoria_id" value="">
-                        <input type="hidden" id="status" name="status" value="0">
-                        <input type="hidden" id="user_id" name="user_id" value="{{auth()->user()->id}}">
-                        <input type="file" id="imagem_base64" name="base64[]" class="file" style="display: none">
-                        <input type="hidden" id="base64" required="required" name="base64[]" value="">
-                        <input type="file" id="imagem_base64_2" name="base64[]" class="file" style="display: none">
-                        <input type="hidden" id="base64_2" name="base64[]" value="">
-                        <input type="file" id="imagem_base64_3" name="base64[]" class="file" style="display: none">
-                        <input type="hidden" id="base64_3" name="base64[]" value="">
-                        <input type="file" id="imagem_base64_4" name="base64[]" class="file" style="display: none">
-                        <input type="hidden" id="base64_4" name="base64[]" value="">
-                        <input type="file" id="imagem_base64_5" name="base64[]" class="file" style="display: none">
-                        <input type="hidden" id="base64_5" name="base64[]" value="">
+                        </section>
+                        <form id="form-anuncio" class="form" style="display: none;">
+                            {!! csrf_field() !!}
+                            <input type="hidden" id="categoria_id" name="categoria_id" value="">
+                            <input type="hidden" id="status" name="status" value="0">
+                            <input type="hidden" id="user_id" name="user_id" value="{{auth()->user()->id}}">
+                            <input type="hidden" name="base64">
+                            <div id="imagem_base64"></div>
+                            <div id="base64"></div>
+                            <section style="width: 100%;padding:50px 100px;margin-top:40px;background-color: #f7f7f7;border-radius:3px;border:1px solid #f5f5f5">
+                                <h3>Titulo</h3>
+                                <input value="{{$data->titulo or ''}}" type="text" class="form-control" id="titulo" placeholder="Digite aqui.." name="titulo">
+                                <h3>Descrição</h3>
+                                <textarea rows="5" class="form-control" id="descricao" name="descricao" placeholder="Ex: alguma coisa..">{{$data->descricao or ''}}</textarea>
+                            </section>
+                            <section style="float:left;width: 100%;padding:50px;margin-top:40px;background-color: #f7f7f7;">
+                                    <h3 class="text-center">Localização</h3>
+                                    <section style="float:left;width: 50%;padding:50px;margin-top:20px;">
+                                            {{--
+                                                <div class="form-group">
+                                                    <div class="input-group">
+                                                        <div class="input-group-addon">Preço</div>
+                                                        <input value="{{$data->preco or ''}}" type="text" required="required" class="form-control" id="titulo" name="titulo" placeholder="Titulo">
+                                                    </div>
+                                                </div>
+                                            --}}
+                                            <h3>CEP</h3>
+                                            <input name="cep" style="width: 100%" placeholder="Digite seu CEP" type="text" id="cep" class="form-control" onblur="pesquisacep(this.value);">
+                                            <h3>Cidade</h3>
+                                            <input name="cidade" style="width: 100%" type="text" id="cidade" class="form-control" disabled>
+                                            <h3>Número</h3>
+                                            <input name="cidade" style="width: 100%" type="text" id="cidade" class="form-control">
+                                    </section>
+                                    <section style="float:right;width: 50%;padding:50px;margin-top:20px;background-color: #f7f7f7;">
+                                            {{--
+                                                <div class="form-group">
+                                                    <div class="input-group">
+                                                        <div class="input-group-addon">Preço</div>
+                                                        <input value="{{$data->preco or ''}}" type="text" required="required" class="form-control" id="titulo" name="titulo" placeholder="Titulo">
+                                                    </div>
+                                                </div>
+                                            --}}
+                                            <h3>Rua</h3>
+                                            <input name="rua" style="width: 100%" type="text" id="rua" class="form-control" disabled>
+                                            <h3>Bairro</h3>
+                                            <input name="bairro" style="width: 100%" type="text" id="bairro" class="form-control" disabled>
+                                            <h3>Estado</h3>
+                                            <input name="uf" style="width: 100%" type="text" id="uf" class="form-control" disabled>
+                                </section>
+                            </section>
+                              {{--  <div style="float: left;width: 100%;">
+                                            <h3>Localização</h3>
+                                        <select  class="form-control" name="uf_id" id="uf_id">
+                                            @forelse(\App\Models\Uf::all() as $z)
+                                                @if($z->id == auth()->user()->id)
+                                                    <option value="{{$z->id}}"
+                                                            selected>{{$z->uf}}</option>
+                                                @else
+                                                    <option value="{{$z->id}}">{{$z->uf}}</option>
+                                                @endif
+                                            @empty
+                                            @endforelse
+                                        </select>
+                                </div>--}}
+                                {{--<div class="form-group">
+                                    <div class="input-group">
+                                        <div class="input-group-addon">Preço</div>
+                                        <input type="text" class="form-control" id="preco" name="preco" placeholder="0">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <div class="input-group">
+                                        <div class="input-group-addon">Por:</div>
+                                        <select class="form-control">
+                                            <option value="audi">Selecione</option>
+                                            <option value="volvo">Animal</option>
+                                            <option value="saab">Dese(s)</option>
+                                            <option value="mercedes">Cobertura(s)</option>
+                                        </select>
+                                    </div>
+                                </div>
 
-                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                            <div class="form-group">
-                                <div class="input-group">
-                                    <div class="input-group-addon">Titulo</div>
-                                    <input value="{{$data->titulo or ''}}" type="text" class="form-control" id="titulo" name="titulo" placeholder="Titulo">
+                                <div class="form-group">
+                                    <div class="input-group">
+                                        <input type="checkbox"> Negociar Valor
+                                    </div>
                                 </div>
-                            </div>
-                            <div class="form-group">
-                                <div class="input-group">
-                                    <div class="input-group-addon">Descricao</div>
-                                    <textarea rows="5" class="form-control" id="descricao" name="descricao" placeholder="Ex: alguma coisa..">{{$data->descricao or ''}}</textarea>
-                                </div>
-                            </div>
-{{--
-                            <div class="form-group">
-                                <div class="input-group">
-                                    <div class="input-group-addon">Preço</div>
-                                    <input value="{{$data->preco or ''}}" type="text" required="required" class="form-control" id="titulo" name="titulo" placeholder="Titulo">
-                                </div>
-                            </div>--}}
-
-                            <div class="form-group">
-                                <div class="input-group">
-                                    <div class="input-group-addon">Localização</div>
-                                    <select  class="form-control" name="uf_id" id="uf_id">
-                                        @forelse(\App\Models\Uf::all() as $z)
-                                            @if($z->id == auth()->user()->id)
-                                                <option value="{{$z->id}}"
-                                                        selected>{{$z->uf}}</option>
-                                            @else
-                                                <option value="{{$z->id}}">{{$z->uf}}</option>
-                                            @endif
-                                        @empty
-                                        @endforelse
-                                    </select>
-                                </div>
-                            </div>
-                            {{--<div class="form-group">
-                                <div class="input-group">
-                                    <div class="input-group-addon">Preço</div>
-                                    <input type="text" class="form-control" id="preco" name="preco" placeholder="0">
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <div class="input-group">
-                                    <div class="input-group-addon">Por:</div>
-                                    <select class="form-control">
-                                        <option value="audi">Selecione</option>
-                                        <option value="volvo">Animal</option>
-                                        <option value="saab">Dese(s)</option>
-                                        <option value="mercedes">Cobertura(s)</option>
-                                    </select>
-                                </div>
-                            </div>
-
-                            <div class="form-group">
-                                <div class="input-group">
-                                    <input type="checkbox"> Negociar Valor
-                                </div>
-                            </div>
 
 
-                            <div class="form-group">
-                                <div class="input-group">
-                                    <div class="input-group-addon">Informações Genealógicas</div>
+                                <div class="form-group">
+                                    <div class="input-group">
+                                        <div class="input-group-addon">Informações Genealógicas</div>
+                                    </div>
                                 </div>
-                            </div>
 
-                            <div class="form-group">
-                                <div class="input-group">
-                                    <div class="input-group-addon">Pai:</div>
-                                    <input type="text" class="form-control" id="pai" name="pai" placeholder="">
+                                <div class="form-group">
+                                    <div class="input-group">
+                                        <div class="input-group-addon">Pai:</div>
+                                        <input type="text" class="form-control" id="pai" name="pai" placeholder="">
+                                    </div>
                                 </div>
+                                <div class="form-group">
+                                    <div class="input-group">
+                                        <div class="input-group-addon">Mãe:</div>
+                                        <input type="text" class="form-control" id="mae" name="mae" placeholder="">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <div class="input-group">
+                                        <div class="input-group-addon">Avô paterno:</div>
+                                        <input type="text" class="form-control" id="avo_paterno" name="avo_paterno" placeholder="">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <div class="input-group">
+                                        <div class="input-group-addon">Avó paterna:</div>
+                                        <input type="text" class="form-control" id="avo_paterna" name="avo_paterna" placeholder="">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <div class="input-group">
+                                        <div class="input-group-addon">Avô materno:</div>
+                                        <input type="text" class="form-control" id="avo_materno" name="avo_materno" placeholder="">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <div class="input-group">
+                                        <div class="input-group-addon">Avó materno:</div>
+                                        <input type="text" class="form-control" id="avo_materna" name="avo_materna" placeholder="">
+                                    </div>
+                                </div>--}}
+                                <section style="float:left;width: 100%;padding:10px 50px 10px 100px;margin-top:40px;background-color: #f7f7f7;border-radius:3px;border:1px solid #f5f5f5">
+                                    <h3>Imagem do Anúncio:</h3>
+                                    <br>
+                                    <div style="width: 100%;">
+                                        <a class="btn btn-success" style="width: 170px;" id="add"><i class="fa fa-plus"></i>
+                                            Adicionar
+                                        </a>
+                                    </div>
+                                </section>
+                                <section id="album" style="display:none;float:left;width: 100%;margin-top:5px;padding:0px 0px 10px 55px;background-color: #f7f7f7;border-radius:3px;border:1px solid #f5f5f5">
+                                    <ol> </ol>
+                                </section>
+                                <section style="float:left;width: 100%;padding:50px 100px;margin-top:40px;background-color: #f7f7f7;border-radius:3px;border:1px solid #f5f5f5">
+                                    <a class="btn btn-success" onclick="save('anuncio', '{{url('anuncio')}}');"><i class="fa fa-save"></i>
+                                        Salvar
+                                    </a>
+                                </section>
+                            <br>
+                            <br>
+                            <div class="text-center" id="sucesso" style="float:left;width:100%;display:none;margin-bottom:10px;padding:20px;background-color: #63d3f8;border:1px solid #18aecb">
+                                Seu Anúncio foi cadastrado com sucesso!!
                             </div>
-                            <div class="form-group">
-                                <div class="input-group">
-                                    <div class="input-group-addon">Mãe:</div>
-                                    <input type="text" class="form-control" id="mae" name="mae" placeholder="">
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <div class="input-group">
-                                    <div class="input-group-addon">Avô paterno:</div>
-                                    <input type="text" class="form-control" id="avo_paterno" name="avo_paterno" placeholder="">
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <div class="input-group">
-                                    <div class="input-group-addon">Avó paterna:</div>
-                                    <input type="text" class="form-control" id="avo_paterna" name="avo_paterna" placeholder="">
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <div class="input-group">
-                                    <div class="input-group-addon">Avô materno:</div>
-                                    <input type="text" class="form-control" id="avo_materno" name="avo_materno" placeholder="">
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <div class="input-group">
-                                    <div class="input-group-addon">Avó materno:</div>
-                                    <input type="text" class="form-control" id="avo_materna" name="avo_materna" placeholder="">
-                                </div>
-                            </div>--}}
-
-                            <div class="form-group">
-                                <div class="input-group">
-                                    <div class="input-group-addon">Imagem de destaque:</div>
-                                </div>
-                            </div>
-
-                            <img type="button" id="img_click" required="required" style="border:2px dashed #ccc;padding:2px; cursor:pointer;" height="135" src="{{asset ('img/sem_imagem.png')}}">
-                            <img type="button" id="img_click_2" style="border:2px dashed #ccc;padding:2px; cursor:pointer;" height="135" src="{{asset ('img/sem_imagem.png')}}">
-                            <img type="button" id="img_click_3" style="border:2px dashed #ccc;padding:2px; cursor:pointer;" height="135" src="{{asset ('img/sem_imagem.png')}}">
-                            <img type="button" id="img_click_4" style="border:2px dashed #ccc;padding:2px; cursor:pointer;" height="135" src="{{asset ('img/sem_imagem.png')}}">
-                            <img type="button" id="img_click_5" style="border:2px dashed #ccc;padding:2px; cursor:pointer;" height="135" src="{{asset ('img/sem_imagem.png')}}">
-
-                        </div>
-                        <br>
-                        <a class="btn btn-success" onclick="save('anuncio', '{{url('anuncio')}}');"><i class="fa fa-save"></i>
-                            Salvar
-                        </a>
-
-                        <br>
-                        <br>
-                        <div class="text-center" id="sucesso" style="display:none;margin-bottom:10px;padding:20px;background-color: #63d3f8;border:1px solid #18aecb">
-                            Seu Anúncio foi cadastrado com sucesso!!
-                        </div>
-                    </form>
-
+                        </form>
                     <script>
 
                         function captura(id, ul) {
@@ -251,8 +244,9 @@
                                 @endif
 
                                 if(window.top==window) {
-                                    window.setTimeout('location.reload()', 3000);
+                                    setTimeout(location.href = "{{url("")}}/user/{{Auth()->user()->id}}",3000);
                                 }
+
                             }).fail(function () {
 
                             });
@@ -293,20 +287,106 @@
                             });
                         }
                     </script>
+                    <script type="text/javascript">
+                        $(document).ready(function(){
+                            $("#cep").mask("99.999-999");
+                        });
+                    </script>
+                    <script src="https://www.geradordecep.com.br/assets/js/jquery.maskedinput-1.1.4.pack.js"></script>
+                    <!-- Adicionando Javascript -->
+                    <script type="text/javascript" >
 
+                        function limpa_formulário_cep() {
+                            //Limpa valores do formulário de cep.
+                            document.getElementById('rua').value=("");
+                            document.getElementById('bairro').value=("");
+                            document.getElementById('cidade').value=("");
+                            document.getElementById('uf').value=("");
+                            document.getElementById('ibge').value=("");
+                        }
+
+                        function meu_callback(conteudo) {
+                            if (!("erro" in conteudo)) {
+                                //Atualiza os campos com os valores.
+                                document.getElementById('rua').value=(conteudo.logradouro);
+                                document.getElementById('bairro').value=(conteudo.bairro);
+                                document.getElementById('cidade').value=(conteudo.localidade);
+                                document.getElementById('uf').value=(conteudo.uf);
+                            } //end if.
+                            else {
+                                //CEP não Encontrado.
+                                limpa_formulário_cep();
+                                alert("CEP não encontrado.");
+                            }
+                        }
+
+                        function pesquisacep(valor) {
+
+                            //Nova variável "cep" somente com dígitos.
+                            var cep = valor.replace(/\D/g, '');
+
+                            //Verifica se campo cep possui valor informado.
+                            if (cep != "") {
+
+                                //Expressão regular para validar o CEP.
+                                var validacep = /^[0-9]{8}$/;
+
+                                //Valida o formato do CEP.
+                                if(validacep.test(cep)) {
+
+                                    //Preenche os campos com "..." enquanto consulta webservice.
+                                    document.getElementById('rua').value="...";
+                                    document.getElementById('bairro').value="...";
+                                    document.getElementById('cidade').value="...";
+                                    document.getElementById('uf').value="...";
+
+                                    //Cria um elemento javascript.
+                                    var script = document.createElement('script');
+
+                                    //Sincroniza com o callback.
+                                    script.src = 'https://viacep.com.br/ws/'+ cep + '/json/?callback=meu_callback';
+
+                                    //Insere script no documento e carrega o conteúdo.
+                                    document.body.appendChild(script);
+
+                                } //end if.
+                                else {
+                                    //cep é inválido.
+                                    limpa_formulário_cep();
+                                    alert("Formato de CEP inválido.");
+                                }
+                            } //end if.
+                            else {
+                                //cep sem valor, limpa formulário.
+                                limpa_formulário_cep();
+                            }
+                        };
+
+                    </script>
                     <script>
+                        var conta = 0;
+                        $("#add").click(function(){
+                            conta++;
+                            if(conta<9)
+                                $("ol").append('<img type="button" id="img_click_' + conta +'" style="margin-left:10px;margin-top:10px;border:2px dashed #ccc;padding:2px; cursor:pointer;" height="135" src="{{asset ('img/sem_imagem.png')}}">');
+                                $("#imagem_base64").append('<input type="file" id="imagem_base64_' + conta +'" name="base64[]" class="file" style="display: none">');
+                                $("#base64").append('<input type="hidden" id="base64_' + conta +'" required="required" name="base64[]" value="">');
+                            if (conta != 0){
+                                jQuery("#album").fadeIn();
+                                $("#album").css("display", "block");
+                            }
+                        });
                         //JS que carrega o UPLOAD
                         $(document).on('click', '.browse', function () {
                             var file = $(this).parent().parent().parent().find('.file');
                             file.trigger('click');
                         });
                         /*
-                                        $(document).on('change', '.file', function () {
-                                            $(this).parent().find('#texto_arquivo_base64_on').val($(this).val().replace(/C:\\fakepath\\/i, ''));
-                                        });*/
-
-                        $(document).on('click', '#img_click', function () {
-                            $('#imagem_base64').click();
+                            $(document).on('change', '.file', function () {
+                            $(this).parent().find('#texto_arquivo_base64_on').val($(this).val().replace(/C:\\fakepath\\/i, ''));
+                        });*/
+                        $(document).on('click', '#img_click_1', function () {
+                            $('#imagem_base64_1').click();
                         });
                         $(document).on('click', '#img_click_2', function () {
                             $('#imagem_base64_2').click();
@@ -319,6 +399,69 @@
                         });
                         $(document).on('click', '#img_click_5', function () {
                             $('#imagem_base64_5').click();
+                        });
+                        $(document).on('click', '#img_click_6', function () {
+                            $('#imagem_base64_6').click();
+                        });
+                        $(document).on('click', '#img_click_7', function () {
+                            $('#imagem_base64_7').click();
+                        });
+                        $(document).on('click', '#img_click_8', function () {
+                            $('#imagem_base64_8').click();
+                        });
+
+                        $(document).on('change', '#imagem_base64_1', function () {
+                            /*
+                                                console.log($('#imagem_base64').val());
+                                                console.log("ENTROU?");
+                            */
+
+                            console.log(this.files);
+                            if (this.files && this.files[0]) {
+
+                                if (this.files[0].type == "image/png" || this.files[0].type == "image/jpeg" || this.files[0].type == "image/gif") {
+                                    $("#erro_imagem").css("display", "none");
+                                    var FR = new FileReader();
+
+                                    FR.addEventListener("load", function (e) {
+                                        document.getElementById("img_click_1").src = e.target.result;
+                                        document.getElementById("base64_1").value = e.target.result;
+                                    });
+
+                                    FR.readAsDataURL(this.files[0]);
+                                } else {
+                                    document.getElementById("img_click_1").src = "{{asset('img/sem_imagem.png')}}";
+                                    document.getElementById("base64_1").value = "";
+                                    $("#erro_imagem").css("display", "block");
+                                }
+                            }
+                        });
+
+                        $(document).on('change', '#imagem_base64_2', function () {
+                            /*
+                                                console.log($('#imagem_base64').val());
+                                                console.log("ENTROU?");
+                            */
+
+                            console.log(this.files);
+                            if (this.files && this.files[0]) {
+
+                                if (this.files[0].type == "image/png" || this.files[0].type == "image/jpeg" || this.files[0].type == "image/gif") {
+                                    $("#erro_imagem").css("display", "none");
+                                    var FR = new FileReader();
+
+                                    FR.addEventListener("load", function (e) {
+                                        document.getElementById("img_click_2").src = e.target.result;
+                                        document.getElementById("base64_2").value = e.target.result;
+                                    });
+
+                                    FR.readAsDataURL(this.files[0]);
+                                } else {
+                                    document.getElementById("img_click_2").src = "{{asset('img/sem_imagem.png')}}";
+                                    document.getElementById("base64_2").value = "";
+                                    $("#erro_imagem").css("display", "block");
+                                }
+                            }
                         });
                         $(document).on('change', '#imagem_base64_3', function () {
                             /*
@@ -399,62 +542,7 @@
                                 }
                             }
                         });
-                        $(document).on('change', '#imagem_base64_2', function () {
-                            /*
-                                                console.log($('#imagem_base64').val());
-                                                console.log("ENTROU?");
-                            */
 
-                            console.log(this.files);
-                            if (this.files && this.files[0]) {
-
-                                if (this.files[0].type == "image/png" || this.files[0].type == "image/jpeg" || this.files[0].type == "image/gif") {
-                                    $("#erro_imagem").css("display", "none");
-                                    var FR = new FileReader();
-
-                                    FR.addEventListener("load", function (e) {
-                                        document.getElementById("img_click_2").src = e.target.result;
-                                        document.getElementById("base64_2").value = e.target.result;
-                                    });
-
-                                    FR.readAsDataURL(this.files[0]);
-                                } else {
-                                    document.getElementById("img_click_2").src = "{{asset('img/sem_imagem.png')}}";
-                                    document.getElementById("base64_2").value = "";
-                                    $("#erro_imagem").css("display", "block");
-                                }
-                            }
-                        });
-                        $(document).on('change', '#imagem_base64', function () {
-                            /*
-                                                console.log($('#imagem_base64').val());
-                                                console.log("ENTROU?");
-                            */
-
-                            console.log(this.files);
-                            if (this.files && this.files[0]) {
-
-                                if (this.files[0].type == "image/png" || this.files[0].type == "image/jpeg" || this.files[0].type == "image/gif") {
-                                    $("#erro_imagem").css("display", "none");
-                                    var FR = new FileReader();
-
-                                    FR.addEventListener("load", function (e) {
-                                        document.getElementById("img_click").src = e.target.result;
-                                        document.getElementById("base64").value = e.target.result;
-                                    });
-
-                                    FR.readAsDataURL(this.files[0]);
-                                } else {
-                                    document.getElementById("img_click").src = "{{asset('img/sem_imagem.png')}}";
-                                    document.getElementById("base64").value = "";
-                                    $("#erro_imagem").css("display", "block");
-                                }
-                            }
-                        });
-
-                        function refresh() {
-                            window.location.reload();
-                        }
                     </script>
                 </section>
             </main>

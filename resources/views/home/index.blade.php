@@ -13,11 +13,11 @@
         @else
             Ben vindo <b>VISITANTE</b>
         @endif--}}
-            @if(Auth::user())
+           {{-- @if(Auth::user())
                  <div class="cor_black @if(\App\Models\Anuncio::where('user_id', auth()->user()->id)->count() == 0)notify @else notify2 @endif">
                      @if(\App\Models\Anuncio::where('user_id', auth()->user()->id)->get())
                          @if(auth()->user()->tipo_id == '1')
-                             Olá, <b>Administrador - {{auth()->user()->name}}</b> temos <b>{{\App\Models\Anuncio::where('status', 1)->count()}}</b> Publicados na plataforma
+                             Olá, <b>Administrador - {{auth()->user()->name}}</b> temos <b>{{\App\Models\Anuncio::where('anuncio_status_id', 1)->count()}}</b> Publicados na plataforma
                          @else
                              @if(\App\Models\Anuncio::where('user_id', auth()->user()->id)->count() == 0)
                                  Olá, <b>{{Auth::user()->name}}</b> crie agora seu primeiro anúncio é Grátis
@@ -27,7 +27,7 @@
                          @endif
                      @endif
                  </div>
-            @endif
+            @endif--}}
              <section id="destaque">
                  <h1 class="fontzero">Nossos Produtos em Destaque</h1>
 
@@ -74,7 +74,7 @@
          </section>
          <!--Fim Destaque-->
          <!--Inicio Leilões-->
-         <section id="leiloes">
+         {{--<section id="leiloes">
 
              <span class="titulo"><h3><i class="fa fa-legal fa-1x"></i> leilões ativos</h3></span>
 
@@ -132,7 +132,7 @@
                          <p class="hour">13:00H  <i class="fa fa-clock-o fa-1x"></i></p> <p class="enc">Encerramento: <br /> <date class="data_c">24/03/2017</date></p>                                </div>
                  </div>
              </article>
-         </section>
+         </section>--}}
          <!--Fim Leilões-->
          <!--Inicio Ultimos Anuncios-->
          <aside class="home_ads">
@@ -177,7 +177,7 @@
                         <span class="cor_black" style="font-size:13px;"> /animal</span>
                      </p>
                      <p class="desc_artigo">
-                         {{str_limit($z->descricao, 60)}}
+                         {{str_limit($z->descricao, 30)}}
                      </p>
                      <div class="data">
                          <date><i class="fa fa-calendar"></i> {{$z->created_at->format('d/m/ Y')}}</date>
@@ -194,7 +194,7 @@
          </section>
          <!--Fim Ultimos Anuncios-->
          @if($lojas->count() > 0)
-         <section id="lojas">
+        {{-- <section id="lojas">
              <h1 style="color:#000;text-transform: uppercase">// lojas oficiais</h1>
              <div class="tamanho">
                  @forelse($lojas as $z)
@@ -204,7 +204,7 @@
                  @empty
                  @endforelse
              </div>
-         </section>
+         </section>--}}
          @endif
          <!-- <section id="depoimentos">
                          <h1 style="color:#000; text-transform: uppercase;font-size: 17px;">// depoimentos</h1>
@@ -256,7 +256,7 @@
          </section>--}}
      </main>
 
-     <section style="width: 100%;background-color: #63d3f8;float: left">
+    {{-- <section style="width: 100%;background-color: #63d3f8;float: left">
          <section style="color:#000;width: 1140px;background-color: #63d3f8;margin:auto;margin-top:30px;margin-bottom:30px">
              <h1 style="font-size:1.7em;margin:30px 0px">// Região</h1>
 
@@ -270,9 +270,9 @@
              <a href="#" style="font-size:15px; display: inline;color: #000;">
                  <a href="#" style="color: #000;">Brasil</a>,
          </section>
-     </section>
+     </section>--}}
 
-   <section id="compartilhar">
+   {{--<section id="compartilhar">
          <div class="bg">
              <div class="width">
                  <h1>COMPARTILHE</h1><br />
@@ -283,10 +283,11 @@
 	            </span>
             </div>
         </div>
-    </section>
+    </section>--}}
+   {{--
     <div class="arrow_share">
         <img src="img/arrow_share.png" alt="">
-    </div>
+    </div>--}}
 
     @if (session('status'))
         <div class="alert alert-success">

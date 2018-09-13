@@ -26,7 +26,7 @@ class AnuncioController extends DefaultController
     {
         $categoria = Categoria::all();
         $usuario = UserTipo::all();
-        $anuncio = Anuncio::where('status', 1)->orderBy('id', 'DESC')->paginate(30);
+        $anuncio = Anuncio::where('status_id', 1)->orderBy('id', 'DESC')->paginate(30);
 
         return view("$this->view.index", compact('usuario', 'categoria', 'anuncio'));
     }
@@ -37,7 +37,7 @@ class AnuncioController extends DefaultController
             return redirect('/');
         }*/
         $t = Input::get('texto');
-        $busca = Anuncio::where('status', 1)->where('titulo', 'LIKE', '%' . $t . '%')
+        $busca = Anuncio::where('status_id', 1)->where('titulo', 'LIKE', '%' . $t . '%')
             ->orWhere('descricao', 'LIKE', '%' . $t . '%')->orderBy('id', 'desc')->paginate(10);
         return view("$this->view.search")->with('result', $busca);
 
@@ -90,8 +90,10 @@ class AnuncioController extends DefaultController
         $store = $this->model->create($this->request->all());
 
         foreach (request()->get('base64') as $z) {
+
             $data = [];
             $data['base64'] = $z;
+
             $data['anuncio_id'] = $store->id;
             AnuncioFoto::create($data);
         }

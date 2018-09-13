@@ -120,7 +120,7 @@
                </span>
            </a>
            @endif
-           <a href="{{url ('anuncio/novo_anuncio')}}">
+           <a href="{{url ('anuncio/novo')}}">
                <span class="anunciar swing">
                    <i class="fa fa-bullhorn fa-lg"></i> Inserir anúncio
                </span>
@@ -131,14 +131,14 @@
                    <i class="fa fa-user fa-lg"></i> Meus anúncios
                </span>
            </a>
-            <a href="{{url ('anuncio/novo_anuncio')}}">
+            <a href="{{url ('anuncio/novo')}}">
                <span class="anunciar swing">
                    <i class="fa fa-bullhorn fa-lg"></i> Inserir anúncio
                </span>
             </a>
        @endif
     @else
-       <a href="{{url ('anuncio/novo_anuncio')}}">
+       <a href="{{url ('anuncio/novo')}}">
        <span class="anunciar2 swing">
            <i class="fa fa-bullhorn fa-lg"></i> Inserir anúncio
        </span>

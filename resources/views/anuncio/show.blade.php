@@ -137,7 +137,9 @@
                 <h2>Anuncio normal</h2>
                 <h2 style="text-transform:uppercase;font-weight: normal">{{$data->titulo}} [{{$data->id}}]</h2>
                 <h4>
+{{--
                     <p><a class="cor_black" href="../estado/{{$data->uf->sigla}}">{{$data->uf->uf or ''}} - {{$data->uf->sigla or ''}}</a></p>
+--}}
                 </h4>
                 <p style="font-size: 11px;"> (Anúncio publicado em {{date( 'd/m/Y' , strtotime($data->created_at))}})</p>
                 <br/>
@@ -249,7 +251,7 @@
             </span>
 
             <hr class="style12">
-            @forelse(\App\Models\Anuncio::where('status', 1)->where('categoria_id', $data->categoria->id)->orderByRaw('RAND()')->take(4)->get() as $z => $value)
+            @forelse(\App\Models\Anuncio::where('status_id', 1)->where('categoria_id', $data->categoria->id)->orderByRaw('RAND()')->take(4)->get() as $z => $value)
                 <article class="item">
                     <h2 class="fontzero">Outros Anuncios</h2>
 
@@ -284,7 +286,7 @@
                     <div class="data">
                         <date><i class="fa fa-calendar"></i> {{$value->created_at->format('d/m/ Y')}}</date>
                         <span class="estado">
-                        <span class="cor_black">{{$value->uf->uf}} - {{$value->uf->sigla}}</span> <i class="fa fa-map-marker fa-1x"></i>
+                        <span class="cor_black">{{--{{$value->uf->uf}} - {{$value->uf->sigla}}--}}</span> <i class="fa fa-map-marker fa-1x"></i>
                     </span>
                     </div>
                 </article>

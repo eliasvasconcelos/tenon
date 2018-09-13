@@ -1,18 +1,19 @@
 @extends('layouts.app')
 
 @section('content')
+    <main class="conteudo">
     @auth
-        <div class="center info_cfg">
+        <div class="info_cfg">
             @if(auth()->user()->tipo_id == "2" || auth()->user()->tipo_id == "3")
                 <h1 style="font-size: 2em">Meus Anuncios</h1>
                 <ul class="menu_u" style="margin-top:-25px;">
                     <li class="text-right">
-                        <a title="Assinatura" class="botao cor_black" href="?pg=assinatura"><i class="fa fa-star fa-lg"></i> &nbsp; Assinatura </a>|
+                       {{-- <a title="Assinatura" class="botao cor_black" href="#"><i class="fa fa-star fa-lg"></i> &nbsp; Assinatura </a>|
 
-                        <a title="Depoimento" class="botao cor_black" href="?pg=feedback"><i class="fa fa-list-alt  fa-lg"></i> &nbsp; Feedback </a>|
+                        <a title="Depoimento" class="botao cor_black" href="#"><i class="fa fa-list-alt  fa-lg"></i> &nbsp; Feedback </a>|
 
-                        <a title="Leilão" class="botao cor_black" href="?pg=leilao"><i class="fa fa-legal  fa-lg"></i> &nbsp; Leilão </a>|
-
+                        <a title="Leilão" class="botao cor_black" href="#"><i class="fa fa-legal  fa-lg"></i> &nbsp; Leilão </a>|
+--}}
                         <a title="Configurações" class="botao cor_black" href="{{url('user')}}/{{auth()->user()->id}}/edit"><i class="fa fa-cog  fa-lg"></i> &nbsp; Configurações </a>
 
                     </li>
@@ -21,18 +22,18 @@
                 <h1 style="font-size: 2em">Minha Loja</h1>
                 <ul class="menu_u" style="margin-top:-25px;">
                     <li class="text-right">
-                        <a title="Assinatura" class="botao cor_black" href="?pg=assinatura"><i class="fa fa-star fa-lg"></i> &nbsp; Assinatura </a>|
+                        <a title="Assinatura" class="botao cor_black" href="#"><i class="fa fa-star fa-lg"></i> &nbsp; Assinatura </a>|
 
-                        <a title="Depoimento" class="botao cor_black" href="?pg=feedback"><i class="fa fa-list-alt  fa-lg"></i> &nbsp; Feedback </a>|
+                        <a title="Depoimento" class="botao cor_black" href="#"><i class="fa fa-list-alt  fa-lg"></i> &nbsp; Feedback </a>|
 
-                        <a title="Leilão" class="botao cor_black" href="?pg=leilao"><i class="fa fa-legal  fa-lg"></i> &nbsp; Leilão </a>|
+                        <a title="Leilão" class="botao cor_black" href="#"><i class="fa fa-legal  fa-lg"></i> &nbsp; Leilão </a>|
 
                         <a title="Configurações" class="botao cor_black" href="{{url('user')}}/{{auth()->user()->id}}/edit"><i class="fa fa-cog  fa-lg"></i> &nbsp; Configurações </a>
 
                     </li>
                 </ul>
             @elseif(auth()->user()->tipo_id == '1')
-                <h1 style="font-size: 2em">Anuncios</h1>
+                <{{--h1 style="font-size: 2em">Anuncios</h1>
                     <ul class="menu_u" style="margin-top:-25px;">
                         <li class="text-right">
                             <a title="Assinatura" class="botao cor_black" href="{{url('user')}}"><i class="fa fa-group fa-lg"></i> &nbsp; Usuários </a> &nbsp;|
@@ -40,16 +41,13 @@
                             <a title="Anúncios" class="botao cor_black" href="{{url('user')}}/{{auth()->user()->id}}"><i class="fa fa-bullhorn  fa-lg"></i> &nbsp; Anúncios </a> &nbsp;|
                             <a title="Configurações" class="botao cor_black" href="config"><i class="fa fa-cog  fa-lg"></i> Configurações </a>
                         </li>
-                    </ul>
+                    </ul>--}}
             @endif
         </div>
-    @endauth
-<main class="conteudo">
-    @auth
-        <div class="text-center @if(auth()->user()->status == '1') notify2 @elseif(auth()->user()->status == '0') notify @else notify3 @endif cor_black"  style="margin-top:10px;">
-            @if(auth()->user()->status == '1')
+        <div class="text-center @if(auth()->user()->status_id == '1') notify2 @elseif(auth()->user()->status_id == '0') notify @else notify3 @endif cor_black"  style="margin-top:10px;">
+            @if(auth()->user()->status_id == '1')
                 Parabéns <b>{{auth()->user()->name }}</b> você está <b>Ativado</b> :)
-            @elseif(auth()->user()->status == '0')
+            @elseif(auth()->user()->status_id == '0')
                 Desculpe <b>{{auth()->user()->name }}</b> sua conta  está <b>Pendente</b>!!
                 <div class="text-center" id="sucesso" style="display:none;margin-bottom:10px;padding:20px;background-color: #63d3f8;border:1px solid #18aecb">
                 </div>
@@ -57,7 +55,7 @@
                 Desculpe <b>{{auth()->user()->name }}</b> sua conta  está <b>Bloqueada</b>!!
             @endif
         </div>
-        @if(auth()->user()->status == '1' and auth()->user()->id == $usuario->id)
+        @if(auth()->user()->status_id == '1' and auth()->user()->id == $usuario->id)
             @if($usuario->tipo_id == '2' || $usuario->loja_link == null)
                 <div class="text-center notify cor_black">
                     Notamos que você não personalizou o seu link de acesso para a sua loja virtual, faça agora mesmo <b>clique aqui</b>
@@ -88,17 +86,17 @@
                 </form>
             </div>
         </section>--}}
-        @if(auth()->user()->status == '1')
-            <section id="leiloes">
+        @if(auth()->user()->status_id == '1')
+           {{-- <section id="leiloes">
                 <div class="user_anuncio fade" style="width:150px;height: 150px">
                     <a href="{{url('user')}}/{{auth()->user()->id}}">
-                        {{--
+                        --}}{{--
                             <img src="{{$z->fotos->base64 or '../img/image.jpeg'}}" alt="Imagem">
-                        --}}
+                        --}}{{--
                         <img src="@if(auth()->user()->foto_perfil == null) {{asset ('img/sem-foto.png')}} @else {{auth()->user()->foto_perfil}} @endif">
                     </a>
                 </div>
-                    <div class="descricao_anuncio" style="margin-left:170px">
+                    --}}{{--<div class="descricao_anuncio" style="margin-left:170px">
                         <h3>Oi, {{auth()->user()->name}}</h3>
                         @if(auth()->user()->tipo_id == "2" || auth()->user()->tipo_id == "4")
                             Pessoa Jurídica
@@ -115,9 +113,9 @@
                         @if(auth()->user()->tipo_id == "4")
                             <h1 style="font-size: 2em">Minha Loja</h1>
                         @endif
-                    </div>
-            </section>
-            <section id="default2">
+                    </div>--}}{{--
+            </section>--}}
+            {{--<section id="default2">
                 <div class="perfil_user_cat left cor_black">
                     <h3>Total de Anuncios</h3>
                     <p style="margin:20px">
@@ -125,7 +123,7 @@
                     </p>
                     @if(auth()->user()->tipo_id == '1')
                         <p style="margin:20px">
-                        <h5 style="background-color: #c596ff;padding: 10px 0px 10px 0px ;margin:3px 0px 3px 0px;border-radius:3px;"><span style="background-color: #f5f5f5;border:1px dotted #e5e5e5;padding: 15px;margin:1px 5px;border-radius:3px"><b>{{\App\Models\Anuncio::where('premium', 1)->count()}}</b> </span> Premium</h5>
+                        <h5 style="background-color: #c596ff;padding: 10px 0px 10px 0px ;margin:3px 0px 3px 0px;border-radius:3px;"><span style="background-color: #f5f5f5;border:1px dotted #e5e5e5;padding: 15px;margin:1px 5px;border-radius:3px"><b>{{\App\Models\Anuncio::where('status_pagamento', 1)->count()}}</b> </span> Premium</h5>
                         </p>
                         <p style="margin:20px">
                         <h5 style="background-color: #f49c9c;padding: 10px 0px 10px 0px ;margin:3px 0px 3px 0px;border-radius:3px;"><span style="background-color: #f5f5f5;border:1px dotted #e5e5e5;padding: 15px;margin:1px 5px;border-radius:3px"><b>{{\App\Models\Anuncio::where('status', 0)->count()}}</b> </span> Desativado</h5>
@@ -147,8 +145,8 @@
 8                            <div class="left" style="background-color: #f5f5f5;padding: 2px;border: 1px dotted #ccc">
                                 <div class="foto fade" style="width:250px;height: 160px;">
                                     <a href="{{url('anuncio')}}/{{$z->id}}">
-                                        {{--   <img src="{{$z->fotos->base64 or '../img/image.jpeg'}}" alt="Imagem">
-                                          --}}
+                                        --}}{{--   <img src="{{$z->fotos->base64 or '../img/image.jpeg'}}" alt="Imagem">
+                                          --}}{{--
                                         <span class="hidden" style="display: none">{{$aa = 0}}</span>
                                         @forelse($z->album as $x)
                                             @if($x->base64 == null)
@@ -165,9 +163,9 @@
                                         @endif
                                     </a>
                                 </div>
-{{--
+--}}{{--
                                 <a href="../anuncio/{{$z->id}}"><img src="{{$z->fotos->base64 or '../img/image.jpeg'}}" alt="Imagem" height="130px" width="200"></a>
---}}
+--}}{{--
                             </div>
                             <div style="height: 140px;margin-left:230px">
                                 <h3 style="font-weight: 600;text-color:#000;">{{$z->titulo}}</h3>
@@ -175,24 +173,24 @@
                                 <br />Postado por: <b>{{$z->user->name or ''}}</b>
                                 <br />Data: <b>{{$z->user->created_at or ''}}</b>
                                 <br/><br/>
-                                {{--{{$z->user_id}} - {{auth()->user()->id}}--}}
+                                --}}{{--{{$z->user_id}} - {{auth()->user()->id}}--}}{{--
                                 <a class="cor_black" style="padding: 10px 20px;background-color: #2ab27b;border:1px solid #f4f4f4" href="{{url ('anuncio')}}/{{$z->id}}/edit">Editar</a>
                                 @if($z->premium == 1)
                                     |<a class="cor_black" style="padding: 10px 20px;background-color: #c596ff;border:1px solid #f4f4f4" href="#">Premium</a>
                                 @endif
                                 @if(auth()->user()->tipo_id == '1')
-                                @if($z->status == 0)
+                                @if($z->status_id == 0)
                                     | <a class="cor_black" style="padding: 10px 20px;background-color: #24f489;border:1px solid #f4f4f4" href="{{url ('anuncio')}}/{{$z->id}}/update?status=1">Ativar</a>
-                                @elseif($z->status == 1)
+                                @elseif($z->status_id == 1)
                                     | <a class="cor_black" style="padding: 10px 20px;background-color: #ffc863;border:1px solid #f4f4f4" href="{{url ('anuncio')}}/{{$z->id}}/update?status=0">Desativar</a>
-                                    {{--
+                                    --}}{{--
                                       <a class="cor_black" style="padding: 10px 20px;background-color: #ffc863;border:1px solid #e5e5e5" href="{{url ('anuncio')}}/{{$z->id}}/edit">Pendente</a> |
-                                    --}}
+                                    --}}{{--
                                 @endif
-                                @elseif($z->status == 2)
+                                @elseif($z->status_id == 2)
                                     | <a class="cor_black" style="padding: 10px 20px;background-color: #24f489;border:1px solid #f4f4f4" href="{{url ('anuncio')}}/{{$z->id}}/update?status=1">Ativar</a>
                                 @endif
-                                @if($z->status == 1)
+                                @if($z->status_id == 1)
                                 @else
                                     | <a class="cor_black" style="padding: 10px 20px;background-color: #f86c6b;border:1px solid #f4f4f4" href="{{url ('anuncio')}}/{{$z->id}}/delete" class="delete">Deletar</a>
                                 @endif
@@ -202,38 +200,38 @@
                     @empty
                         Não há registro!
                     @endforelse
-{{--
+--}}{{--
                     @if($anuncio)
                         @if($anuncio->links())
                             {!! $anuncio->links() !!}
                         @else
 
                         @endif
-                    @endif--}}
+                    @endif--}}{{--
                 </div>
-            </section>
+            </section>--}}
 
             @if(auth()->user()->tipo_id == '1')
 
             @elseif(auth()->user()->tipo_id  == '2')
-            <section id="default2">
+            <section id="destaque">
                 <div class="perfil_user_cat left cor_black">
                     <h3>Total de Anuncios</h3>
                     <p style="margin:20px">
-                    <h5 style="background-color: #96caff;padding: 10px 0px 10px 0px ;margin:3px 0px 3px 0px;border-radius:3px;"><span style="background-color: #f5f5f5;border:1px dotted #e5e5e5;padding: 15px;margin:1px 5px;border-radius:3px"><b>{{\App\Models\Anuncio::withTrashed()->where('user_id', auth()->user()->id)->count() + \App\Models\Anuncio::where('user_id', auth()->user()->id)->where('status', 0)->where('status', 1)->where('status', 2)->where('status', 3)->count()}}</b></span>Total</h5>
+                    <h5 style="background-color: #96caff;padding: 10px 0px 10px 0px ;margin:3px 0px 3px 0px;border-radius:3px;"><span style="background-color: #f5f5f5;border:1px dotted #e5e5e5;padding: 15px;margin:1px 5px;border-radius:3px"><b>{{\App\Models\Anuncio::withTrashed()->where('user_id', auth()->user()->id)->count() + \App\Models\Anuncio::where('user_id', auth()->user()->id)->where('status_id', 0)->where('status_id', 1)->where('status_id', 2)->where('status_id', 3)->count()}}</b></span>Total</h5>
                     </p>
                     @if(auth()->user()->tipo_id == $usuario->id)
                         <p style="margin:20px">
-                        <h5 style="background-color: #c596ff;padding: 10px 0px 10px 0px ;margin:3px 0px 3px 0px;border-radius:3px;"><span style="background-color: #f5f5f5;border:1px dotted #e5e5e5;padding: 15px;margin:1px 5px;border-radius:3px"><b>{{\App\Models\Anuncio::where('user_id', auth()->user()->id)->where('premium', 1)->count()}}</b> </span> Premium</h5>
+                        <h5 style="background-color: #c596ff;padding: 10px 0px 10px 0px ;margin:3px 0px 3px 0px;border-radius:3px;"><span style="background-color: #f5f5f5;border:1px dotted #e5e5e5;padding: 15px;margin:1px 5px;border-radius:3px"><b>{{\App\Models\Anuncio::where('user_id', auth()->user()->id)->where('status_pagamento', 1)->count()}}</b> </span> Premium</h5>
                         </p>
                         <p style="margin:20px">
-                        <h5 style="background-color: #f49c9c;padding: 10px 0px 10px 0px ;margin:3px 0px 3px 0px;border-radius:3px;"><span style="background-color: #f5f5f5;border:1px dotted #e5e5e5;padding: 15px;margin:1px 5px;border-radius:3px"><b>{{\App\Models\Anuncio::where('user_id', auth()->user()->id)->where('status', 0)->count()}}</b> </span> Desativado</h5>
+                        <h5 style="background-color: #f49c9c;padding: 10px 0px 10px 0px ;margin:3px 0px 3px 0px;border-radius:3px;"><span style="background-color: #f5f5f5;border:1px dotted #e5e5e5;padding: 15px;margin:1px 5px;border-radius:3px"><b>{{\App\Models\Anuncio::where('user_id', auth()->user()->id)->where('status_id', 0)->count()}}</b> </span> Desativado</h5>
                         </p>
                         <p style="margin:20px">
-                        <h5 style="background-color: #24f489;padding: 10px 0px 10px 0px ;margin:3px 0px 3px 0px;border-radius:3px;"><span style="background-color: #f5f5f5;border:1px dotted #e5e5e5;padding: 15px;margin:1px 5px;border-radius:3px"><b>{{\App\Models\Anuncio::where('user_id', auth()->user()->id)->where('status', 1)->count()}}</b> </span> Ativado</h5>
+                        <h5 style="background-color: #24f489;padding: 10px 0px 10px 0px ;margin:3px 0px 3px 0px;border-radius:3px;"><span style="background-color: #f5f5f5;border:1px dotted #e5e5e5;padding: 15px;margin:1px 5px;border-radius:3px"><b>{{\App\Models\Anuncio::where('user_id', auth()->user()->id)->where('status_id', 1)->count()}}</b> </span> Ativado</h5>
                         </p>
                         <p style="margin:20px">
-                        <h5 style="background-color: #ffc863;padding: 10px 0px 10px 0px ;margin:3px 0px 3px 0px;border-radius:3px;"><span style="background-color: #f5f5f5;border:1px dotted #e5e5e5;padding: 15px;margin:1px 5px;border-radius:3px"><b>{{\App\Models\Anuncio::where('user_id', auth()->user()->id)->where('status', 2)->count()}}</b> </span> Pendente</h5>
+                        <h5 style="background-color: #ffc863;padding: 10px 0px 10px 0px ;margin:3px 0px 3px 0px;border-radius:3px;"><span style="background-color: #f5f5f5;border:1px dotted #e5e5e5;padding: 15px;margin:1px 5px;border-radius:3px"><b>{{\App\Models\Anuncio::where('user_id', auth()->user()->id)->where('status_id', 2)->count()}}</b> </span> Pendente</h5>
                         </p>
                         <p style="margin:20px">
                         <h5 style="background-color: #fc6464;padding: 10px 0px 10px 0px ;margin:3px 0px 3px 0px;border-radius:3px;"><span style="background-color: #f5f5f5;border:1px dotted #e5e5e5;padding: 15px;margin:1px 5px;border-radius:3px"><b>{{\App\Models\Anuncio::onlyTrashed()->where('user_id', auth()->user()->id)->count()}}</b> </span> Deletados</h5>
@@ -241,41 +239,87 @@
                     @endif
                 </div>
                 <div class="perfil_user_anuncio right cor_black" style="width: 70%;padding:20px">
-                    @forelse(\App\Models\Anuncio::all()->where('user_id', auth()->user()->id)->where('status', 1) as $z)
+                    <div class="sub_anuncio"><i class="fa fa-clock-o" style="font-size:18px"></i> Anúncios Pendentes</div>
+                    @forelse(\App\Models\Anuncio::all()->where('user_id', auth()->user()->id)->where('status_id', 0) as $z)
                         <aside class="anuncios">
-                            <div class="left" style="background-color: #f5f5f5;padding: 2px;border: 1px dotted #ccc">
-                                <a href="../anuncio/{{$z->id}}"><img src="{{$z->fotos->base64 or '../img/image.jpeg'}}" alt="Imagem" height="130px" width="200"></a>
+                            <div style="position:relative;float:left;width:100%;padding-right: 2px;">
+                                <div style="margin-right:20px;position:relative;float:left;height:auto;width:100%;max-width:200px;padding: 2px;border: 1px dotted #ccc">
+                                    <a href="../anuncio/{{$z->id}}"><img src="{{$z->fotos->base64 or '../img/image.jpeg'}}" alt="Imagem"></a>
+                                </div>
+                                <h3 style="font-weight: 600;margin-top:5px;">{{$z->titulo}}</h3>
+                                    <p style="height: 102px;">// {{$z->descricao}}</p>
+                                        {{--{{$z->user_id}} - {{auth()->user()->id}}--}}
+
+
+                                <a class="cor_black" style="font-size:12px;padding: 5px 10px;background-color: #ffc863;border-radius:3px">Pendente</a>
+                                {{--<a class="cor_black" style="font-size:12px;padding: 5px 10px;background-color: #2ab27b;border-radius:3px" href="{{url ('anuncio')}}/{{$z->id}}/edit">Editar</a> |--}}
+
+{{--
+                                        <a class="cor_black delete" style="font-size:12px;padding: 5px 10px;background-color: #f86c6b;border-radius:3px" href="{{url ('anuncio')}}/{{$z->id}}/delete">Deletar</a>
+--}}
+                                <div class="right">
+                                    <a class="cor_black" style="float:right;font-size:12px;padding: 5px 10px;background-color: #f5f5f5;border-radius:3px"> Postado em: <b>{{$z->user->created_at or ''}}</b></a>
+                                </div>
                             </div>
-                            <div style="height: 140px;margin-left:230px">
-                                <h3 style="font-weight: 600;text-color:#000;">{{$z->titulo}}</h3>
-                                // {{$z->descricao}}
-                                <br />Postado por: <b>{{$z->user->name or ''}}</b>
-                                <br />Data: <b>{{$z->user->created_at or ''}}</b>
-                                <br/><br/>
-                                {{--{{$z->user_id}} - {{auth()->user()->id}}--}}
-                                <a class="cor_black" style="padding: 10px 20px;background-color: #2ab27b;border:1px solid #0d3625" href="{{url ('anuncio')}}/{{$z->id}}/edit">Editar</a> |
-                                <a class="cor_black" style="padding: 10px 20px;background-color: #f86c6b;border:1px solid #c7254e" href="{{url ('anuncio')}}/{{$z->id}}/delete" class="delete">Deletar</a>
-                            </div>
+
                         </aside>
                         <hr class="style12">
                     @empty
-                        Não há registro!
+                           <div class="text-center" style="position:relative;float:right;padding: 10px;width:100%;background-color: #f4f4f4;"> Não há registro!</div>
                     @endforelse
-                        {{--
-                                                @if($anuncio)
-                                                    @if($anuncio->links())
-                                                        {!! $anuncio->links() !!}
-                                                    @else
+                    {{--
+                        @if($anuncio)
+                        @if($anuncio->links())
+                            {!! $anuncio->links() !!}
+                        @else
 
-                                                    @endif
-                                                    @endif--}}
+                        @endif
+                        @endif
+                     --}}
+                </div>
+
+                <div class="perfil_user_anuncio right cor_black" style="width: 70%;padding:20px">
+                    <div class="sub_anuncio"><i class="fa fa-check" style="font-size:18px"></i> Anúncios Ativos</div>
+                    @forelse(\App\Models\Anuncio::all()->where('user_id', auth()->user()->id)->where('status_id', 1) as $z)
+                        <aside class="anuncios">
+                            <div style="position:relative;float:left;width:100%;padding-right: 2px;">
+                                <div style="margin-right:20px;position:relative;float:left;height:auto;width:100%;max-width:200px;padding: 2px;border: 1px dotted #ccc">
+                                    <a href="../anuncio/{{$z->id}}"><img src="{{$z->fotos->base64 or '../img/image.jpeg'}}" alt="Imagem"></a>
+                                </div>
+                                <h3 style="font-weight: 600;margin-top:5px;">{{$z->titulo}}</h3>
+                                <p style="height: 102px;">// {{$z->descricao}}</p>
+                                {{--{{$z->user_id}} - {{auth()->user()->id}}--}}
+
+
+                                <a class="cor_black" style="font-size:12px;padding: 5px 10px;background-color: #2ab27b;border-radius:3px" href="{{url ('anuncio')}}/{{$z->id}}/edit">Editar</a> |
+
+                                                                        <a class="cor_black delete" style="font-size:12px;padding: 5px 10px;background-color: #f86c6b;border-radius:3px" href="{{url ('anuncio')}}/{{$z->id}}/delete">Deletar</a>
+                                <div class="right">
+                                    <a class="cor_black" style="float:right;font-size:12px;padding: 5px 10px;background-color: #f5f5f5;border-radius:3px"> Postado em: <b>{{$z->user->created_at or ''}}</b></a>
+                                </div>
+                            </div>
+
+                        </aside>
+                        <hr class="style12">
+                    @empty
+                        <div class="text-center" style="position:relative;float:right;padding: 10px;width:100%;background-color: #f4f4f4;"> Não há registro!</div>
+                    @endforelse
+                    {{--
+                        @if($anuncio)
+                        @if($anuncio->links())
+                            {!! $anuncio->links() !!}
+                        @else
+
+                        @endif
+                        @endif
+                     --}}
                 </div>
             </section>
         @elseif(auth()->user()->tipo_id == '3')
 
-        @elseif(auth()->user()->status == '0')
+        @elseif(auth()->user()->status_id == '0')
             autenticado & pendente
-        @elseif(auth()->user()->status == '2')
+        @elseif(auth()->user()->status_id == '2')
 
         @else
 
@@ -439,16 +483,16 @@
            </section>--}}
         @endif
         @else
-        <div class="text-center @if($usuario->status == '0') notify @elseif($usuario->status == '2') notify3 @endif cor_black"  style="margin-top:10px;">
-            @if($usuario->status == '0')
+        <div class="text-center @if($usuario->status_id == '0') notify @elseif($usuario->status_id == '2') notify3 @endif cor_black"  style="margin-top:10px;">
+            @if($usuario->status_id == '0')
                 Desculpe esta conta ainda está <b>Pendente</b>, volte mais tarde!!
                 <div class="text-center" id="sucesso" style="display:none;margin-bottom:10px;padding:20px;background-color: #63d3f8;border:1px solid #18aecb">
                 </div>
-            @elseif($usuario->status == '2')
+            @elseif($usuario->status_id == '2')
                 Desculpe esta conta foi <b>Bloqueada</b>!!
             @endif
         </div>
-        @if($usuario->status == '1')
+        @if($usuario->status_id == '1')
         <section id="leiloes">
             <div class="user_anuncio">
                 <img src="@if($usuario->foto_perfil == null) {{asset ('img/sem-foto.png')}} @else {{$usuario->foto_perfil}} @endif">
