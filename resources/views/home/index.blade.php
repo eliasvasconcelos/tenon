@@ -51,7 +51,7 @@
                      </a>
                  </div>
                  <p class="preco">
-                     R$ 2,000.000
+                   {{$z->preco}}
                  <span class="cor_black" style="font-size:13px;">
                      /animal
                  </span>
@@ -173,8 +173,8 @@
                          </a>
                      </div>
                      <p class="preco">
-                         R$ 2,000.000
-                        <span class="cor_black" style="font-size:13px;"> /animal</span>
+                         {{$z->preco}}
+                        <span class="cor_black" style="font-size:13px;"> /{{$z->tipo}}</span>
                      </p>
                      <p class="desc_artigo">
                          {{str_limit($z->descricao, 30)}}
@@ -182,7 +182,7 @@
                      <div class="data">
                          <date><i class="fa fa-calendar"></i> {{$z->created_at->format('d/m/ Y')}}</date>
                          <span class="estado">
-                         <a class="cor_black" href="{{url('estado')}}/{{$z->uf->sigla or ''}}">{{$z->uf->uf or ''}}-{{$z->uf->sigla or ''}}</a> <i class="fa fa-map-marker fa-1x"></i>
+                         <a class="cor_black" href="{{url('estado')}}/{{$z->uf->sigla or 'Uf'}}">{{$z->uf->uf or 'Estado'}}-{{$z->uf->sigla or ''}}</a> <i class="fa fa-map-marker fa-1x"></i>
                      </span>
                      </div>
                  </article>

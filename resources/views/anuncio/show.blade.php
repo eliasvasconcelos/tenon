@@ -3,45 +3,34 @@
 @section('content')
     <link  href="{{asset ('css')}}/fotorama.css" rel="stylesheet"> <!-- 3 KB -->
     <script src="http://cdnjs.cloudflare.com/ajax/libs/fotorama/4.6.4/fotorama.js"></script> <!-- 16 KB -->
-
     <main class="conteudo">
+        @if($data->user->tipo_id == 4)
+
         <section id="leiloes">
-            <div class="user_anuncio fade" style="width:115px">
+            <div class="user_anuncio fade" style="width:160px">
                     <a href="{{url('user')}}/{{$data->id}}">
-                        {{--   <img src="{{$value->fotos->base64 or '../img/image.jpeg'}}" alt="Imagem">
+                      {{--   <img src="{{$value->fotos->base64 or '../img/image.jpeg'}}" alt="Imagem">
                           --}}
                         <img src="@if($data->user->foto_perfil == null) {{asset ('img/sem-foto.png')}} @else {{$data->user->foto_perfil}} @endif">
                     </a>
             </div>
             <div class="descricao_anuncio" style="margin-left:170px">
-                @if($data->user->tipo_id == "2" || $data->user->tipo_id == "4")
                     <h3>Olá, sou {{$data->user->name}}</h3>
-                    Pessoa Jurídica
-                @elseif($data->user->tipo_id == '3')
-                    Pessoa Física
-                @elseif($data->user->tipo_id == '1')
-                    Equipe {{$data->user->id}} {{$data->user->tipo_id}}
-                @endif
-                <br />
-                <br />
-                <br />
-                @if($data->user->tipo_id == "4")
-                <a href="{{url('user')}}/{{$data->user->id}}" class="cor_black">
+                    <br><br><br><br><br>
+                    <a href="{{url('user')}}/{{$data->user->id}}" class="cor_black">
                     <span style="background-color:#f5f5f5;border:1px dotted #eee;padding:5px 20px;">
-                     Meu perfil
+                     Minha Loja
                     </span>
-                </a>
-                @endif
+                    </a>
             </div>
         </section>
+    @endif
 {{--
         <section id="default2" style="background: url('http://www.ncsolucoes.com.br//wp-content/uploads/2017/03/agro_business.jpg') fixed center;">
 --}}<!-- Fotorama -->
         <section id="default2">
             <div class="img_anuncio left">
                 @if($data->premium == 1)
-                    <h3>{{$data->titulo}}</h3>
-                    <br />
                     <div class="fotorama"
                          data-width="100%"
                          data-autoplay="true"
@@ -62,8 +51,6 @@
                         @endforelse
                     </div>
                 @elseif($data->premium == 0)
-                    <h3>{{$data->titulo}}</h3>
-                    <br />
                     <div class="fotorama"
                          data-width="100%"
                          data-autoplay="true"
@@ -84,9 +71,25 @@
                             @endforelse
                     </div>
                 @endif
+                <section id="default">
+                    <p>// Descrição : <b>{{$data->descricao}}</b></p>
+                </section>
+
             </div>
+            @if($data->status_pagamento == 1)
+            <div class="wrapper">
+
+                <div class="ribbon-wrapper-green">
+
+                    <div class="ribbon-green"><i class="fa fa-star"></i> </div>
+
+                </div>
+
+            </div>
+            @endif
         <div class="premium_anuncio right" style="width: 35%;padding: 20px 30px">
-            @if($data->premium == 1)
+
+            @if($data->status_pagamento == 1)
                 <h2 style="text-transform:uppercase;font-weight: normal">{{$data->titulo}} [{{$data->id}}]</h2>
                 <h4>
                     <p><a class="cor_black" href="../estado/{{$data->uf_id}}">{{$data->uf->uf or ''}} - {{$data->uf->sigla or ''}}</a></p>
@@ -98,7 +101,7 @@
                 <p>
                     Valor
                 </p>
-                <h1>2.000,00</h1>
+                <h1>{{$data->preco}}</h1>
             {{--<p>//<b>
                 @if($data->user->tipo_id == "2" || $data->user->tipo_id == "4")
                     Sou Pessoa Jurídica
@@ -134,7 +137,6 @@
             @endif
 
             @elseif($data->premium == 0)
-                <h2>Anuncio normal</h2>
                 <h2 style="text-transform:uppercase;font-weight: normal">{{$data->titulo}} [{{$data->id}}]</h2>
                 <h4>
 {{--
@@ -148,7 +150,7 @@
                     Valor
                 </p>
                 <h1 style="">
-                    R$ 2.000,00
+                    {{$data->preco}}
                 </h1>
                 <br/>
             @if(Auth::user())
@@ -178,7 +180,7 @@
             @endif
         </div>
             <div class="premium_anuncio right" style="width: 35%;padding: 20px 30px">
-                @if($data->premium == 1)
+                @if($data->status_pagamento == 1)
                     // Categoria : <a href="../categoria/{{$data->categoria_id}}" class="cor_black">{{$data->categoria->nome or ''}}</a>
 
                     {{--<p>//<b>
@@ -197,21 +199,20 @@
                                  {{$data->user->name or ''}}
                              </a>
                          </b>
-                     </p>--}}
+                     </p>--}}{{--
                     @if(Auth::user())
                         @if(($data)->user->email == 0)
                             <p>// Email  : <b>{{$data->user->email}}</b></p>
                         @endif
-                    @endif
-                    <p>// Descrição : <b>{{$data->descricao}}</b></p>
-                @elseif($data->premium == 0)
-                    <p>// Anunciante :
+                    @endif--}}
+                @elseif($data->status_pagamento == 0)
+                   {{-- <p>// Anunciante :
                         <b>
                             <a href="../user/{{$data->user->name}}" class="cor_black">
                                 {{$data->user->name or ''}}
                             </a>
                         </b>
-                    </p>
+                    </p>--}}
                     // Categoria : <a href="../categoria/{{$data->categoria_id}}" class="cor_black">{{$data->categoria->nome or ''}}</a>
 
                     {{--<p>//<b>
@@ -230,13 +231,12 @@
                                  {{$data->user->name or ''}}
                              </a>
                          </b>
-                     </p>--}}
+                     </p>--}}{{--
                     @if(Auth::user())
                         @if(($data)->user->email == 0)
                             <p>// Email  : <b>{{$data->user->email}}</b></p>
                         @endif
-                    @endif
-                    <p>// Descrição : <b>{{$data->descricao}}</b></p>
+                    @endif--}}
                 @endif
             </div>
         </section>
@@ -278,15 +278,15 @@
                          </a>
                     </div>
                     <p class="preco">
-                        R$ 2,000.000
+                        {{$data->preco}}
                         <span class="cor_black" style="font-size:13px;"> /animal  </span>
                     </p>
                     <p class="desc_artigo">
                     </p>
                     <div class="data">
-                        <date><i class="fa fa-calendar"></i> {{$value->created_at->format('d/m/ Y')}}</date>
+                        <date><i class="fa fa-calendar"></i> {{$value->created_at->format('d/m/Y')}}</date>
                         <span class="estado">
-                        <span class="cor_black">{{--{{$value->uf->uf}} - {{$value->uf->sigla}}--}}</span> <i class="fa fa-map-marker fa-1x"></i>
+                        <span class="cor_black">{{$value->uf->uf or 'Estado'}} - {{$value->uf->sigla or 'Cidade'}}</span> <i class="fa fa-map-marker fa-1x"></i>
                     </span>
                     </div>
                 </article>

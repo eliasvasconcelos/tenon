@@ -24,11 +24,12 @@ class AnuncioController extends DefaultController
 
     public function index()
     {
+        $data = $this->model->where('status_id', 1)->orderBy('id', 'DESC')->paginate(30)->get();
         $categoria = Categoria::all();
         $usuario = UserTipo::all();
-        $anuncio = Anuncio::where('status_id', 1)->orderBy('id', 'DESC')->paginate(30);
+/*        $anuncio = Anuncio::where('status_id', 1)->orderBy('id', 'DESC')->paginate(30);*/
 
-        return view("$this->view.index", compact('usuario', 'categoria', 'anuncio'));
+        return view("$this->view.index", compact('data', 'usuario', 'categoria', 'anuncio'));
     }
 
     public function Pesquisar()

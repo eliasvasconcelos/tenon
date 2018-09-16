@@ -55,16 +55,50 @@
                         <form id="form-anuncio" class="form" style="display: none;">
                             {!! csrf_field() !!}
                             <input type="hidden" id="categoria_id" name="categoria_id" value="">
-                            <input type="hidden" id="status" name="status" value="0">
                             <input type="hidden" id="user_id" name="user_id" value="{{auth()->user()->id}}">
                             <input type="hidden" name="base64">
                             <div id="imagem_base64"></div>
                             <div id="base64"></div>
-                            <section style="width: 100%;padding:50px 100px;margin-top:40px;background-color: #f7f7f7;border-radius:3px;border:1px solid #f5f5f5">
-                                <h3>Titulo</h3>
-                                <input value="{{$data->titulo or ''}}" type="text" class="form-control" id="titulo" placeholder="Digite aqui.." name="titulo">
-                                <h3>Descrição</h3>
-                                <textarea rows="5" class="form-control" id="descricao" name="descricao" placeholder="Ex: alguma coisa..">{{$data->descricao or ''}}</textarea>
+                            <section style="width: 100%;padding:50px 0px;margin-top:40px;background-color: #f7f7f7;border-radius:3px;border:1px solid #f5f5f5">
+                                <section style="width: 100%;padding: 0px 50px 0px">
+                                    <h3>Titulo</h3>
+                                    <input value="{{$data->titulo or ''}}" type="text" class="form-control" id="titulo" placeholder="Digite aqui.." name="titulo">
+                                    <h3>Descrição</h3>
+                                    <textarea rows="5" class="form-control" id="descricao" name="descricao" placeholder="Ex: alguma coisa..">{{$data->descricao or ''}}</textarea>
+                                </section>
+                                <section style="float:left;width: 100%;">
+                                    <section style="float:left;width: 50%;padding:50px;margin-top:20px;background-color: #f7f7f7;">
+                                        {{--
+                                            <div class="form-group">
+                                                <div class="input-group">
+                                                    <div class="input-group-addon">Preço</div>
+                                                    <input value="{{$data->preco or ''}}" type="text" required="required" class="form-control" id="titulo" name="titulo" placeholder="Titulo">
+                                                </div>
+                                            </div>
+                                        --}}
+                                        <h3>Preço</h3>
+                                        <input name="preco" style="width: 100%;" type="text" id="valor" class="form-control" onblur="pesquisacep(this.value);">
+
+                                    </section>
+                                    <section style="float:right;width: 50%;padding:50px;margin-top:20px;background-color: #f7f7f7;">
+                                        {{--
+                                            <div class="form-group">
+                                                <div class="input-group">
+                                                    <div class="input-group-addon">Preço</div>
+                                                    <input value="{{$data->preco or ''}}" type="text" required="required" class="form-control" id="titulo" name="titulo" placeholder="Titulo">
+                                                </div>
+                                            </div>
+                                        --}}
+                                        <h3>Por</h3>
+                                        <select name="tipo" class="form-control" style="padding: 6px;">
+                                            <option value="">Selecione</option>
+                                            <option value="1">Cabeça</option>
+                                            <option value="2">Arroba</option>
+                                            <option value="3">Animal</option>
+                                        </select>
+                                    </section>
+                                </section>
+
                             </section>
                             <section style="float:left;width: 100%;padding:50px;margin-top:40px;background-color: #f7f7f7;">
                                     <h3 class="text-center">Localização</h3>
@@ -78,7 +112,7 @@
                                                 </div>
                                             --}}
                                             <h3>CEP</h3>
-                                            <input name="cep" style="width: 100%" placeholder="Digite seu CEP" type="text" id="cep" class="form-control" onblur="pesquisacep(this.value);">
+                                            <input name="cep" style="width: 100%" placeholder="00-000-000" type="text" id="cep" class="form-control" onblur="pesquisacep(this.value);">
                                             <h3>Cidade</h3>
                                             <input name="cidade" style="width: 100%" type="text" id="cidade" class="form-control" disabled>
                                             <h3>Número</h3>
@@ -291,8 +325,19 @@
                         $(document).ready(function(){
                             $("#cep").mask("99.999-999");
                         });
+                        $('#valor').keyup(function(){
+                            var v = $(this).val();
+                            v=v.replace(/\D/g,'');
+                            v=v.replace(/(\d{1,2})$/, ',$1');
+                            v=v.replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1.');
+                            v = v != ''?'R$ '+v:'';
+                            $(this).val(v);
+                        });
+
                     </script>
                     <script src="https://www.geradordecep.com.br/assets/js/jquery.maskedinput-1.1.4.pack.js"></script>
+                    <script src="https://igorescobar.github.io/jQuery-Mask-Plugin/js/jquery.mask.min.js"></script>
+
                     <!-- Adicionando Javascript -->
                     <script type="text/javascript" >
 
@@ -367,7 +412,7 @@
                         var conta = 0;
                         $("#add").click(function(){
                             conta++;
-                            if(conta<9)
+                                if(conta<9)
                                 $("ol").append('<img type="button" id="img_click_' + conta +'" style="margin-left:10px;margin-top:10px;border:2px dashed #ccc;padding:2px; cursor:pointer;" height="135" src="{{asset ('img/sem_imagem.png')}}">');
                                 $("#imagem_base64").append('<input type="file" id="imagem_base64_' + conta +'" name="base64[]" class="file" style="display: none">');
                                 $("#base64").append('<input type="hidden" id="base64_' + conta +'" required="required" name="base64[]" value="">');

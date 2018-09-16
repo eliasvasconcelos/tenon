@@ -95,7 +95,7 @@
             </section>
 
             <section class="content">
-                @forelse($anuncio as $z)
+                @forelse($data as $z)
                     <aside class="anuncios">
                         <div class="foto_anuncio">
                             <a href="{{url('anuncio')}}/{{$z->id}}"> <img src="{{$z->fotos->base64 or ''}}" width="200" height="146" alt="">

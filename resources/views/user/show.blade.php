@@ -244,10 +244,11 @@
                         <aside class="anuncios">
                             <div style="position:relative;float:left;width:100%;padding-right: 2px;">
                                 <div style="margin-right:20px;position:relative;float:left;height:auto;width:100%;max-width:200px;padding: 2px;border: 1px dotted #ccc">
-                                    <a href="../anuncio/{{$z->id}}"><img src="{{$z->fotos->base64 or '../img/image.jpeg'}}" alt="Imagem"></a>
+                                   <img src="{{$z->fotos->base64 or '../img/image.jpeg'}}" alt="Imagem">
                                 </div>
                                 <h3 style="font-weight: 600;margin-top:5px;">{{$z->titulo}}</h3>
-                                    <p style="height: 102px;">// {{$z->descricao}}</p>
+                                    <p style="height: 102px;">// {{str_limit($z->descricao, 200)}}
+                                    </p>
                                         {{--{{$z->user_id}} - {{auth()->user()->id}}--}}
 
 
@@ -287,7 +288,7 @@
                                     <a href="../anuncio/{{$z->id}}"><img src="{{$z->fotos->base64 or '../img/image.jpeg'}}" alt="Imagem"></a>
                                 </div>
                                 <h3 style="font-weight: 600;margin-top:5px;">{{$z->titulo}}</h3>
-                                <p style="height: 102px;">// {{$z->descricao}}</p>
+                                <p style="height: 102px;">// {{str_limit($z->descricao, 200)}}</p>
                                 {{--{{$z->user_id}} - {{auth()->user()->id}}--}}
 
 
