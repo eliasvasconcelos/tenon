@@ -55,6 +55,12 @@ return [
             'visibility' => 'public',
         ],
 
+        'anuncio' => [
+            'driver' => 'local',
+            'root' => public_path('app/media/anuncio'),
+//            'url' => env('APP_URL').'/storage',
+            'visibility' => 'public',
+        ],
         's3' => [
             'driver' => 's3',
             'key' => env('AWS_KEY'),

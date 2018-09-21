@@ -17,11 +17,16 @@ Route::resource('/', 'HomeController');
 
 Route::group(['middleware' => ['auth']], function (){
     Route::get('anuncio/novo', 'AnuncioController@novo');
+    Route::post('anuncio/novo', 'AnuncioController@move');
     Route::get('anuncio/{id}/update', 'AnuncioController@anuncio_update');
 
     Route::put('user/{id}', 'UserController@update');
     Route::put('user/anuncio', 'UserController@anuncio');
     Route::get('anuncio/{id}/delete', 'AnuncioController@destroy');
+    Route::get('user/{id}/configuracao/edit', 'UserController@configuracao');
+    Route::get('user/{id}/configuracao', 'UserController@configuracao');
+    Route::get('user/{id}/endereco', 'UserController@endereco')->name('editar');
+    Route::get('user/{id}/perfil', 'UserController@perfil');
 });
 
 Route::group(['prefix' => 'painel'], function () {

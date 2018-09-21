@@ -13,7 +13,8 @@ return [
     |
     */
 
-    'name' => env('APP_NAME', 'Laravel'),
+    'name' => env('APP_NAME', 'Tenon'),
+    'descricao' => env('APP_DESCRICAO', 'Sistema de Anúncio Online'),
 
     /*
     |--------------------------------------------------------------------------

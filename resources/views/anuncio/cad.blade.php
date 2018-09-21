@@ -28,12 +28,12 @@
                         <a title="Configurações" class="botao cor_black" href="config"><i class="fa fa-cog  fa-lg"></i> &nbsp; Configurações </a>
 
                     </li>
-                </ul>
+                </ul>{{--
                 <div class="cor_black notify2" style="margin-top:10px;">
                     <b>{{Auth::user()->name}}</b> lembre-se, de sempre manter seus dados atualizados, para melhor contato!!
-                </div>
+                </div>--}}
             </div>
-            <main class="conteudo">
+            <main class="conteudo" id="anunciar">
                 <section id="default2" style="padding:50px 100px;">
                     <h3 class="text-center">Qual Categoria?</h3>
                         <section style="width: 100%;padding:50px 100px;margin-top:40px;background-color: #f7f7f7;border-radius:3px;border:1px solid #f5f5f5">
@@ -56,7 +56,6 @@
                             {!! csrf_field() !!}
                             <input type="hidden" id="categoria_id" name="categoria_id" value="">
                             <input type="hidden" id="user_id" name="user_id" value="{{auth()->user()->id}}">
-                            <input type="hidden" name="base64">
                             <div id="imagem_base64"></div>
                             <div id="base64"></div>
                             <section style="width: 100%;padding:50px 0px;margin-top:40px;background-color: #f7f7f7;border-radius:3px;border:1px solid #f5f5f5">
@@ -92,7 +91,7 @@
                                         <h3>Por</h3>
                                         <select name="tipo" class="form-control" style="padding: 6px;">
                                             <option value="">Selecione</option>
-                                            <option value="1">Cabeça</option>
+                                            <option value="Cabeça">Cabeça</option>
                                             <option value="2">Arroba</option>
                                             <option value="3">Animal</option>
                                         </select>
@@ -103,6 +102,8 @@
                             <section style="float:left;width: 100%;padding:50px;margin-top:40px;background-color: #f7f7f7;">
                                     <h3 class="text-center">Localização</h3>
                                     <section style="float:left;width: 50%;padding:50px;margin-top:20px;">
+                                        <input type="checkbox" name="vehicle1" value="Bike"> Usar meu Endereço<br>
+                                        <input type="checkbox" name="vehicle1" value="Bike"> Novo Endereço<br>
                                             {{--
                                                 <div class="form-group">
                                                     <div class="input-group">
@@ -462,6 +463,9 @@
                             */
 
                             console.log(this.files);
+
+                            console.log($('#imagem_base64_1').val());
+                            console.log("ENTROU?");
                             if (this.files && this.files[0]) {
 
                                 if (this.files[0].type == "image/png" || this.files[0].type == "image/jpeg" || this.files[0].type == "image/gif") {

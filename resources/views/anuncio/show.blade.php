@@ -46,7 +46,7 @@
                          data-allowfullscreen="true"
                          data-nav="thumbs">
                         @forelse($data->album as $z)
-                            <img src="{{$z->base64 or '../img/image.jpeg'}}">
+                            <img src="{{url('app/media/anuncio')}}/{{$z->base64 or 'image.jpeg'}}" alt="Imagem">
                         @empty
                         @endforelse
                     </div>
@@ -66,7 +66,7 @@
                          data-allowfullscreen="true"
                          data-nav="thumbs">
                             @forelse($data->album as $z)
-                                <img src="{{$z->base64 or '../img/image.jpeg'}}">
+                            <img src="{{url('app/media/anuncio')}}/{{$z->base64 or 'image.jpeg'}}" alt="Imagem">
                             @empty
                             @endforelse
                     </div>

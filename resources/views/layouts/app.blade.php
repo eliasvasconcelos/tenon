@@ -85,7 +85,6 @@
                 <a title="Acesse nossa plataforma" class="botao" href="{{url ('user')}}/{{Auth::user()->id}}">
                     <i class="fa fa-user-circle-o  fa-lg"></i> Minha Conta </a>
                 @else
-
                     <a title="Acesse nossa plataforma" class="botao visivel" href="{{ url('/') }}"><i class="fa fa-home fa-lg chat"></i> &nbsp; Home </a><span class="visivel">|</span>
                     <a title="Acesse nossa plataforma" class="botao" href="{{ route('login') }}"><i class="fa fa-user-circle-o  fa-lg user"></i> &nbsp; Minha Conta </a>
                 @endif
@@ -120,7 +119,7 @@
                </span>
            </a>
            @endif
-           <a href="{{url ('anuncio/novo')}}">
+           <a href="{{url ('anuncio/novo')}}#anunciar">
                <span class="anunciar swing">
                    <i class="fa fa-bullhorn fa-lg"></i> Inserir anúncio
                </span>
@@ -131,14 +130,14 @@
                    <i class="fa fa-user fa-lg"></i> Meus anúncios
                </span>
            </a>
-            <a href="{{url ('anuncio/novo')}}">
+            <a href="{{url ('anuncio/novo')}}#anunciar">
                <span class="anunciar swing">
                    <i class="fa fa-bullhorn fa-lg"></i> Inserir anúncio
                </span>
             </a>
        @endif
     @else
-       <a href="{{url ('anuncio/novo')}}">
+       <a href="{{url ('anuncio/novo')}}#anunciar">
        <span class="anunciar2 swing">
            <i class="fa fa-bullhorn fa-lg"></i> Inserir anúncio
        </span>

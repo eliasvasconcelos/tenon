@@ -16,7 +16,7 @@
                             <strong>{{ $errors->first('name') }}</strong>
                     </span>
                 @endif
-
+{{--
                 <label for="name" class="form-texto">Sobre Nome</label>
                 <input type="text" name="sobrenome" pattern="[a-zA-Z\s]+$" class="form-control" placeholder="ex: Ferreira">
                 <br />
@@ -24,7 +24,7 @@
                     <span style="float:left;color: #FFFFFF;background-color: #f86c6b;padding:10px; width:100%; border-color: #c7254e 1px solid">
                             <strong>{{ $errors->first('sobrenome') }}</strong>
                     </span>
-                @endif
+                @endif--}}
                 <label for="name" class="form-texto">E-mail</label>
 
                 <input type="email" name="email" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$" class="form-control" placeholder="meunome@email.com">
@@ -72,7 +72,7 @@
 
             <section id="login_right">
 
-                        <div class="form-group{{ $errors->has('tipo_id') ? ' has-error' : '' }}">
+                        {{--<div class="form-group{{ $errors->has('tipo_id') ? ' has-error' : '' }}">
                             <label for="tipo_user" class="col-md-4 control-label form-texto">Tipo de Conta</label>
 
                             <select id="tipo_id" name="tipo_id"  value="{{ old('tipo_id') }}" class="form-control" onchange="exibir_ocultar(this)">
@@ -124,7 +124,7 @@
                                     <strong>{{ $errors->first('razao') }}</strong>
                                 </span>
                             @endif
-                        </div>
+                        </div>--}}
 
                 <button type="submit" class="btn btn-secondary px-4">
                     Criar Conta

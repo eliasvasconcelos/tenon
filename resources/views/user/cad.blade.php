@@ -1,25 +1,25 @@
 @extends('layouts.app')
 
 @section('content')
-
     <div class="center info_cfg">
         @auth
-            @if(auth()->user()->id == $data->tipo_id)
+          {{--  @if(auth()->user()->id == $data->tipo_id)
                 @if($data->tipo_id == "2" || $data->tipo_id == "3")
                     <h1 style="font-size: 2em">Meus Anuncios</h1>
                 @endif
-            @endif
-
+            @endif--}}
             <h1 style="font-size: 2em">Meu Perfil</h1>
             <ul class="menu_u" style="margin-top:-25px;">
                 <li class="text-right">
-                    <a title="Assinatura" class="botao cor_black" href="?pg=assinatura"><i class="fa fa-star fa-lg"></i> &nbsp; Assinatura </a>|
+                 {{--   <a title="Assinatura" class="botao cor_black" href="?pg=assinatura"><i class="fa fa-star fa-lg"></i> &nbsp; Assinatura </a>|
 
                     <a title="Depoimento" class="botao cor_black" href="?pg=feedback"><i class="fa fa-list-alt  fa-lg"></i> &nbsp; Feedback </a>|
 
                     <a title="Leilão" class="botao cor_black" href="?pg=leilao"><i class="fa fa-legal  fa-lg"></i> &nbsp; Leilão </a>|
 
                     <a title="Configurações" class="botao cor_black" href="{{url('user')}}/{{$data->id}}/edit"><i class="fa fa-cog  fa-lg"></i> &nbsp; Configurações </a>
+                 --}}
+                    <a title="Configurações" class="botao cor_black" href="{{url('user')}}/{{auth()->user()->id}}/configuracao"><i class="fa fa-cog  fa-lg"></i> &nbsp; Configurações </a>
 
                 </li>
             </ul>
@@ -29,29 +29,52 @@
 
     <main class="conteudo">
         <section id="leiloes">
-            <form id="form-user">
-                {!! csrf_field() !!}
-                <div class="user_anuncio fade">
-                        <img type="button" id="img_click" required="required" style="border:2px dashed #ccc;padding:2px; cursor:pointer;" src="@if($data->foto_perfil == null) {{asset ('img/sem-foto.png')}} @else {{$data->foto_perfil}} @endif">
-                </div>
-                <div class="descricao_anuncio" style="margin-left:170px">
-                        <br/>
-                        <input type="file" id="imagem_base64" name="foto_perfil" class="file" style="display: none">
-                        <input type="hidden" id="foto_perfil" required="required" name="foto_perfil" value="">
-                        <input type="text" class="form-control" placeholder="name" name="name" value="{{$data->name}}">
-                        <input type="text" class="form-control" placeholder="sobrenome" name="sobrenome" value="{{$data->sobrenome}}">
-                        <input type="text" class="form-control" placeholder="email" name="email" value="{{$data->email}}">
-                        <input type="text" class="form-control" placeholder="cpf" name="cpf" value="{{$data->cpf}}">
-                        <input type="text" class="form-control" placeholder="cnpj" name="cnpj" value="{{$data->cnpj}}">
-                        <input type="text" class="form-control" placeholder="telefone" name="telefone" value="{{$data->telefone}}">
-                        <input type="text" class="form-control" placeholder="status" name="status" value="{{$data->status}}">
-                        <input type="text" class="form-control" placeholder="loja_link" name="loja_link" value="{{$data->loja_link}}">
-                        <input type="text" class="form-control" placeholder="razao" name="razao" value="{{$data->razao}}">
-                        <a class="btn btn-success" onclick="save('user', '{{url('user')}}/{{$data->id}}');">
-                            <i class="fa fa-save"></i> Salvar
-                        </a>
-                </div>
-            </form>
+            <div class="perfil_user_cat left cor_black" style="width: 20%;padding:10px">
+                <h3>Total de Anuncios</h3>
+                <p style="margin:20px">
+                <h5 style="background-color: #96caff;padding: 9px 0px 10px 0px ;margin:3px 0px 3px 0px;border-radius:3px;">
+                    <span style="background-color: #f5f5f5;padding: 10px;margin:0px 5px;"><b>
+                            <i class="fa fa-cog" style="font-size:18px"></i>
+                        </b></span>Configurações</h5>
+                </p>
+                <p style="margin:20px">
+                <h5 style="background-color: #96caff;padding: 9px 0px 10px 0px ;margin:3px 0px 3px 0px;border-radius:3px;">
+                    <span style="background-color: #f5f5f5;padding: 10px;margin:0px 5px;"><b>
+                            <i class="fa fa-user" style="font-size:18px"></i>
+                        </b></span>Perfil</h5>
+                </p>
+            </div>
+            <div class="perfil_user_anuncio right cor_black" style="width: 80%;padding:10px">
+                <div class="sub_anuncio"><i class="fa fa-clock-o" style="font-size:18px"></i> Anúncios Pendentes</div>
+                    <aside class="anuncios">
+                        <form id="form-user">
+                            {!! csrf_field() !!}
+                            <div class="user_anuncio fade">
+                                <img type="button" id="img_click" required="required" style="border:2px dashed #ccc;padding:2px; cursor:pointer;" src="@if($data->foto_perfil == null) {{asset ('img/sem-foto.png')}} @else {{$data->foto_perfil}} @endif">
+                            </div>
+                            <div class="descricao_anuncio" style="margin-left:170px">
+                                <br/>
+                                <input type="file" id="imagem_base64" name="foto_perfil" class="file" style="display: none">
+                                <input type="hidden" id="foto_perfil" required="required" name="foto_perfil" value="">
+                                <input type="text" class="form-control" placeholder="name" name="name" value="{{$data->name}}">
+                                <input type="text" class="form-control" placeholder="sobrenome" name="sobrenome" value="{{$data->sobrenome}}">
+                                <input type="text" class="form-control" placeholder="email" name="email" value="{{$data->email}}">
+                                <input type="text" class="form-control" placeholder="cpf" name="cpf" value="{{$data->cpf}}">
+                                <input type="text" class="form-control" placeholder="cnpj" name="cnpj" value="{{$data->cnpj}}">
+                                <input type="text" class="form-control" placeholder="telefone" name="telefone" value="{{$data->telefone}}">
+                                <input type="text" class="form-control" placeholder="status" name="status" value="{{$data->status}}">
+                                <input type="text" class="form-control" placeholder="loja_link" name="loja_link" value="{{$data->loja_link}}">
+                                <input type="text" class="form-control" placeholder="razao" name="razao" value="{{$data->razao}}">
+                                <a class="btn btn-success" onclick="save('user', '{{url('user')}}/{{$data->id}}');">
+                                    <i class="fa fa-save"></i> Salvar
+                                </a>
+                            </div>
+                        </form>
+
+                    </aside>
+            </div>
+
+
         </section>
     </main>
     <script>

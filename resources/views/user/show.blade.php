@@ -14,7 +14,7 @@
 
                         <a title="Leilão" class="botao cor_black" href="#"><i class="fa fa-legal  fa-lg"></i> &nbsp; Leilão </a>|
 --}}
-                        <a title="Configurações" class="botao cor_black" href="{{url('user')}}/{{auth()->user()->id}}/edit"><i class="fa fa-cog  fa-lg"></i> &nbsp; Configurações </a>
+                        <a title="Configurações" class="botao cor_black" href="{{url('user')}}/{{auth()->user()->id}}/configuracao"><i class="fa fa-cog  fa-lg"></i> &nbsp; Configurações </a>
 
                     </li>
                 </ul>
@@ -28,7 +28,7 @@
 
                         <a title="Leilão" class="botao cor_black" href="#"><i class="fa fa-legal  fa-lg"></i> &nbsp; Leilão </a>|
 
-                        <a title="Configurações" class="botao cor_black" href="{{url('user')}}/{{auth()->user()->id}}/edit"><i class="fa fa-cog  fa-lg"></i> &nbsp; Configurações </a>
+                        <a title="Configurações" class="botao cor_black" href="{{url('user')}}/{{auth()->user()->id}}/configuracao"><i class="fa fa-cog  fa-lg"></i> &nbsp; Configurações </a>
 
                     </li>
                 </ul>
@@ -56,11 +56,11 @@
             @endif
         </div>
         @if(auth()->user()->status_id == '1' and auth()->user()->id == $usuario->id)
-            @if($usuario->tipo_id == '2' || $usuario->loja_link == null)
+            {{--@if($usuario->tipo_id == '2' || $usuario->loja_link == null)
                 <div class="text-center notify cor_black">
                     Notamos que você não personalizou o seu link de acesso para a sua loja virtual, faça agora mesmo <b>clique aqui</b>
                 </div>
-            @endif
+            @endif--}}
     @endauth
         {{--<section id="leiloes">
             <div class="user_anuncio">
@@ -238,13 +238,15 @@
                         </p>
                     @endif
                 </div>
-                <div class="perfil_user_anuncio right cor_black" style="width: 70%;padding:20px">
+                <div class="perfil_user_anuncio right cor_black" style="width: 80%;padding:20px">
                     <div class="sub_anuncio"><i class="fa fa-clock-o" style="font-size:18px"></i> Anúncios Pendentes</div>
                     @forelse(\App\Models\Anuncio::all()->where('user_id', auth()->user()->id)->where('status_id', 0) as $z)
                         <aside class="anuncios">
                             <div style="position:relative;float:left;width:100%;padding-right: 2px;">
-                                <div style="margin-right:20px;position:relative;float:left;height:auto;width:100%;max-width:200px;padding: 2px;border: 1px dotted #ccc">
-                                   <img src="{{$z->fotos->base64 or '../img/image.jpeg'}}" alt="Imagem">
+                                <div class="foto fade" style="margin-bottom:0px;margin-right:10px;width:250px;height: 160px;position:relative;float:left;">
+                                    <a href="{{url('anuncio')}}/{{$z->id}}">
+                                        <img src="{{url('app/media/anuncio')}}/{{$z->fotos->base64 or 'image.jpeg'}}" alt="Imagem">
+                                    </a>
                                 </div>
                                 <h3 style="font-weight: 600;margin-top:5px;">{{$z->titulo}}</h3>
                                     <p style="height: 102px;">// {{str_limit($z->descricao, 200)}}
@@ -279,13 +281,20 @@
                      --}}
                 </div>
 
-                <div class="perfil_user_anuncio right cor_black" style="width: 70%;padding:20px">
+                <div class="perfil_user_anuncio right cor_black" style="width: 80%;padding:20px">
                     <div class="sub_anuncio"><i class="fa fa-check" style="font-size:18px"></i> Anúncios Ativos</div>
                     @forelse(\App\Models\Anuncio::all()->where('user_id', auth()->user()->id)->where('status_id', 1) as $z)
                         <aside class="anuncios">
                             <div style="position:relative;float:left;width:100%;padding-right: 2px;">
-                                <div style="margin-right:20px;position:relative;float:left;height:auto;width:100%;max-width:200px;padding: 2px;border: 1px dotted #ccc">
-                                    <a href="../anuncio/{{$z->id}}"><img src="{{$z->fotos->base64 or '../img/image.jpeg'}}" alt="Imagem"></a>
+                               {{-- <div style="margin-right:20px;height:100%;;width:auto;max-width:200px;padding: 2px;border: 1px dotted #ccc">
+                                    <a href="../anuncio/{{$z->id}}">
+                                        <img src="{{url('app/media/anuncio')}}/{{$z->fotos->base64 or 'image.jpeg'}}" alt="Imagem">
+                                    </a>
+                                </div>--}}
+                                <div class="foto fade" style="margin-bottom:0px;margin-right:10px;position:relative;float:left;;width:250px;height: 160px;">
+                                    <a href="{{url('anuncio')}}/{{$z->id}}">
+                                        <img src="{{url('app/media/anuncio')}}/{{$z->fotos->base64 or 'image.jpeg'}}" alt="Imagem">
+                                    </a>
                                 </div>
                                 <h3 style="font-weight: 600;margin-top:5px;">{{$z->titulo}}</h3>
                                 <p style="height: 102px;">// {{str_limit($z->descricao, 200)}}</p>

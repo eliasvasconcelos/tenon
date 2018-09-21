@@ -22,6 +22,26 @@ class UserController extends DefaultController
         $this->request = $request;
     }
 
+    public function configuracao($id)
+    {
+        $data = $this->model->find($id);
+        return view("$this->view.configuracao", compact('data'));
+    }
+    public function endereco($id)
+    {
+        $endereco = $this->endereco->find($id);
+        if($endereco == null){
+            return "Erro";
+        }
+        return view("$this->view.configuracao", compact('data','endereco'));
+    }
+
+    public function perfil($id)
+    {
+        $data = $this->model->find($id);
+        return view("$this->view.configuracao", compact('data'));
+    }
+
     public function index()
     {
         if (auth()->check()) {

@@ -6,19 +6,19 @@ use App\Models\Anuncio;
 use App\Models\AnuncioFoto;
 use App\Models\UserTipo;
 use App\Models\Categoria;
-use App\User;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Input;
+use Illuminate\Support\Facades\Storage;
 
 class AnuncioController extends DefaultController
 {
-    protected $model, $request;
+    protected $model, $midia, $request;
     protected $view = 'anuncio';
 
-    function __construct(Anuncio $model, Request $request)
+    function __construct(Anuncio $model, AnuncioFoto $midia, Request $request)
 
     {
         $this->model = $model;
+        $this->midia = $midia;
         $this->request = $request;
     }
 
@@ -81,25 +81,60 @@ class AnuncioController extends DefaultController
              return "Vixi, deu zebra";
          }*/
     }
-
     /*
      * ESSE METODO ESTAVA PEGANDO DO DEFAULTCONTROLLER
      * FOI REESCRITO AQUI PORQUE TEM QUE ADICIONAR O CREATE DA FOTO JUNTO COM O ID DO ANUNCIO CONFORME ABAIXO
     */
     public function store()
     {
+
+        $store = $this->model->create($this->request->all());
+
+        foreach (request()->get('base64') as $midia) {
+
+            $data = [];
+            $data['base64'] = $midia;
+            $midia = utf8_decode($midia);
+            $base64_str = substr($midia, strpos($midia, ",") + 1);
+            $image = base64_decode($base64_str);
+            $teste = explode(",", $midia);
+            $teste1 = explode("/", $teste[0]);
+            $teste2 = explode(";", $teste1[1]);
+            $avatar = time(). rand(10, 99). "." . $teste2[0];
+            Storage::disk('anuncio')->put("$avatar", $image);
+            if ($teste2[0] == "jpg" || $teste2[0] == "png" || $teste2[0] == "jpeg") {
+                $return['tipo_id'] = 2;
+            } else if ($teste2[0] == "mp3") {
+                $return['tipo_id'] = 3;
+            } else if ($teste2[0] == "mp4") {
+                $return['tipo_id'] = 4;
+            } else {
+                $return['tipo_id'] = 8;
+            }
+            $return['base64'] = $avatar;
+
+            $data['base64'] = $avatar;
+            $data['anuncio_id'] = $store->id;
+            AnuncioFoto::create($data);
+        }
+
+        return 1;
+
+        /*
+
         $store = $this->model->create($this->request->all());
 
         foreach (request()->get('base64') as $z) {
 
             $data = [];
             $data['base64'] = $z;
+            dd($data);
 
             $data['anuncio_id'] = $store->id;
             AnuncioFoto::create($data);
         }
 
-        return 1;
+        return 1;*/
 
         /* $data = $this->request->all();
          $store = $this->model->create($data);
@@ -108,6 +143,11 @@ class AnuncioController extends DefaultController
          AnuncioFoto::create($data);
 
          return 1;*/
+    }
+
+    public function move()
+    {
+
     }
 
     public function anuncio_update($id)
