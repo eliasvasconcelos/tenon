@@ -99,19 +99,19 @@
                                 </section>
 
                             </section>
-                            <section style="float:left;width: 100%;padding:50px;margin-top:40px;background-color: #f7f7f7;">
+                            {{--<section style="float:left;width: 100%;padding:50px;margin-top:40px;background-color: #f7f7f7;">
                                     <h3 class="text-center">Localização</h3>
                                     <section style="float:left;width: 50%;padding:50px;margin-top:20px;">
                                         <input type="checkbox" name="vehicle1" value="Bike"> Usar meu Endereço<br>
                                         <input type="checkbox" name="vehicle1" value="Bike"> Novo Endereço<br>
-                                            {{--
+                                            --}}{{--
                                                 <div class="form-group">
                                                     <div class="input-group">
                                                         <div class="input-group-addon">Preço</div>
                                                         <input value="{{$data->preco or ''}}" type="text" required="required" class="form-control" id="titulo" name="titulo" placeholder="Titulo">
                                                     </div>
                                                 </div>
-                                            --}}
+                                            --}}{{--
                                             <h3>CEP</h3>
                                             <input name="cep" style="width: 100%" placeholder="00-000-000" type="text" id="cep" class="form-control" onblur="pesquisacep(this.value);">
                                             <h3>Cidade</h3>
@@ -120,14 +120,14 @@
                                             <input name="cidade" style="width: 100%" type="text" id="cidade" class="form-control">
                                     </section>
                                     <section style="float:right;width: 50%;padding:50px;margin-top:20px;background-color: #f7f7f7;">
-                                            {{--
+                                            --}}{{--
                                                 <div class="form-group">
                                                     <div class="input-group">
                                                         <div class="input-group-addon">Preço</div>
                                                         <input value="{{$data->preco or ''}}" type="text" required="required" class="form-control" id="titulo" name="titulo" placeholder="Titulo">
                                                     </div>
                                                 </div>
-                                            --}}
+                                            --}}{{--
                                             <h3>Rua</h3>
                                             <input name="rua" style="width: 100%" type="text" id="rua" class="form-control" disabled>
                                             <h3>Bairro</h3>
@@ -135,7 +135,7 @@
                                             <h3>Estado</h3>
                                             <input name="uf" style="width: 100%" type="text" id="uf" class="form-control" disabled>
                                 </section>
-                            </section>
+                            </section>--}}
                               {{--  <div style="float: left;width: 100%;">
                                             <h3>Localização</h3>
                                         <select  class="form-control" name="uf_id" id="uf_id">
@@ -279,7 +279,7 @@
                                 @endif
 
                                 if(window.top==window) {
-                                    setTimeout(location.href = "{{url("")}}/user/{{Auth()->user()->id}}",3000);
+                                    setTimeout(location.href = "{{url("")}}/user/{{Auth()->user()->profile}}",3000);
                                 }
 
                             }).fail(function () {
@@ -413,11 +413,11 @@
                         var conta = 0;
                         $("#add").click(function(){
                             conta++;
-                                if(conta<9)
+                                if(conta<13)
                                 $("ol").append('<img type="button" id="img_click_' + conta +'" style="margin-left:10px;margin-top:10px;border:2px dashed #ccc;padding:2px; cursor:pointer;" height="135" src="{{asset ('img/sem_imagem.png')}}">');
                                 $("#imagem_base64").append('<input type="file" id="imagem_base64_' + conta +'" name="base64[]" class="file" style="display: none">');
                                 $("#base64").append('<input type="hidden" id="base64_' + conta +'" required="required" name="base64[]" value="">');
-                            if (conta != 0){
+                            if (conta != 13){
                                 jQuery("#album").fadeIn();
                                 $("#album").css("display", "block");
                             }

@@ -9,6 +9,7 @@
                 <p class="text-muted text-center">Simples e rápido ;)</p>
             <section id="login_left">
                 <label for="name" class="form-texto">Nome</label>
+                <input type="hidden" name="profile">
                 <input type="text" name="name" pattern="[a-zA-Z\s]+$" class="form-control" placeholder="ex: João">
                 <br />
                 @if ($errors->has('name'))

@@ -82,7 +82,7 @@
                 <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
                     {{ csrf_field() }}
                 </form>
-                <a title="Acesse nossa plataforma" class="botao" href="{{url ('user')}}/{{Auth::user()->id}}">
+                <a title="Acesse nossa plataforma" class="botao" href="{{url ('user')}}/{{Auth::user()->profile}}">
                     <i class="fa fa-user-circle-o  fa-lg"></i> Minha Conta </a>
                 @else
                     <a title="Acesse nossa plataforma" class="botao visivel" href="{{ url('/') }}"><i class="fa fa-home fa-lg chat"></i> &nbsp; Home </a><span class="visivel">|</span>
@@ -113,7 +113,7 @@
                </span>
            </a>
            @else
-           <a href="{{url ('user')}}/{{Auth::user()->id}}">
+           <a href="{{url ('user')}}/{{Auth::user()->profile}}">
                <span class="ofertas swing">
                    <i class="fa fa-user fa-lg"></i> Meus anúncios
                </span>
@@ -125,7 +125,7 @@
                </span>
            </a>
        @else
-           <a href="{{url ('user')}}/{{Auth::user()->id}}">
+           <a href="{{url ('user')}}/{{Auth::user()->profile}}">
                <span class="ofertas swing">
                    <i class="fa fa-user fa-lg"></i> Meus anúncios
                </span>

@@ -19,4 +19,5 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 
 Route::get('categoria/search/{id}', 'Api\CategoriaController@api')->name('api_categoria_search');
 Route::get('uf/search/{id}', 'Api\UfController@api')->name('api_uf_search');
+Route::get('anuncio/search/{id}', 'Api\AnuncioController@api')->name('api_anuncio_search');
 

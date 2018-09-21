@@ -7,6 +7,7 @@ use App\Models\AnuncioFoto;
 use App\Models\UserTipo;
 use App\Models\Categoria;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Input;
 use Illuminate\Support\Facades\Storage;
 
 class AnuncioController extends DefaultController
@@ -20,6 +21,20 @@ class AnuncioController extends DefaultController
         $this->model = $model;
         $this->midia = $midia;
         $this->request = $request;
+    }
+
+    public function show($id)
+    {
+       /* $data = $this->model->find($id);*/
+        $data = $this->model->where("titulo", $id)->first();
+
+            if($data->status_id != 1)
+        {
+            return redirect("home");
+        }
+        else{
+            return view("$this->view.show", compact('data'));
+        }
     }
 
     public function index()
@@ -88,8 +103,8 @@ class AnuncioController extends DefaultController
     public function store()
     {
 
-        $store = $this->model->create($this->request->all());
 
+        $store = $this->model->create($this->request->all());
         foreach (request()->get('base64') as $midia) {
 
             $data = [];
@@ -143,11 +158,6 @@ class AnuncioController extends DefaultController
          AnuncioFoto::create($data);
 
          return 1;*/
-    }
-
-    public function move()
-    {
-
     }
 
     public function anuncio_update($id)

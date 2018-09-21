@@ -1,11 +1,8 @@
 @extends('layouts.app')
 
 @section('content')
-    <link  href="{{asset ('css')}}/fotorama.css" rel="stylesheet"> <!-- 3 KB -->
-    <script src="http://cdnjs.cloudflare.com/ajax/libs/fotorama/4.6.4/fotorama.js"></script> <!-- 16 KB -->
     <main class="conteudo">
         @if($data->user->tipo_id == 4)
-
         <section id="leiloes">
             <div class="user_anuncio fade" style="width:160px">
                     <a href="{{url('user')}}/{{$data->id}}">
@@ -68,10 +65,13 @@
                             @forelse($data->album as $z)
                             <img src="{{url('app/media/anuncio')}}/{{$z->base64 or 'image.jpeg'}}" alt="Imagem">
                             @empty
-                            @endforelse
+                            <img src="{{url('app/media/anuncio')}}/{{'image.jpeg'}}" alt="Imagem">
+                        @endforelse
                     </div>
                 @endif
                 <section id="default">
+
+
                     <p>// Descrição : <b>{{$data->descricao}}</b></p>
                 </section>
 
@@ -266,14 +266,16 @@
                             @if($x->base64 == null)
                             @else
                                 <span class="hidden" style="display: none">{{$aa = 1}}</span>
-                                <img src="{{$x->base64}}" alt="Imagem">
+                                    <img src="{{url('app/media/anuncio')}}/{{$x->base64 or 'image.jpeg'}}" alt="Imagem">
                                 @break
                             @endif
                         @empty
-                            <img src="{{'../img/image.jpeg'}}" alt="Imagem">
-                        @endforelse
+{{--
+                            <img src="{{url('app/media/anuncio')}}/{{'image.jpeg'}}" alt="Imagem">
+--}}
+                            @endforelse
                         @if($aa == 0)
-                            <img src="{{'../img/image.jpeg'}}" alt="Imagem">
+                                <img src="{{url('app/media/anuncio')}}/{{'image.jpeg'}}" alt="Imagem">
                         @endif
                          </a>
                     </div>
@@ -297,4 +299,6 @@
             @endforelse
         </section>
     </main>
+    <link  href="{{asset ('css')}}/fotorama.css" rel="stylesheet"> <!-- 3 KB -->
+    <script src="{{asset ('js')}}/fotorama.js"></script> <!-- 16 KB -->
 @endsection

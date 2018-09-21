@@ -7,9 +7,12 @@
             <img src="img/arrow.png" alt="" class="left top_5" width="40px">
             \\ categorias
         </div>
-        {{--<div class="thumb">
-            <i class="fa fa-home fa-1x"></i><a href="#"> Home</a> <i class="fa fa-angle-right fa-1x"></i> <a href="#">Animais</a>
-        </div>--}}
+        <div class="thumb">
+            <i class="fa fa-home fa-1x"></i><a href="#"> Home</a> <i class="fa fa-angle-right fa-1x"></i>
+            <a href="#">Categoria</a> <i class="fa fa-angle-right fa-1x"></i> <b>Nome
+                <span class="right" style="margin:5px 10px "><i class="fa fa-sort-amount-desc fa-1x"></i> Mostrando
+                    Total Anuncios</span>
+        </div>
         <section id="destaque">
             <div class="top_esq">
                 <form action="?pagina=resultado" method="post">

@@ -47,7 +47,7 @@
                  </p>
                  <div class="foto fade" style="width:250px;height: 160px;">
                      <a href="{{url('anuncio')}}/{{$z->id}}">
-                         <img src="{{url('')}}/{{$z->fotos->base64 or '../img/image.jpeg'}}" alt="Imagem">
+                         <img src="{{url('app/media/anuncio')}}/{{$z->fotos->base64 or 'image.jpeg'}}" alt="Imagem">
                      </a>
                  </div>
                  <p class="preco">
@@ -155,20 +155,25 @@
                          {{$z->titulo}}
                      </p>
                      <div class="foto fade" style="width:250px;height: 160px;">
-                         <a href="{{url('anuncio')}}/{{$z->id}}">
+                         <a href="{{url('anuncio')}}/{{$z->titulo}}">
                              <span class="hidden" style="display: none">{{$aa = 0}}</span>
                              @forelse($z->album as $x)
                                 @if($x->base64 == null)
                                     @else
                                         <span class="hidden" style="display: none">{{$aa = 1}}</span>
-                                        <img src="{{$x->base64}}" alt="Imagem">
+                                     <img src="{{url('app/media/anuncio')}}/{{$x->base64 or 'image.jpeg'}}" alt="Imagem">
                                     @break
                                 @endif
                              @empty
-                                <img src="{{url('../img/image.jpeg')}}" alt="Imagem">
+{{--
+                                <img src="{{'../img/image.jpeg'}}" alt="Imagem">
+--}}
+{{--
+                                 <img src="{{url('app/media/anuncio')}}/{{'image.jpeg'}}" alt="Imagem">
+--}}
                              @endforelse
                              @if($aa == 0)
-                                <img src="{{url('../img/image.jpeg')}}" alt="Imagem">
+                                 <img src="{{url('app/media/anuncio')}}/{{'image.jpeg'}}" alt="Imagem">
                              @endif
                          </a>
                      </div>

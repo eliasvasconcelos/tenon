@@ -63,13 +63,16 @@ class UserController extends DefaultController
         return view("$this->view.show", compact( 'anuncio','usuario'));
     }
     */
-
     public function show($id)
     {
-        $usuario = $this->model->find($id);
-    /*  $usuario = $this->model->where($id)->first();
-        $anuncio = $this->anuncio->where('user_id', $usuario->id)->orderBy('id','DESC')->paginate(10);*/
-        return view("$this->view.show", compact( 'anuncio','usuario'));
+        if (auth()->user()->profile == $id) {
+            $data = $this->model->where("profile", $id)->first();
+            /*  $usuario = $this->model->where($id)->first();
+                $anuncio = $this->anuncio->where('user_id', $usuario->id)->orderBy('id','DESC')->paginate(10);*/
+            return view("$this->view.show", compact( 'data'));
+        } else {
+            return redirect()->back();
+        }
     }
 
     public function anuncio()

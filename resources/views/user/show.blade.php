@@ -55,7 +55,7 @@
                 Desculpe <b>{{auth()->user()->name }}</b> sua conta  está <b>Bloqueada</b>!!
             @endif
         </div>
-        @if(auth()->user()->status_id == '1' and auth()->user()->id == $usuario->id)
+        @if(auth()->user()->status_id == '1' and auth()->user()->id == $data->id)
             {{--@if($usuario->tipo_id == '2' || $usuario->loja_link == null)
                 <div class="text-center notify cor_black">
                     Notamos que você não personalizou o seu link de acesso para a sua loja virtual, faça agora mesmo <b>clique aqui</b>
@@ -220,7 +220,7 @@
                     <p style="margin:20px">
                     <h5 style="background-color: #96caff;padding: 10px 0px 10px 0px ;margin:3px 0px 3px 0px;border-radius:3px;"><span style="background-color: #f5f5f5;border:1px dotted #e5e5e5;padding: 15px;margin:1px 5px;border-radius:3px"><b>{{\App\Models\Anuncio::withTrashed()->where('user_id', auth()->user()->id)->count() + \App\Models\Anuncio::where('user_id', auth()->user()->id)->where('status_id', 0)->where('status_id', 1)->where('status_id', 2)->where('status_id', 3)->count()}}</b></span>Total</h5>
                     </p>
-                    @if(auth()->user()->tipo_id == $usuario->id)
+                    @if(auth()->user()->tipo_id == $data->id)
                         <p style="margin:20px">
                         <h5 style="background-color: #c596ff;padding: 10px 0px 10px 0px ;margin:3px 0px 3px 0px;border-radius:3px;"><span style="background-color: #f5f5f5;border:1px dotted #e5e5e5;padding: 15px;margin:1px 5px;border-radius:3px"><b>{{\App\Models\Anuncio::where('user_id', auth()->user()->id)->where('status_pagamento', 1)->count()}}</b> </span> Premium</h5>
                         </p>
@@ -244,9 +244,7 @@
                         <aside class="anuncios">
                             <div style="position:relative;float:left;width:100%;padding-right: 2px;">
                                 <div class="foto fade" style="margin-bottom:0px;margin-right:10px;width:250px;height: 160px;position:relative;float:left;">
-                                    <a href="{{url('anuncio')}}/{{$z->id}}">
                                         <img src="{{url('app/media/anuncio')}}/{{$z->fotos->base64 or 'image.jpeg'}}" alt="Imagem">
-                                    </a>
                                 </div>
                                 <h3 style="font-weight: 600;margin-top:5px;">{{$z->titulo}}</h3>
                                     <p style="height: 102px;">// {{str_limit($z->descricao, 200)}}
@@ -493,35 +491,35 @@
            </section>--}}
         @endif
         @else
-        <div class="text-center @if($usuario->status_id == '0') notify @elseif($usuario->status_id == '2') notify3 @endif cor_black"  style="margin-top:10px;">
-            @if($usuario->status_id == '0')
+        <div class="text-center @if($data->status_id == '0') notify @elseif($data->status_id == '2') notify3 @endif cor_black"  style="margin-top:10px;">
+            @if($data->status_id == '0')
                 Desculpe esta conta ainda está <b>Pendente</b>, volte mais tarde!!
                 <div class="text-center" id="sucesso" style="display:none;margin-bottom:10px;padding:20px;background-color: #63d3f8;border:1px solid #18aecb">
                 </div>
-            @elseif($usuario->status_id == '2')
+            @elseif($data->status_id == '2')
                 Desculpe esta conta foi <b>Bloqueada</b>!!
             @endif
         </div>
-        @if($usuario->status_id == '1')
+        @if($data->status_id == '1')
         <section id="leiloes">
             <div class="user_anuncio">
-                <img src="@if($usuario->foto_perfil == null) {{asset ('img/sem-foto.png')}} @else {{$usuario->foto_perfil}} @endif">
+                <img src="@if($data->foto_perfil == null) {{asset ('img/sem-foto.png')}} @else {{$data->foto_perfil}} @endif">
             </div>
             <div class="descricao_anuncio" style="margin-left:170px">
-                <h3>Olá, sou {{$usuario->name}}</h3>
-                @if($usuario->tipo_id == "2" || $usuario->tipo_id == "4")
+                <h3>Olá, sou {{$data->name}}</h3>
+                @if($data->tipo_id == "2" || $data->tipo_id == "4")
                     Pessoa Jurídica
                     <form>
-                        <input type="text" value="{{$usuario->name}}">
+                        <input type="text" value="{{$data->name}}">
                         <input type="submit" value="enviar">
                     </form>
-                @elseif($usuario->tipo_id == '3')
+                @elseif($data->tipo_id == '3')
                     Pessoa Física
-                @elseif($usuario->tipo_id == '1')
+                @elseif($data->tipo_id == '1')
                     Equipe da Tenon
-                    <p>{{$usuario->email}}</p>
+                    <p>{{$data->email}}</p>
                 @endif
-                @if($usuario->tipo_id == "4")
+                @if($data->tipo_id == "4")
                     <h1 style="font-size: 2em">Minha Loja</h1>
                 @endif
             </div>
@@ -532,7 +530,7 @@
 <script>
 
     function save(form, link) {
-        var link = "{{url('user')}}/{{$usuario->id}}";
+        var link = "{{url('user')}}/{{$data->id}}";
         var dataForm = $('#form-' + form).serialize();
         var metodo = 'POST';
         ajax(link, metodo, dataForm);

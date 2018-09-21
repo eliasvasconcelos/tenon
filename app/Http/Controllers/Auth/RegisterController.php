@@ -62,15 +62,14 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
+        $user = str_pad(mt_rand(0, 999999), 6, '0', STR_PAD_LEFT);
         return User::create([
             'name' => $data['name'],
             'email' => $data['email'],
             'password' => bcrypt($data['password']),
-            'tipo_id' => $data['tipo_id'],
-            'razao' => $data['razao'],
-            'cpf' => $data['cpf'],
-            'cnpj' => $data['cnpj'],
-            'loja_link' => str_pad(mt_rand(0, 999999), 6, '0', STR_PAD_LEFT),
+            'profile' => $data['profile'].$user,
+            /*
+            'loja_link' => str_pad(mt_rand(0, 999999), 6, '0', STR_PAD_LEFT),*/
         ]);
     }
 }
