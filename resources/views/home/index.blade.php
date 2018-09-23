@@ -60,7 +60,7 @@
                      {{str_limit($z->descricao, 60)}}
                  </p>
                  <div class="data">
-                     <date><i class="fa fa-calendar"></i> {{$z->created_at->format('d/m/ Y')}}</date>
+                     <date><i class="fa fa-calendar"></i> {{$z->created_at->format('d/m/Y')}}</date>
                      <span class="estado">
                          <a class="cor_black" href="{{url('estado')}}/{{$z->uf->sigla or ''}}">{{$z->uf->uf or ''}}-{{$z->uf->sigla or ''}}</a> <i class="fa fa-map-marker fa-1x"></i>
                      </span>
@@ -185,7 +185,7 @@
                          {{str_limit($z->descricao, 30)}}
                      </p>
                      <div class="data">
-                         <date><i class="fa fa-calendar"></i> {{$z->created_at->format('d/m/ Y')}}</date>
+                         <date><i class="fa fa-calendar"></i> {{$z->created_at->format('d/m/Y')}}</date>
                          <span class="estado">
                          <a class="cor_black" href="{{url('estado')}}/{{$z->uf->sigla or 'Uf'}}">{{$z->uf->uf or 'Estado'}}-{{$z->uf->sigla or ''}}</a> <i class="fa fa-map-marker fa-1x"></i>
                      </span>

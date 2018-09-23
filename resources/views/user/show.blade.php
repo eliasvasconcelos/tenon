@@ -44,7 +44,7 @@
                     </ul>--}}
             @endif
         </div>
-        <div class="text-center @if(auth()->user()->status_id == '1') notify2 @elseif(auth()->user()->status_id == '0') notify @else notify3 @endif cor_black"  style="margin-top:10px;">
+        <div class="text-center @if(auth()->user()->status_id == '1') notify2 @elseif(auth()->user()->status_id == '0') notify @else notify3 @endif cor_black"  id="alerta" style="margin-top:10px;">
             @if(auth()->user()->status_id == '1')
                 Parabéns <b>{{auth()->user()->name }}</b> você está <b>Ativado</b> :)
             @elseif(auth()->user()->status_id == '0')
@@ -238,8 +238,10 @@
                         </p>
                     @endif
                 </div>
-                <div class="perfil_user_anuncio right cor_black" style="width: 80%;padding:20px">
-                    <div class="sub_anuncio"><i class="fa fa-clock-o" style="font-size:18px"></i> Anúncios Pendentes</div>
+                <div class="perfil_user_anuncio right cor_black" id="pendente" style="width: 80%;padding:20px">
+                    <div class="sub_anuncio"><i class="fa fa-clock-o" style="font-size:18px"></i> Anúncios Pendentes
+                    <p style="font-size:1em;margin-top:-7px;margin-right:-20px;border-top-left-radius:10px;border-bottom-left-radius:10px;padding:7px;float: right;background-color: #f5f5f5">Total <b>{{\App\Models\Anuncio::all()->where('user_id', auth()->user()->id)->where('status_id', 0)->count()}}</b></p>
+                    </div>
                     @forelse(\App\Models\Anuncio::all()->where('user_id', auth()->user()->id)->where('status_id', 0) as $z)
                         <aside class="anuncios">
                             <div style="position:relative;float:left;width:100%;padding-right: 2px;">
@@ -259,7 +261,7 @@
                                         <a class="cor_black delete" style="font-size:12px;padding: 5px 10px;background-color: #f86c6b;border-radius:3px" href="{{url ('anuncio')}}/{{$z->id}}/delete">Deletar</a>
 --}}
                                 <div class="right">
-                                    <a class="cor_black" style="float:right;font-size:12px;padding: 5px 10px;background-color: #f5f5f5;border-radius:3px"> Postado em: <b>{{$z->user->created_at or ''}}</b></a>
+                                    <a class="cor_black" style="float:right;font-size:12px;padding: 5px 10px;background-color: #f5f5f5;border-radius:3px"> Postado em: <b>{{$z->user->created_at->format('d/m/Y')}} às {{$z->user->created_at->format('H:i')}}</a>
                                 </div>
                             </div>
 
@@ -280,9 +282,20 @@
                 </div>
 
                 <div class="perfil_user_anuncio right cor_black" style="width: 80%;padding:20px">
-                    <div class="sub_anuncio"><i class="fa fa-check" style="font-size:18px"></i> Anúncios Ativos</div>
-                    @forelse(\App\Models\Anuncio::all()->where('user_id', auth()->user()->id)->where('status_id', 1) as $z)
+                    <div class="sub_anuncio"><i class="fa fa-check" style="font-size:18px"></i> Anúncios Ativos
+                    <p style="font-size:1em;margin-top:-7px;margin-right:-20px;border-top-left-radius:10px;border-bottom-left-radius:10px;padding:7px;float: right;background-color: #f5f5f5">Total <b>{{\App\Models\Anuncio::all()->where('user_id', auth()->user()->id)->where('status_id', 1)->count()}}</b></p>
+                    </div>
+                @forelse(\App\Models\Anuncio::all()->where('user_id', auth()->user()->id)->where('status_id', 1)->where('status_pagamento', 1) as $z)
                         <aside class="anuncios">
+                                <div class="wrapper">
+
+                                    <div class="ribbon-wrapper-green">
+
+                                        <div class="ribbon-green"><i class="fa fa-star"></i> </div>
+
+                                    </div>
+
+                                </div>
                             <div style="position:relative;float:left;width:100%;padding-right: 2px;">
                                {{-- <div style="margin-right:20px;height:100%;;width:auto;max-width:200px;padding: 2px;border: 1px dotted #ccc">
                                     <a href="../anuncio/{{$z->id}}">
@@ -300,10 +313,42 @@
 
 
                                 <a class="cor_black" style="font-size:12px;padding: 5px 10px;background-color: #2ab27b;border-radius:3px" href="{{url ('anuncio')}}/{{$z->id}}/edit">Editar</a> |
-
-                                                                        <a class="cor_black delete" style="font-size:12px;padding: 5px 10px;background-color: #f86c6b;border-radius:3px" href="{{url ('anuncio')}}/{{$z->id}}/delete">Deletar</a>
+                                <a class="cor_black" style="font-size:12px;padding: 5px 10px;background-color: #c596ff;border-radius:3px">Premium</a> |
+                                <a class="cor_black delete" style="font-size:12px;padding: 5px 10px;background-color: #f86c6b;border-radius:3px" href="{{url ('anuncio')}}/{{$z->id}}/delete">Deletar</a>
                                 <div class="right">
-                                    <a class="cor_black" style="float:right;font-size:12px;padding: 5px 10px;background-color: #f5f5f5;border-radius:3px"> Postado em: <b>{{$z->user->created_at or ''}}</b></a>
+                                    <a class="cor_black" style="float:right;font-size:12px;padding: 5px 10px;background-color: #f5f5f5;border-radius:3px"> Postado em: <b>{{$z->user->created_at->format('d/m/Y')}} às {{$z->user->created_at->format('H:i')}}</a>
+                                </div>
+                            </div>
+
+                        </aside>
+                        <hr class="style12">
+                    @empty
+                        <div class="text-center" style="position:relative;float:right;padding: 10px;width:100%;background-color: #f4f4f4;"> Não há registro!</div>
+                    @endforelse
+
+                    @forelse(\App\Models\Anuncio::all()->where('user_id', auth()->user()->id)->where('status_id', 1) as $z)
+                        <aside class="anuncios">
+                            <div style="position:relative;float:left;width:100%;padding-right: 2px;">
+                                {{-- <div style="margin-right:20px;height:100%;;width:auto;max-width:200px;padding: 2px;border: 1px dotted #ccc">
+                                     <a href="../anuncio/{{$z->id}}">
+                                         <img src="{{url('app/media/anuncio')}}/{{$z->fotos->base64 or 'image.jpeg'}}" alt="Imagem">
+                                     </a>
+                                 </div>--}}
+                                <div class="foto fade" style="margin-bottom:0px;margin-right:10px;position:relative;float:left;;width:250px;height: 160px;">
+                                    <a href="{{url('anuncio')}}/{{$z->id}}">
+                                        <img src="{{url('app/media/anuncio')}}/{{$z->fotos->base64 or 'image.jpeg'}}" alt="Imagem">
+                                    </a>
+                                </div>
+                                <h3 style="font-weight: 600;margin-top:5px;">{{$z->titulo}}</h3>
+                                <p style="height: 102px;">// {{str_limit($z->descricao, 200)}}</p>
+                                {{--{{$z->user_id}} - {{auth()->user()->id}}--}}
+
+
+                                <a class="cor_black" style="font-size:12px;padding: 5px 10px;background-color: #2ab27b;border-radius:3px" href="{{url ('anuncio')}}/{{$z->id}}/edit">Editar</a> |
+
+                                <a class="cor_black delete" style="font-size:12px;padding: 5px 10px;background-color: #f86c6b;border-radius:3px" href="{{url ('anuncio')}}/{{$z->id}}/delete">Deletar</a>
+                                <div class="right">
+                                    <a class="cor_black" style="float:right;font-size:12px;padding: 5px 10px;background-color: #f5f5f5;border-radius:3px"> Postado em: <b>{{$z->user->created_at->format('d/m/Y')}} às {{$z->user->created_at->format('H:i')}}</a>
                                 </div>
                             </div>
 

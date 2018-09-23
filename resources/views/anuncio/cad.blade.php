@@ -240,8 +240,8 @@
                                 Seu Anúncio foi cadastrado com sucesso!!
                             </div>
                         </form>
+                    <script src="{{asset('js/edit.js')}}"></script>
                     <script>
-
                         function captura(id, ul) {
                             var metodo = 'GET';
                             var link = '{{url('api/categoria/search')}}/' + id;
@@ -251,7 +251,14 @@
 
                         function save(form, link) {
                             var dataForm = $('#form-' + form).serialize();
-                            var metodo = 'POST';
+                            var id = $("#" + form + "_id").val();
+                            var metodo;
+                            if (id > 0) {
+                                metodo = 'PUT';
+                                link = link + '/' + id;
+                            } else {
+                                metodo = 'POST';
+                            }
                             ajax(link, metodo, dataForm);
                         }
 
@@ -279,7 +286,7 @@
                                 @endif
 
                                 if(window.top==window) {
-                                    setTimeout(location.href = "{{url("")}}/user/{{Auth()->user()->profile}}",3000);
+                                    setTimeout(location.href = "{{url("")}}/user/{{Auth()->user()->profile}}/#pendente",3000);
                                 }
 
                             }).fail(function () {

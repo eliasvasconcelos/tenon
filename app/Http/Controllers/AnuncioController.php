@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Anuncio;
 use App\Models\AnuncioFoto;
 use App\Models\UserTipo;
+use App\User;
 use App\Models\Categoria;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Input;
@@ -12,21 +13,22 @@ use Illuminate\Support\Facades\Storage;
 
 class AnuncioController extends DefaultController
 {
-    protected $model, $midia, $request;
+    protected $model, $midia, $user, $request;
     protected $view = 'anuncio';
 
-    function __construct(Anuncio $model, AnuncioFoto $midia, Request $request)
+    function __construct(Anuncio $model, AnuncioFoto $midia, User $user, Request $request)
 
     {
         $this->model = $model;
         $this->midia = $midia;
+        $this->user = $user;
         $this->request = $request;
     }
 
     public function show($id)
     {
-       /* $data = $this->model->find($id);*/
-        $data = $this->model->where("titulo", $id)->first();
+       $data = $this->model->find($id);
+/*        $data = $this->model->where("titulo", $id)->first();*/
 
             if($data->status_id != 1)
         {
@@ -45,6 +47,15 @@ class AnuncioController extends DefaultController
 /*        $anuncio = Anuncio::where('status_id', 1)->orderBy('id', 'DESC')->paginate(30);*/
 
         return view("$this->view.index", compact('data', 'usuario', 'categoria', 'anuncio'));
+    }
+
+    public function edit($id)
+    {
+        $data = $this->model->find($id);
+        if($data == null){
+            return "Erro";
+        }
+        return view("$this->view.cad", compact('data'));
     }
 
     public function Pesquisar()
@@ -76,6 +87,9 @@ class AnuncioController extends DefaultController
 
     public function novo()
     {
+        if(Auth()->user()->status_id == 0){
+            return redirect("user/".Auth()->user()->profile."#alerta");
+        }
         return view("$this->view.cad");
 
         /* $inserir = $this->model->create([
