@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Anuncio;
+use App\Models\DescricaoAnuncio;
 use App\Models\AnuncioFoto;
 use App\Models\UserTipo;
 use App\User;
@@ -13,15 +14,16 @@ use Illuminate\Support\Facades\Storage;
 
 class AnuncioController extends DefaultController
 {
-    protected $model, $midia, $user, $request;
+    protected $model, $midia, $user, $descricao, $request;
     protected $view = 'anuncio';
 
-    function __construct(Anuncio $model, AnuncioFoto $midia, User $user, Request $request)
+    function __construct(Anuncio $model, AnuncioFoto $midia, DescricaoAnuncio $descricao, User $user, Request $request)
 
     {
         $this->model = $model;
         $this->midia = $midia;
         $this->user = $user;
+        $this->descricao = $descricao;
         $this->request = $request;
     }
 
@@ -64,8 +66,11 @@ class AnuncioController extends DefaultController
             return redirect('/');
         }*/
         $t = Input::get('texto');
-        $busca = Anuncio::where('status_id', 1)->where('titulo', 'LIKE', '%' . $t . '%')
-            ->orWhere('descricao', 'LIKE', '%' . $t . '%')->orderBy('id', 'desc')->paginate(10);
+        $busca = Anuncio::where('status_id', 1)
+           ->orWhere('titulo', 'LIKE', '%' . $t . '%')/*
+           ->orWhere('descricao', 'LIKE', '%' . $t . '%')*/
+           ->orderBy('id', 'desc')->paginate(10);
+
         return view("$this->view.search")->with('result', $busca);
 
     }
@@ -116,11 +121,12 @@ class AnuncioController extends DefaultController
     */
     public function store()
     {
-
-
-        $store = $this->model->create($this->request->all());
+        $store = $this->model->create($this->request->all());/*
+        $descricao = $this->descricao->create($this->request->all());
+        $six['anuncio_id'] = $descricao->id;
+        DescricaoAnuncio::create($descricao);
+        dd($descricao);*/
         foreach (request()->get('base64') as $midia) {
-
             $data = [];
             $data['base64'] = $midia;
             $midia = utf8_decode($midia);

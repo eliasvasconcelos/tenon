@@ -55,7 +55,7 @@
             @guest
                 Olá! <a href="{{ route('login') }}">Entre</a> ou <a href="{{ route('register') }}">cadastre-se</a>
             @else
-               Olá,  <b>{{ Auth::user()->name }}</b>
+               Olá,  <b>{{ Auth::user()->name }} {{Auth::user()->id - Auth::user()->profile}}</b>
             @endguest
         </span>
         <!-- MENU MOBILE -->

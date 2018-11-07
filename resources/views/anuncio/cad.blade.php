@@ -76,7 +76,7 @@
                                             </div>
                                         --}}
                                         <h3>Preço</h3>
-                                        <input name="preco" style="width: 100%;" type="text" id="valor" class="form-control" onblur="pesquisacep(this.value);">
+                                        <input name="valor" style="width: 100%;" type="text" id="valor" class="form-control" onblur="pesquisacep(this.value);">
 
                                     </section>
                                     <section style="float:right;width: 50%;padding:50px;margin-top:20px;background-color: #f7f7f7;">

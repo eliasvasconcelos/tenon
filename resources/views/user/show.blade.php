@@ -1,5 +1,6 @@
 @extends('layouts.app')
-
+<script src="https://www.cssscript.com/demo/beautiful-native-javascript-alert-replacement-sweet-alert/lib/sweet-alert.js"></script>
+<link rel="stylesheet" type="text/css" href="https://www.cssscript.com/demo/beautiful-native-javascript-alert-replacement-sweet-alert/lib/sweet-alert.css">
 @section('content')
     <main class="conteudo">
     @auth
@@ -268,6 +269,7 @@
                         </aside>
                         <hr class="style12">
                     @empty
+
                            <div class="text-center" style="position:relative;float:right;padding: 10px;width:100%;background-color: #f4f4f4;"> Não há registro!</div>
                     @endforelse
                     {{--
@@ -323,10 +325,9 @@
                         </aside>
                         <hr class="style12">
                     @empty
-                        <div class="text-center" style="position:relative;float:right;padding: 10px;width:100%;background-color: #f4f4f4;"> Não há registro!</div>
                     @endforelse
 
-                    @forelse(\App\Models\Anuncio::all()->where('user_id', auth()->user()->id)->where('status_id', 1) as $z)
+                    @forelse(\App\Models\Anuncio::all()->where('user_id', auth()->user()->id)->where('status_id', 1)->where('status_pagamento', 0) as $z)
                         <aside class="anuncios">
                             <div style="position:relative;float:left;width:100%;padding-right: 2px;">
                                 {{-- <div style="margin-right:20px;height:100%;;width:auto;max-width:200px;padding: 2px;border: 1px dotted #ccc">
@@ -355,7 +356,10 @@
                         </aside>
                         <hr class="style12">
                     @empty
-                        <div class="text-center" style="position:relative;float:right;padding: 10px;width:100%;background-color: #f4f4f4;"> Não há registro!</div>
+                        @if(\App\Models\Anuncio::all()->where('user_id', auth()->user()->id)->where('status_id', 1)->count() == 0)
+                            <div class="text-center" style="position:relative;float:right;padding: 10px;width:100%;background-color: #f4f4f4;"> Não há registro!</div>
+                            @else
+                        @endif
                     @endforelse
                     {{--
                         @if($anuncio)
@@ -594,7 +598,7 @@
     }
 
 $(".delete").click(function() {
-    alert("ALERTA SEU USUARIO.");
+    swal("Good job!", "You clicked the button!", "success")
 });
 </script>
 @endsection

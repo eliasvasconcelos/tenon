@@ -2,6 +2,16 @@
 
 @section('content')
     <main class="conteudo">
+
+        <div class="nome_cat">
+            <img src="../img/arrow.png" alt="" class="left top_5" width="40px">
+            Membro desde
+        </div>
+        <div class="thumb">
+            <i class="fa fa-home fa-1x"></i><a href="#"> Home</a> <i class="fa fa-angle-right fa-1x"></i>
+            <a href="#">Categoria</a> <i class="fa fa-angle-right fa-1x"></i> <b>Nome
+                <span class="right" style="margin:5px 10px "> {{date( 'd/m/Y' , strtotime($data->user->created_at))}}</span>
+        </div>
         @if($data->user->tipo_id == 4)
         <section id="leiloes">
             <div class="user_anuncio fade" style="width:160px">

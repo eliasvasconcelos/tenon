@@ -155,7 +155,7 @@
                          {{$z->titulo}}
                      </p>
                      <div class="foto fade" style="width:250px;height: 160px;">
-                         <a href="{{url('anuncio')}}/{{$z->titulo}}">
+                         <a href="{{url('anuncio')}}/{{$z->id}}">
                              <span class="hidden" style="display: none">{{$aa = 0}}</span>
                              @forelse($z->album as $x)
                                 @if($x->base64 == null)

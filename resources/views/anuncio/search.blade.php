@@ -113,8 +113,21 @@
                 @forelse($result as $z => $value)
                     <aside class="anuncios">
                         <div class="foto_anuncio">
-                           <a href="{{url('anuncio')}}/{{$value->id}}"> <img src="{{$value->fotos->base64 or '../img/image.jpeg'}}" width="200" height="146" alt="">
-                           </a>
+{{--
+                           <a href="{{url('anuncio')}}/{{$value->id}}"> <img src="{{url('app/media/anuncio')}}/{{$value->fotos->base64 or '../img/image.jpeg'}}" width="200" height="146" alt="">
+                            </a>--}}
+                            @forelse($value->album as $x)
+                                @if($x->base64 == null)
+                                @else
+                                    <span class="hidden" style="display: none">{{$aa = 1}}</span>
+                                    <img src="{{url('app/media/anuncio')}}/{{$x->base64 or 'image.jpeg'}}" alt="Imagem">
+                                    @break
+                                @endif
+                            @empty
+                            @endforelse
+                            @if($aa == 0)
+                                <img src="{{url('app/media/anuncio')}}/{{'image.jpeg'}}" alt="Imagem">
+                            @endif
                         </div>
                         <section class="desc_anuncio">
                             <h3 style="font-weight: 600;">{{$value->titulo}}</h3>

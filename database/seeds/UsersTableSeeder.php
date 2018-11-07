@@ -12,7 +12,7 @@ class UsersTableSeeder extends Seeder
      */
     public function run()
     {
-        DB::table('users')->insert([
+        /*DB::table('users')->insert([
             [
                 'name' => 'Elias',
                 'sobrenome' => 'Vasconcelos',
@@ -20,6 +20,8 @@ class UsersTableSeeder extends Seeder
                 'password' => bcrypt('123'),
                 'remember_token' => str_random(10),
                 'tipo_id' => 1,
+                'status_id'=>  1,
+                'avatar' => 'default.jpg',
                 'created_at' => date('Y-m-d H:i:s'),
                 'updated_at' => date('Y-m-d H:i:s'),
             ],[
@@ -29,9 +31,11 @@ class UsersTableSeeder extends Seeder
                 'password' => bcrypt('123'),
                 'remember_token' => str_random(10),
                 'tipo_id' => 2,
+                'status_id'=>  1,
+                'avatar' => 'default.jpg',
                 'created_at' => date('Y-m-d H:i:s'),
                 'updated_at' => date('Y-m-d H:i:s'),
             ],
-        ]);
+        ]);*/
     }
 }
