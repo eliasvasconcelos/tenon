@@ -24,10 +24,12 @@
                 <ul>
                     <li><h3> Proteção</h3></li>
                     <li> <a href="?pg=regras">Regras</a></li>
+                    <li> <a href="?pg=regras">Regras</a></li>
                 </ul>
 
                 <ul>
                     <li><h3> Divulgue</h3></li>
+                    <li> <a href="#">Segurança</a></li>
                     <li> <a href="#">Segurança</a></li>
                 </ul>
 
