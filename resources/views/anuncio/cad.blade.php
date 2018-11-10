@@ -92,8 +92,8 @@
                                         <select name="tipo" class="form-control" style="padding: 6px;">
                                             <option value="">Selecione</option>
                                             <option value="Cabeça">Cabeça</option>
-                                            <option value="2">Arroba</option>
-                                            <option value="3">Animal</option>
+                                            <option value="Arroba">Arroba</option>
+                                            <option value="Animal">Animal</option>
                                         </select>
                                     </section>
                                 </section>

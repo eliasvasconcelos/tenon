@@ -21,6 +21,7 @@ class CreateDescricaoAnuncioTable extends Migration
             $table->string('tipo')->nullable();
             $table->timestamps();
             $table->softDeletes();
+
         });
 
         Schema::table('descricao_anuncios', function($table) {

@@ -165,6 +165,9 @@ h1 {
 .topo{
     height:370px;
 }
+.topo_search{
+    height:170px;
+}
 .logo{
 	float: none;
 }.menu{
@@ -252,6 +255,9 @@ h1 {
 .topo{
     height:400px;
 }
+.topo_search{
+    height:200px;
+}
 .saudacao{
     width: 40%;
 }
@@ -297,6 +303,11 @@ h1 {
     margin-top: -1px;
     padding:  2% 5%;
     height : 468px;
+}
+.topo_search{
+    margin-top: -1px;
+    padding:  2% 5%;
+    height : 230px;
 }
 .menu{
 margin-top: -47px;
@@ -350,6 +361,11 @@ margin-top: -47px;
 @media screen and (min-width: 1280px){
 	
 .topo{
+    width: 1280px;
+    margin-top: -1px;
+    float: none;padding:  2% 5%;
+}
+.topo_search{
     width: 1280px;
     margin-top: -1px;
     float: none;padding:  2% 5%;

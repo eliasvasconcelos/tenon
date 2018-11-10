@@ -14,6 +14,7 @@ b{font-weight: bold;}
 /* BG e Topo */
 .container{width: 100%;background: url(../img/bg_header.jpg) no-repeat center ;}
 .topo{width:100%; padding:2% 3%; height:220px;}
+.topo_search{width:100%; padding:2% 3%; height:120px;}
 .logo{width: 30px; height: 31px; float: left; background: url(../img/logo_mobile.png) center center/30px no-repeat;	font-size: 0;}
 .saudacao{display:none;	float: right; border-bottom: 1px solid #fff; padding-bottom: 5px;}
 .saudacao a:visited{color: #fff;}

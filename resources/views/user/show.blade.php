@@ -213,7 +213,6 @@
             </section>--}}
 
             @if(auth()->user()->tipo_id == '1')
-
             @elseif(auth()->user()->tipo_id  == '2')
             <section id="destaque">
                 <div class="perfil_user_cat left cor_black">
@@ -221,9 +220,9 @@
                     <p style="margin:20px">
                     <h5 style="background-color: #96caff;padding: 10px 0px 10px 0px ;margin:3px 0px 3px 0px;border-radius:3px;"><span style="background-color: #f5f5f5;border:1px dotted #e5e5e5;padding: 15px;margin:1px 5px;border-radius:3px"><b>{{\App\Models\Anuncio::withTrashed()->where('user_id', auth()->user()->id)->count() + \App\Models\Anuncio::where('user_id', auth()->user()->id)->where('status_id', 0)->where('status_id', 1)->where('status_id', 2)->where('status_id', 3)->count()}}</b></span>Total</h5>
                     </p>
-                    @if(auth()->user()->tipo_id == $data->id)
+                    @if(auth()->user())
                         <p style="margin:20px">
-                        <h5 style="background-color: #c596ff;padding: 10px 0px 10px 0px ;margin:3px 0px 3px 0px;border-radius:3px;"><span style="background-color: #f5f5f5;border:1px dotted #e5e5e5;padding: 15px;margin:1px 5px;border-radius:3px"><b>{{\App\Models\Anuncio::where('user_id', auth()->user()->id)->where('status_pagamento', 1)->count()}}</b> </span> Premium</h5>
+                        <h5 style="background-color: #c596ff;padding: 10px 0px 10px 0px ;margin:3px 0px 3px 0px;border-radius:3px;"><span style="background-color: #f5f5f5;border:1px dotted #e5e5e5;padding: 15px;margin:1px 5px;border-radius:3px"><b>{{\App\Models\Anuncio::where('user_id', auth()->user()->id)->where('premium', 1)->count()}}</b> </span> Premium</h5>
                         </p>
                         <p style="margin:20px">
                         <h5 style="background-color: #f49c9c;padding: 10px 0px 10px 0px ;margin:3px 0px 3px 0px;border-radius:3px;"><span style="background-color: #f5f5f5;border:1px dotted #e5e5e5;padding: 15px;margin:1px 5px;border-radius:3px"><b>{{\App\Models\Anuncio::where('user_id', auth()->user()->id)->where('status_id', 0)->count()}}</b> </span> Desativado</h5>
@@ -241,7 +240,7 @@
                 </div>
                 <div class="perfil_user_anuncio right cor_black" id="pendente" style="width: 80%;padding:20px">
                     <div class="sub_anuncio"><i class="fa fa-clock-o" style="font-size:18px"></i> Anúncios Pendentes
-                    <p style="font-size:1em;margin-top:-7px;margin-right:-20px;border-top-left-radius:10px;border-bottom-left-radius:10px;padding:7px;float: right;background-color: #f5f5f5">Total <b>{{\App\Models\Anuncio::all()->where('user_id', auth()->user()->id)->where('status_id', 0)->count()}}</b></p>
+                    <p style="font-size:1em;margin-top:-7px;margin-right:-20px;padding:7px;float: right;background-color: #d9d9d9">Total <b>{{\App\Models\Anuncio::all()->where('user_id', auth()->user()->id)->where('status_id', 0)->count()}}</b></p>
                     </div>
                     @forelse(\App\Models\Anuncio::all()->where('user_id', auth()->user()->id)->where('status_id', 0) as $z)
                         <aside class="anuncios">
@@ -285,7 +284,7 @@
 
                 <div class="perfil_user_anuncio right cor_black" style="width: 80%;padding:20px">
                     <div class="sub_anuncio"><i class="fa fa-check" style="font-size:18px"></i> Anúncios Ativos
-                    <p style="font-size:1em;margin-top:-7px;margin-right:-20px;border-top-left-radius:10px;border-bottom-left-radius:10px;padding:7px;float: right;background-color: #f5f5f5">Total <b>{{\App\Models\Anuncio::all()->where('user_id', auth()->user()->id)->where('status_id', 1)->count()}}</b></p>
+                    <p style="font-size:1em;margin-top:-7px;margin-right:-20px;padding:7px;float: right;background-color: #d9d9d9">Total <b>{{\App\Models\Anuncio::all()->where('user_id', auth()->user()->id)->where('status_id', 1)->count()}}</b></p>
                     </div>
                 @forelse(\App\Models\Anuncio::all()->where('user_id', auth()->user()->id)->where('status_id', 1)->where('status_pagamento', 1) as $z)
                         <aside class="anuncios">
@@ -310,7 +309,7 @@
                                     </a>
                                 </div>
                                 <h3 style="font-weight: 600;margin-top:5px;">{{$z->titulo}}</h3>
-                                <p style="height: 102px;">// {{str_limit($z->descricao, 200)}}</p>
+                                <p style="height: 102px;">// {{str_limit($z->descricao->descricao, 200)}}</p>
                                 {{--{{$z->user_id}} - {{auth()->user()->id}}--}}
 
 
@@ -341,11 +340,11 @@
                                     </a>
                                 </div>
                                 <h3 style="font-weight: 600;margin-top:5px;">{{$z->titulo}}</h3>
-                                <p style="height: 102px;">// {{str_limit($z->descricao, 200)}}</p>
+                                <p style="height: 102px;">// {{str_limit($z->descricao->descricao, 200)}}</p>
                                 {{--{{$z->user_id}} - {{auth()->user()->id}}--}}
 
 
-                                <a class="cor_black" style="font-size:12px;padding: 5px 10px;background-color: #2ab27b;border-radius:3px" href="{{url ('anuncio')}}/{{$z->id}}/edit">Editar</a> |
+                                <a class="cor_black" style="font-size:12px;padding: 5px 10px;background-color: #2ab27b;border-radius:3px" href="{{url ('anuncio')}}/{{$z->id}}/editar">Editar</a> |
 
                                 <a class="cor_black delete" style="font-size:12px;padding: 5px 10px;background-color: #f86c6b;border-radius:3px" href="{{url ('anuncio')}}/{{$z->id}}/delete">Deletar</a>
                                 <div class="right">

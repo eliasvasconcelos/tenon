@@ -1,7 +1,6 @@
-@extends('layouts.app')
-
+@extends('layouts.header')
+@extends('layouts.search')
 @section('content')
-
     <main class="conteudo">
         <div class="nome_cat">
             <img src="img/arrow.png" alt="" class="left top_5" width="40px">
@@ -110,7 +109,7 @@
                     Anuncio ADS
                     <p>728 x 90</p>
                 </aside>
-                @forelse($result as $z => $value)
+                @forelse($data as $z => $value)
                     <aside class="anuncios">
                         <div class="foto_anuncio">
 {{--
@@ -154,13 +153,13 @@
                     <p>728 x 90</p>
                 </aside>
                 <div class="carregar">
-                    @if($result)
+                   {{-- @if($result)
                         @if($result->links())
                             {!! $result->links() !!}
                         @else
 
                         @endif
-                    @endif
+                    @endif--}}
                 </div>
             </section>
         </section>

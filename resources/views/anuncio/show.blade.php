@@ -9,7 +9,7 @@
         </div>
         <div class="thumb">
             <i class="fa fa-home fa-1x"></i><a href="#"> Home</a> <i class="fa fa-angle-right fa-1x"></i>
-            <a href="#">Categoria</a> <i class="fa fa-angle-right fa-1x"></i> <b>Nome
+            <a href="#">{{$data->categoria->nome or ''}}</a> <i class="fa fa-angle-right fa-1x"></i> <b>Nome
                 <span class="right" style="margin:5px 10px "> {{date( 'd/m/Y' , strtotime($data->user->created_at))}}</span>
         </div>
         @if($data->user->tipo_id == 4)
@@ -82,7 +82,7 @@
                 <section id="default">
 
 
-                    <p>// Descrição : <b>{{$data->descricao}}</b></p>
+                    <p>// Descrição : <b>{{$data->descricao->descricao or ''}}</b></p>
                 </section>
 
             </div>
@@ -109,9 +109,9 @@
                 <br/>
                 <br/>
                 <p>
-                    Valor
+                    Preço
                 </p>
-                <h1>{{$data->preco}}</h1>
+                <h1>{{$data->descricao->valor or ''}}</h1>
             {{--<p>//<b>
                 @if($data->user->tipo_id == "2" || $data->user->tipo_id == "4")
                     Sou Pessoa Jurídica
@@ -157,10 +157,10 @@
                 <br/>
                 <br/>
                 <p>
-                    Valor
+                    Preço
                 </p>
                 <h1 style="">
-                    {{$data->preco}}
+                    <h1>{{$data->descricao->valor or ''}}</h1>
                 </h1>
                 <br/>
             @if(Auth::user())
@@ -290,10 +290,11 @@
                          </a>
                     </div>
                     <p class="preco">
-                        {{$data->preco}}
+                        {{$data->descricao->valor or ''}}
                         <span class="cor_black" style="font-size:13px;"> /animal  </span>
                     </p>
                     <p class="desc_artigo">
+                        {{$data->descricao->descricao or ''}}
                     </p>
                     <div class="data">
                         <date><i class="fa fa-calendar"></i> {{$value->created_at->format('d/m/Y')}}</date>

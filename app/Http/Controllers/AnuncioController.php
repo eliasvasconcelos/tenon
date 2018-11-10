@@ -3,8 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\Anuncio;
-use App\Models\DescricaoAnuncio;
 use App\Models\AnuncioFoto;
+use App\Models\DescricaoAnuncio;
 use App\Models\UserTipo;
 use App\User;
 use App\Models\Categoria;
@@ -14,7 +14,7 @@ use Illuminate\Support\Facades\Storage;
 
 class AnuncioController extends DefaultController
 {
-    protected $model, $midia, $user, $descricao, $request;
+    protected $model, $midia, $user, $descricao , $request;
     protected $view = 'anuncio';
 
     function __construct(Anuncio $model, AnuncioFoto $midia, DescricaoAnuncio $descricao, User $user, Request $request)
@@ -65,13 +65,59 @@ class AnuncioController extends DefaultController
         /*if (Input::has('texto') == false) {
             return redirect('/');
         }*/
+        ini_set('memory_limit', '-1');
+        set_time_limit(0);
+        if (!$this->request->all()) {
+            $getArray = [];
+            $data = [];
+        } else {
+            $getArray = $this->request->all();
+            $data_inicial = '';
+            $data_final = '';
+            $status_id = '';
+            $motivo_id = '';
+            $canal_id = '';
+            $operador_id = '';
+            $tempo = '';
+            foreach ($this->request->all() as $nome_campo => $valor) {
+                $comando = "\$" . $nome_campo . "='" . $valor . "';";
+                eval($comando);
+            }
+            $busca = Anuncio::select('anuncios.*')->where('status_id', 1);
+            if ($status_id != '') {
+                $busca->where('status_id', $status_id);
+            }
+            if ($motivo_id != '') {
+                $busca->where('motivo_id', $motivo_id);
+            }
+            if ($canal_id != '') {
+                $busca->where('canal_id', $canal_id);
+            }
+            if ($tempo != '') {
+                $busca->where('tm', $tempo);
+            }
+            if ($operador_id != '') {
+                $busca->where('operador_id', $operador_id);
+            }
+            if ($data_inicial != '') {
+                $busca->where('canal_protocolos.created_at', '>=', "$data_inicial 00:00:00");
+            }
+            if ($data_final != '') {
+                $busca->where('canal_protocolos.created_at', '<=', "$data_final 23:59:59");
+            }
+            $busca->orderBy('id', 'desc');
+            $data = $busca->get();
+        }
+        return view("$this->view.search", compact('data', 'getArray'));
+    /*
+
         $t = Input::get('texto');
         $busca = Anuncio::where('status_id', 1)
            ->orWhere('titulo', 'LIKE', '%' . $t . '%')/*
-           ->orWhere('descricao', 'LIKE', '%' . $t . '%')*/
+           ->orWhere('descricao', 'LIKE', '%' . $t . '%')
            ->orderBy('id', 'desc')->paginate(10);
 
-        return view("$this->view.search")->with('result', $busca);
+        return view("$this->view.search")->with('result', $busca);*/
 
     }
 
@@ -121,11 +167,7 @@ class AnuncioController extends DefaultController
     */
     public function store()
     {
-        $store = $this->model->create($this->request->all());/*
-        $descricao = $this->descricao->create($this->request->all());
-        $six['anuncio_id'] = $descricao->id;
-        DescricaoAnuncio::create($descricao);
-        dd($descricao);*/
+        $store = $this->model->create($this->request->all());
         foreach (request()->get('base64') as $midia) {
             $data = [];
             $data['base64'] = $midia;
@@ -150,9 +192,15 @@ class AnuncioController extends DefaultController
 
             $data['base64'] = $avatar;
             $data['anuncio_id'] = $store->id;
-            AnuncioFoto::create($data);
+            $this->midia->create($data);
         }
 
+        $create = [];
+        $create['anuncio_id'] =  $store->id;
+        $create['descricao'] = $this->request->get('descricao');
+        $create['valor'] = $this->request->get('valor');
+        $create['tipo'] = $this->request->get('tipo');
+        $data = $this->descricao->create($create);
         return 1;
 
         /*

@@ -12,4 +12,5 @@ class DescricaoAnuncio extends Model
     protected $dates = ['deleted_at'];
 
     protected $fillable = ['anuncio_id', 'descricao', 'valor', 'tipo'];
+
 }
