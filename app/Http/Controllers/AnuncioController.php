@@ -29,8 +29,8 @@ class AnuncioController extends DefaultController
 
     public function show($id)
     {
-       $data = $this->model->find($id);
-/*        $data = $this->model->where("titulo", $id)->first();*/
+     /*  $data = $this->model->find($id);*/
+        $data = $this->model->where("titulo", $id)->first();
 
             if($data->status_id != 1)
         {

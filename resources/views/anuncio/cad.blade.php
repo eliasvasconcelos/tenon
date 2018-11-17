@@ -1,4 +1,5 @@
 @extends('layouts.app')
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 @section('content')
     @if(Auth::user()->where('id', auth()->user()->id))
         @forelse(\App\Models\Endereco::where('id', auth()->user()->id)->where('rua', null)->get() as $z)
@@ -236,7 +237,7 @@
                                 </section>
                             <br>
                             <br>
-                            <div class="text-center" id="sucesso" style="float:left;width:100%;display:none;margin-bottom:10px;padding:20px;background-color: #63d3f8;border:1px solid #18aecb">
+                            <div class="text-center" id="sucesso" style="float:left;width:100%;display:none;margin-bottom:10px;padding:20px;background-color: #63d3f8;border:1px solid #olaecb">
                                 Seu Anúncio foi cadastrado com sucesso!!
                             </div>
                         </form>
@@ -268,29 +269,31 @@
                                 data: dataForm,
                                 cache: false,
                                 method: metodo,
-                            }).done(function (data) {
-                                if ($("#titulo").val() == "") {
-                                    $("#erro").css("display", "block");
-                                    return false;
-                                }else{
-                                    $("#erro").css("display", "block");
-                                }
-                                if ($("#descricao").val() == "") {
-                                    alert("Descrição Obrigatória");
-                                    return false;
-                                }
+                            }).done(function (data) {/*
+
+                                if($("#valor").val() == null) {
+                                    swal("Ops..", "Descricao Obrigatória", "alert");
+                                }*/
+
+                                swal("Pronto ;)!", "Anuncio criado com sucesso!!", "success");
+
+                                /*if(window.top==window) {
+                                    setTimeout(location.href = "{{url("")}}/user/{{Auth()->user()->profile}}/#pendente",150000);
+                                }*/
+                                var time = 3;
+
+                                setInterval(function(){
+                                    setTimeout(location.href = "{{url("")}}/user/{{Auth()->user()->profile}}/#pendente");
+                                }, 1000);
+                                @endif
                                 @if(isset($data))
                                 $("#editado").css("display", "block");
-                                @else
-                                $("#sucesso").css("display", "block");
-                                @endif
-
-                                if(window.top==window) {
-                                    setTimeout(location.href = "{{url("")}}/user/{{Auth()->user()->profile}}/#pendente",3000);
-                                }
-
+                                @else{{--
+                                $("#sucesso").css("display", "block");--}}
                             }).fail(function () {
-
+                                if($("#titulo").val()== "" || $("#descricao").val() == "" || $("#valor").val() == "" || $("#add").val() == ""){
+                                    swal("Ops..", "Campos em branco ou inválidos", "warning");
+                                }
                             });
                         }
 
@@ -326,6 +329,7 @@
                                     });
                                 }
                             }).fail(function () {
+
                             });
                         }
                     </script>
@@ -345,7 +349,6 @@
                     </script>
                     <script src="https://www.geradordecep.com.br/assets/js/jquery.maskedinput-1.1.4.pack.js"></script>
                     <script src="https://igorescobar.github.io/jQuery-Mask-Plugin/js/jquery.mask.min.js"></script>
-
                     <!-- Adicionando Javascript -->
                     <script type="text/javascript" >
 
@@ -468,15 +471,14 @@
                                                 console.log($('#imagem_base64').val());
                                                 console.log("ENTROU?");
                             */
-
+/*
                             console.log(this.files);
 
                             console.log($('#imagem_base64_1').val());
-                            console.log("ENTROU?");
+                            console.log("ENTROU?");*/
                             if (this.files && this.files[0]) {
 
                                 if (this.files[0].type == "image/png" || this.files[0].type == "image/jpeg" || this.files[0].type == "image/gif") {
-                                    $("#erro_imagem").css("display", "none");
                                     var FR = new FileReader();
 
                                     FR.addEventListener("load", function (e) {
@@ -488,7 +490,8 @@
                                 } else {
                                     document.getElementById("img_click_1").src = "{{asset('img/sem_imagem.png')}}";
                                     document.getElementById("base64_1").value = "";
-                                    $("#erro_imagem").css("display", "block");
+                                   /* $("#erro_imagem").css("display", "block");*/
+                                    swal("Ops!", "Tipo de arquivo não permitido", "error")
                                 }
                             }
                         });
@@ -503,7 +506,7 @@
                             if (this.files && this.files[0]) {
 
                                 if (this.files[0].type == "image/png" || this.files[0].type == "image/jpeg" || this.files[0].type == "image/gif") {
-                                    $("#erro_imagem").css("display", "none");
+                                    /*$("#erro_imagem").css("display", "none");*/
                                     var FR = new FileReader();
 
                                     FR.addEventListener("load", function (e) {
@@ -515,7 +518,7 @@
                                 } else {
                                     document.getElementById("img_click_2").src = "{{asset('img/sem_imagem.png')}}";
                                     document.getElementById("base64_2").value = "";
-                                    $("#erro_imagem").css("display", "block");
+                                   /* $("#erro_imagem").css("display", "block");*/
                                 }
                             }
                         });

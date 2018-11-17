@@ -597,7 +597,13 @@
     }
 
 $(".delete").click(function() {
-    swal("Good job!", "You clicked the button!", "success")
+    swal("Certo!", "Anuncio removido com sucesso!!", "success")
+    var time = 10;
+    setInterval(function(){
+        if(time >= 0){
+            document.getElementById('countdown').innerHTML = time--;
+        }
+    }, 10000);
 });
 </script>
 @endsection

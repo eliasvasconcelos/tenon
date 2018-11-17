@@ -54,7 +54,7 @@
             @guest
                 Olá! <a href="{{ route('login') }}">Entre</a> ou <a href="{{ route('register') }}">cadastre-se</a>
             @else
-               Olá,  <b>{{ Auth::user()->name }} {{Auth::user()->id - Auth::user()->profile}}</b>
+               Olá,  <b>{{ Auth::user()->name }} {{Auth::user()->sobrenome}}</b>
             @endguest
         </span>
         <!-- MENU MOBILE -->
@@ -81,7 +81,7 @@
                 <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
                     {{ csrf_field() }}
                 </form>
-                <a title="Acesse nossa plataforma" class="botao" href="{{url ('user')}}/{{Auth::user()->profile}}">
+                <a title="Acesse nossa plataforma" class="botao" href="{{url('user')}}/{{auth()->user()->profile}}/configuracao">
                     <i class="fa fa-user-circle-o  fa-lg"></i> Minha Conta </a>
                 @else
                     <a title="Acesse nossa plataforma" class="botao visivel" href="{{ url('/') }}"><i class="fa fa-home fa-lg chat"></i> &nbsp; Home </a><span class="visivel">|</span>

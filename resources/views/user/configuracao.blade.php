@@ -4,19 +4,19 @@
     <main class="conteudo">
     <div class="info_cfg">
         @if(auth()->user()->tipo_id == "2" || auth()->user()->tipo_id == "3")
-            <h1 style="font-size: 2em">Meus Anuncios</h1>
-            <ul class="menu_u" style="margin-top:-25px;">
+            <h1 style="font-size: 2em">Meu Perfil</h1>
+            {{--<ul class="menu_u" style="margin-top:-25px;">
                 <li class="text-right">
                     <a title="Configurações" class="botao cor_black" href="{{url('user')}}/{{auth()->user()->id}}/configuracao"><i class="fa fa-cog  fa-lg"></i> &nbsp; Configurações </a>
                 </li>
-            </ul>
+            </ul>--}}
         @endif
     </div>
 
         <section id="leiloes">
             <div class="perfil_user_cat left cor_black" style="width: 20%;padding:10px">
                 <h3>Total de Anuncios</h3>
-                <a href="{{url('user')}}/{{auth()->user()->id}}/configuracao">
+                <a href="{{url('user')}}/{{auth()->user()->profile}}/configuracao">
                     <p  style="margin:20px">
                         <h5 style="color: #000;background-color: #96caff;padding: 9px 0px 10px 0px ;margin:3px 0px 3px 0px;border-radius:3px;">
                     <span style="background-color: #f5f5f5;padding: 10px;margin:0px 5px;">
@@ -26,7 +26,7 @@
                     </span>Configurações</h5>
                     </p>
                 </a>
-                <a href="{{url('user')}}/{{auth()->user()->id}}/perfil">
+                {{--<a href="{{url('user')}}/{{auth()->user()->id}}/perfil">
                 <p style="margin:20px">
                     <h5 style="color: #000;background-color: #96caff;padding: 9px 0px 10px 0px ;margin:3px 0px 3px 0px;border-radius:3px;">
                     <span style="background-color: #f5f5f5;padding: 10px;margin:0px 5px;"><b>
@@ -41,7 +41,7 @@
                             <i class="fa fa-user" style="font-size:18px;color: #000"></i>
                         </b></span>Endereço</h5>
                 </p>
-                </a>
+                </a>--}}
             </div>
           {{--  {{\Request::getRequestUri()}} <br>
             {{\Request::fullUrl()}} <br>--}}
