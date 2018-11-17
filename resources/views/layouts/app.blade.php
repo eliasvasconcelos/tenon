@@ -112,7 +112,7 @@
                </span>
            </a>
            @else
-           <a href="{{url ('user')}}/{{Auth::user()->profile}}">
+           <a href="{{url ('user')}}/{{Auth::user()->profile}}/#anuncios">
                <span class="ofertas swing">
                    <i class="fa fa-user fa-lg"></i> Meus anúncios
                </span>
@@ -124,7 +124,7 @@
                </span>
            </a>
        @else
-           <a href="{{url ('user')}}/{{Auth::user()->profile}}">
+           <a href="{{url ('user')}}/{{Auth::user()->profile}}/#anuncios">
                <span class="ofertas swing">
                    <i class="fa fa-user fa-lg"></i> Meus anúncios
                </span>

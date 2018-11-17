@@ -57,7 +57,21 @@ class AnuncioController extends DefaultController
         if($data == null){
             return "Erro";
         }
-        return view("$this->view.cad", compact('data'));
+        return view("$this->view.edit", compact('data'));
+    }
+
+    public function update($id)
+    {
+
+        $update = $this->model->find($id);
+        $atu = $update->update($this->request->all());
+        $data = [];
+        $data['descricao'] = $this->request->get('descricao');
+        $data['valor'] = $this->request->get('valor');
+        $data['tipo'] = $this->request->get('tipo');
+        $this->descricao->update($atu);
+
+        return 1;
     }
 
     public function Pesquisar()
@@ -167,42 +181,35 @@ class AnuncioController extends DefaultController
     */
     public function store()
     {
-        $store = $this->model->create($this->request->all());
         foreach (request()->get('base64') as $midia) {
-            $data = [];
-            $data['base64'] = $midia;
-            $midia = utf8_decode($midia);
-            $base64_str = substr($midia, strpos($midia, ",") + 1);
-            $image = base64_decode($base64_str);
-            $teste = explode(",", $midia);
-            $teste1 = explode("/", $teste[0]);
-            $teste2 = explode(";", $teste1[1]);
-            $avatar = time(). rand(10, 99). "." . $teste2[0];
-            Storage::disk('anuncio')->put("$avatar", $image);
-            if ($teste2[0] == "jpg" || $teste2[0] == "png" || $teste2[0] == "jpeg") {
-                $return['tipo_id'] = 2;
-            } else if ($teste2[0] == "mp3") {
-                $return['tipo_id'] = 3;
-            } else if ($teste2[0] == "mp4") {
-                $return['tipo_id'] = 4;
-            } else {
-                $return['tipo_id'] = 8;
-            }
-            $return['base64'] = $avatar;
-
-            $data['base64'] = $avatar;
-            $data['anuncio_id'] = $store->id;
-            $this->midia->create($data);
+        $data = [];
+        $data['base64'] = $midia;
+        $midia = utf8_decode($midia);
+        $base64_str = substr($midia, strpos($midia, ",") + 1);
+        $image = base64_decode($base64_str);
+        $teste = explode(",", $midia);
+        $teste1 = explode("/", $teste[0]);
+        $teste2 = explode(";", $teste1[1]);
+        $avatar = time(). rand(10, 99). "." . $teste2[0];
+        Storage::disk('anuncio')->put("$avatar", $image);
+        if ($teste2[0] == "jpg" || $teste2[0] == "png" || $teste2[0] == "jpeg") {
+            $return['tipo_id'] = 2;
+        } else {
+            return 200;
         }
-            $create = [];
-            $create['anuncio_id'] =  $store->id;
-            $create['descricao'] = $this->request->get('descricao');
-            $create['valor'] = $this->request->get('valor');
-            $create['tipo'] = $this->request->get('tipo');
-            $data = $this->descricao->create($create);
-
-        return 1;
-
+        $store = $this->model->create($this->request->all());
+        $return['base64'] = $avatar;
+        $data['base64'] = $avatar;
+        $data['anuncio_id'] = $store->id;
+        $this->midia->create($data);
+        $create = [];
+        $create['anuncio_id'] =  $store->id;
+        $create['descricao'] = $this->request->get('descricao');
+        $create['valor'] = $this->request->get('valor');
+        $create['tipo'] = $this->request->get('tipo');
+        $this->descricao->create($create);
+    }
+        return 100;
         /*
 
         $store = $this->model->create($this->request->all());

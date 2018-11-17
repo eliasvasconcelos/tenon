@@ -17,7 +17,7 @@ Route::resource('/', 'HomeController');
 
 Route::group(['middleware' => ['auth']], function (){
     Route::get('anuncio/novo', 'AnuncioController@novo');
-    Route::get('anuncio/{id}/update', 'AnuncioController@anuncio_update');
+/*    Route::get('anuncio/{id}/update', 'AnuncioController@anuncio_update');*/
 
     Route::put('user/{id}', 'UserController@update');
     Route::put('user/anuncio', 'UserController@anuncio');

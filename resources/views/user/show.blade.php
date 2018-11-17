@@ -6,7 +6,7 @@
     @auth
         <div class="info_cfg">
             @if(auth()->user()->tipo_id == "2" || auth()->user()->tipo_id == "3")
-                <h1 style="font-size: 2em">Meus Anuncios</h1>
+                <h1 style="font-size: 2em"  id="anuncios">Meus Anuncios</h1>
                 <ul class="menu_u" style="margin-top:-25px;">
                     <li class="text-right">
                        {{-- <a title="Assinatura" class="botao cor_black" href="#"><i class="fa fa-star fa-lg"></i> &nbsp; Assinatura </a>|

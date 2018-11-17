@@ -1,7 +1,5 @@
 @extends('layouts.app')
-
 @section('content')
-
     <main class="conteudo">
         <div class="nome_cat">
             <img src="img/arrow.png" alt="" class="left top_5" width="40px">

@@ -242,6 +242,8 @@
                             </div>
                         </form>
                     <script src="{{asset('js/edit.js')}}"></script>
+                    <script src="https://www.geradordecep.com.br/assets/js/jquery.maskedinput-1.1.4.pack.js"></script>
+                    <script src="https://igorescobar.github.io/jQuery-Mask-Plugin/js/jquery.mask.min.js"></script>
                     <script>
                         function captura(id, ul) {
                             var metodo = 'GET';
@@ -285,11 +287,11 @@
                                 setInterval(function(){
                                     setTimeout(location.href = "{{url("")}}/user/{{Auth()->user()->profile}}/#pendente");
                                 }, 1000);
-                                @endif
                                 @if(isset($data))
                                 $("#editado").css("display", "block");
                                 @else{{--
                                 $("#sucesso").css("display", "block");--}}
+                                @endif
                             }).fail(function () {
                                 if($("#titulo").val()== "" || $("#descricao").val() == "" || $("#valor").val() == "" || $("#add").val() == ""){
                                     swal("Ops..", "Campos em branco ou inválidos", "warning");
@@ -332,8 +334,6 @@
 
                             });
                         }
-                    </script>
-                    <script type="text/javascript">
                         $(document).ready(function(){
                             $("#cep").mask("99.999-999");
                         });
@@ -345,12 +345,6 @@
                             v = v != ''?'R$ '+v:'';
                             $(this).val(v);
                         });
-
-                    </script>
-                    <script src="https://www.geradordecep.com.br/assets/js/jquery.maskedinput-1.1.4.pack.js"></script>
-                    <script src="https://igorescobar.github.io/jQuery-Mask-Plugin/js/jquery.mask.min.js"></script>
-                    <!-- Adicionando Javascript -->
-                    <script type="text/javascript" >
 
                         function limpa_formulário_cep() {
                             //Limpa valores do formulário de cep.
@@ -418,8 +412,6 @@
                             }
                         };
 
-                    </script>
-                    <script>
                         var conta = 0;
                         $("#add").click(function(){
                             conta++;
