@@ -249,7 +249,7 @@
                                         <img src="{{url('app/media/anuncio')}}/{{$z->fotos->base64 or 'image.jpeg'}}" alt="Imagem">
                                 </div>
                                 <h3 style="font-weight: 600;margin-top:5px;">{{$z->titulo}}</h3>
-                                    <p style="height: 102px;">// {{str_limit($z->descricao, 200)}}
+                                    <p style="height: 102px;">// {{str_limit($z->descricao->descricao, 200)}}
                                     </p>
                                         {{--{{$z->user_id}} - {{auth()->user()->id}}--}}
 

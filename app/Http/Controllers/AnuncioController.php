@@ -11,6 +11,7 @@ use App\Models\Categoria;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Input;
 use Illuminate\Support\Facades\Storage;
+use phpDocumentor\Reflection\Types\Null_;
 
 class AnuncioController extends DefaultController
 {
@@ -30,9 +31,8 @@ class AnuncioController extends DefaultController
     public function show($id)
     {
      /*  $data = $this->model->find($id);*/
-        $data = $this->model->where("titulo", $id)->first();
-
-            if($data->status_id != 1)
+         $data = $this->model->where("id", $id)->first();
+         if($data->status_id != 1)
         {
             return redirect("home");
         }
@@ -194,13 +194,13 @@ class AnuncioController extends DefaultController
             $data['anuncio_id'] = $store->id;
             $this->midia->create($data);
         }
+            $create = [];
+            $create['anuncio_id'] =  $store->id;
+            $create['descricao'] = $this->request->get('descricao');
+            $create['valor'] = $this->request->get('valor');
+            $create['tipo'] = $this->request->get('tipo');
+            $data = $this->descricao->create($create);
 
-        $create = [];
-        $create['anuncio_id'] =  $store->id;
-        $create['descricao'] = $this->request->get('descricao');
-        $create['valor'] = $this->request->get('valor');
-        $create['tipo'] = $this->request->get('tipo');
-        $data = $this->descricao->create($create);
         return 1;
 
         /*

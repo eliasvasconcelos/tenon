@@ -85,7 +85,7 @@
                     <i class="fa fa-user-circle-o  fa-lg"></i> Minha Conta </a>
                 @else
                     <a title="Acesse nossa plataforma" class="botao visivel" href="{{ url('/') }}"><i class="fa fa-home fa-lg chat"></i> &nbsp; Home </a><span class="visivel">|</span>
-                    <a title="Acesse nossa plataforma" class="botao" href="{{ route('login') }}"><i class="fa fa-user-circle-o  fa-lg user"></i> &nbsp; Minha Conta </a>
+                    <a title="Acesse nossa plataforma" class="botao" href="{{ route('login') }}/#acess_login"><i class="fa fa-user-circle-o  fa-lg user"></i> &nbsp; Minha Conta </a>
                 @endif
             </li>
         </ul>
