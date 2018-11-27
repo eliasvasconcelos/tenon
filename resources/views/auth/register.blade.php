@@ -1,77 +1,77 @@
-@extends('layouts.app')
-
+@extends('layouts.limpo')
 @section('content')
-    <main class="conteudo">
-        <section id="default2">
+    <div class="bg_login"></div>
+        <section id="destaque" style="position: absolute;
+top: 0; bottom: 1;
+left: 0; right: 0;width:50%;color:#000;">
             <form class="form-horizontal" method="POST" action="{{ route('register') }}">
+                <div class="text-center">
+                <h1 class="cadastro_login">Cadastre-se</h1>
+                    <a href="login" class="text-muted">Já tem conta? Entre aqui</a>
+                </div>
                 {{ csrf_field() }}
-                <h1 class="text-center">Cadastre-se</h1>
-                <p class="text-muted text-center">Simples e rápido ;)</p>
-            <section id="login_left">
-                <label for="name" class="form-texto">Nome</label>
-                <input type="hidden" name="profile">
-                <input type="text" name="name" pattern="[a-zA-Z\s]+$" class="form-control" placeholder="ex: João">
-                <br />
-                @if ($errors->has('name'))
-                    <span style="float:left;color: #FFFFFF;background-color: #f86c6b;padding:10px; width:100%; border-color: #c7254e 1px solid">
-                            <strong>{{ $errors->first('name') }}</strong>
-                    </span>
-                @endif
-{{--
-                <label for="name" class="form-texto">Sobre Nome</label>
-                <input type="text" name="sobrenome" pattern="[a-zA-Z\s]+$" class="form-control" placeholder="ex: Ferreira">
-                <br />
-                @if ($errors->has('name'))
-                    <span style="float:left;color: #FFFFFF;background-color: #f86c6b;padding:10px; width:100%; border-color: #c7254e 1px solid">
-                            <strong>{{ $errors->first('sobrenome') }}</strong>
-                    </span>
-                @endif--}}
-                <label for="name" class="form-texto">E-mail</label>
-
-                <input type="email" name="email" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$" class="form-control" placeholder="meunome@email.com">
-                @if ($errors->has('email'))
-                    <span style="float:left;color: #FFFFFF;background-color: #f86c6b;padding:10px; width:100%; border-color: #c7254e 1px solid">
-                            <strong>{{ $errors->first('email') }}</strong>
-                        </span>
-                @endif
-
-                <div class="form-group{{ $errors->has('password') ? ' has-error' : '' }}">
-                    <label for="password" class="col-md-4 control-label form-texto">Senha</label>
-
-                    <input id="password" type="password" class="form-control" name="password" required>
-
-                    @if ($errors->has('password'))
+                <section id="login">
+                    <label for="name" class="form-texto">Nome</label>
+                    <input type="hidden" name="profile">
+                    <input type="text" name="name" pattern="[a-zA-Z\s]+$" class="form-control" placeholder="ex: João">
+                    <br />
+                    @if ($errors->has('name'))
                         <span style="float:left;color: #FFFFFF;background-color: #f86c6b;padding:10px; width:100%; border-color: #c7254e 1px solid">
-                            <strong>{{ $errors->first('password') }}</strong>
+                                <strong>{{ $errors->first('name') }}</strong>
                         </span>
                     @endif
-                </div>
+    {{--
+                    <label for="name" class="form-texto">Sobre Nome</label>
+                    <input type="text" name="sobrenome" pattern="[a-zA-Z\s]+$" class="form-control" placeholder="ex: Ferreira">
+                    <br />
+                    @if ($errors->has('name'))
+                        <span style="float:left;color: #FFFFFF;background-color: #f86c6b;padding:10px; width:100%; border-color: #c7254e 1px solid">
+                                <strong>{{ $errors->first('sobrenome') }}</strong>
+                        </span>
+                    @endif--}}
+                    <label for="name" class="form-texto">E-mail</label>
 
-                <label for="password-confirm" class="col-md-4 control-label form-texto">Confirmar Senha</label>
+                    <input type="email" name="email" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$" class="form-control" placeholder="meunome@email.com">
+                    @if ($errors->has('email'))
+                        <span style="float:left;color: #FFFFFF;background-color: #f86c6b;padding:10px; width:100%; border-color: #c7254e 1px solid">
+                                <strong>{{ $errors->first('email') }}</strong>
+                            </span>
+                    @endif
 
-                <input id="password-confirm" type="password" class="form-control" name="password_confirmation" required>
+                    <div class="form-group{{ $errors->has('password') ? ' has-error' : '' }}">
+                        <label for="password" class="col-md-4 control-label form-texto">Senha</label>
 
-                {{-- <div class="form-group{{ $errors->has('name') ? ' has-error' : '' }}">
-                     <label for="name" class="col-md-4 control-label">Name</label>
+                        <input id="password" type="password" class="form-control" name="password" required>
 
-                     <div class="col-md-6">
-                         <input id="name" type="text" class="form-control" name="name" value="{{ old('name') }}" required autofocus>
+                        @if ($errors->has('password'))
+                            <span style="float:left;color: #FFFFFF;background-color: #f86c6b;padding:10px; width:100%; border-color: #c7254e 1px solid">
+                                <strong>{{ $errors->first('password') }}</strong>
+                            </span>
+                        @endif
+                    </div>
 
+                    <label for="password-confirm" class="col-md-4 control-label form-texto">Confirmar Senha</label>
+
+                    <input id="password-confirm" type="password" class="form-control" name="password_confirmation" required>
+
+                    {{-- <div class="form-group{{ $errors->has('name') ? ' has-error' : '' }}">
+                         <label for="name" class="col-md-4 control-label">Name</label>
+
+                         <div class="col-md-6">
+                             <input id="name" type="text" class="form-control" name="name" value="{{ old('name') }}" required autofocus>
+
+                         </div>
                      </div>
-                 </div>
 
-                 <div class="form-group{{ $errors->has('email') ? ' has-error' : '' }}">
-                     <label for="email" class="col-md-4 control-label">E-Mail Address</label>
+                     <div class="form-group{{ $errors->has('email') ? ' has-error' : '' }}">
+                         <label for="email" class="col-md-4 control-label">E-Mail Address</label>
 
-                     <div class="col-md-6">
-                         <input id="email" type="email" class="form-control" name="email" value="{{ old('email') }}" required>
+                         <div class="col-md-6">
+                             <input id="email" type="email" class="form-control" name="email" value="{{ old('email') }}" required>
 
-                     </div>
-                 </div>--}}
+                         </div>
+                     </div>--}}
 
-            </section>
-
-            <section id="login_right">
 
                         {{--<div class="form-group{{ $errors->has('tipo_id') ? ' has-error' : '' }}">
                             <label for="tipo_user" class="col-md-4 control-label form-texto">Tipo de Conta</label>
@@ -113,25 +113,23 @@
                             <strong>{{ $errors->first('cnpj') }}</strong>
                         </span>
                             @endif
-                        </div>
-
-                        <div class="form-group{{ $errors->has('razao') ? ' has-error' : '' }}" id="razao">
-                            <label for="razao" class="col-md-4 control-label form-texto">Razão Social</label>
-
-                            <input id="razao" type="text" class="form-control" name="razao" value="{{ old('razao') }}">
-
-                            @if ($errors->has('razao'))
-                                <span style="float:left;color: #FFFFFF;background-color: #f86c6b;padding:10px; width:100%; border-color: #c7254e 1px solid">
-                                    <strong>{{ $errors->first('razao') }}</strong>
-                                </span>
-                            @endif
                         </div>--}}
 
+                        <div class="form-group{{ $errors->has('telefone') ? ' has-error' : '' }}" id="razao">
+                            <label for="razao" class="col-md-4 control-label form-texto">Telefone</label>
+
+                            <input id="razao" type="text" class="form-control" name="telefone" value="{{ old('telefone') }}">
+
+                            @if ($errors->has('telefone'))
+                                <span style="float:left;color: #FFFFFF;background-color: #f86c6b;padding:10px; width:100%; border-color: #c7254e 1px solid">
+                                    <strong>{{ $errors->first('telefone') }}</strong>
+                                </span>
+                            @endif
+                        </div>
                 <button type="submit" class="btn btn-secondary px-4">
                     Criar Conta
                 </button>
             </section>
             </form>
         </section>
-    </main>
 @endsection

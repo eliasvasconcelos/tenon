@@ -174,12 +174,19 @@ h3{font-size: 1.4em; font-weight: normal;}
 .valor_produto h1{font-size:1.6em;}
 .chat_anun{margin-left:10px; margin-top: 20px; float:left; color:#1769ff;}
 .offer_anun{margin-right:10px; margin-top: 27px; float:right; color:#000;}
-.login{padding: 20px; width:50%; background-color: #FFF; border-radius: 5px;}
 .forgot{width:50%;padding:50px;}
-#login_left{color: #000; width:50%; float: left; margin-top:40px; margin-bottom:60px;padding:20px;}
+#login{color: #000; width:90%; padding:5%; }
+.login_bg{
+    position: absolute;
+    top: 0; bottom: 0;
+    left: 0; right: 0;width:50%;color:#000;float: none;
+}
+/*
 #login_right{color: #000; width:50%; float: right; margin-top:40px; margin-bottom:60px;padding:20px;}
+*/
 #default{color: #000; width:100%; float: left; margin-top:40px; margin-bottom:20px; padding:30px; border:1px solid #ccc; background-color: #fff;}
 #default2{color: #000; width:100%; float: left; margin-top:10px; margin-bottom:20px; padding:30px; border:1px solid #ccc; background-color: #fff;}
+#default3{color: #000; width:50%;  margin-top:10px; margin-bottom:10px; padding:30px; border:1px solid #ccc; background-color: #fff;}
 .px-4 {padding-right: 1.5rem !important; padding-left: 1.5rem !important;}
 .btn-success{color: #fff; background-color: #4dbd74; border-color: #4dbd74;}
 .btn-success:hover{color: #fff; background-color: #3a9d5d; border-color: #4dbd74;cursor: pointer;}
@@ -191,6 +198,8 @@ button, select {text-transform: none;}
 button, input {overflow: visible;}
 #login p {margin-top: 0; margin-bottom: 1rem; display: block; -webkit-margin-before: 1em; -webkit-margin-after: 1em; -webkit-margin-start: 0px; -webkit-margin-end: 0px;
 }
+.cadastro_login{width: 100%;}
+.bg_login{width: 100%;padding:5%; background-color:#ccc;position:fixed}
 h2{font-size: 1.5em;font-weight: bold;}
 h4{font-size: 1.2em}
 .text-muted {color: #000 !important;}
@@ -282,12 +291,8 @@ li ,active{
 
 }
 
-
-
 .ribbon-wrapper-green
-
 {
-
     width: 85px;
 
     height: 88px;
@@ -299,10 +304,7 @@ li ,active{
     top: -3px;
 
     right: -3px;
-
 }
-
-
 
 .ribbon-green
 
@@ -356,8 +358,6 @@ li ,active{
 
 }
 
-
-
 .ribbon-green:before, .ribbon-green:after
 
 {
@@ -376,8 +376,6 @@ li ,active{
 
 }
 
-
-
 .ribbon-green:before
 
 {
@@ -385,8 +383,6 @@ li ,active{
     left: 0;
 
 }
-
-
 
 .ribbon-green:after
 

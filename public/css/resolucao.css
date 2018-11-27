@@ -302,7 +302,7 @@ h1 {
 .topo{
     margin-top: -1px;
     padding:  2% 5%;
-    height : 468px;
+    height : 268px;
 }
 .topo_search{
     margin-top: -1px;
@@ -379,15 +379,6 @@ margin-top: -47px;
     margin-top: -55px;
     font-size: 1em;
 }
-.intro{
-    width: 45%;
-    padding:10px;
-    margin: 130px auto;
-}
-.tagline{
-    margin-top: -130px;
-    font-size: 1.3em;
-}	
 .bg_busca{
     width: 1140px;
 	

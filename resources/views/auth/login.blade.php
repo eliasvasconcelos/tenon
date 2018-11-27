@@ -1,11 +1,12 @@
-@extends('layouts.app')
+@extends('layouts.limpo')
 @section('content')
-    <main class="conteudo" id="acess_login">
-        <section id="default2">
-            <section id="login">
+    <div class="bg_login"></div>
+    <section id="destaque" style="position: absolute;
+top: 0; bottom: 1;
+left: 0; right: 0;width:50%;color:#000;">
                 <form class="form-horizontal" method="POST" action="{{ route('login') }}">
                     {{ csrf_field() }}
-                    <div class="login">
+                    <section id="login">
                         <h1 class="text-center">Minha Conta</h1>
 
                         <p class="text-muted text-center">Faça login em sua conta</p><br />
@@ -34,11 +35,9 @@
                         <br />
                         <p class="text-center"><a href="{{ route('register') }}">Criar conta</a></p>
 
+                    </section>
 
-                    </div>
                 </form>
-            </section>
         </section>
-    </main>
 
 @endsection

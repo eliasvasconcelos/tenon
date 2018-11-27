@@ -93,34 +93,32 @@
         @endif
         <div class="bg_busca">
             <div class="busca">
-                <i class="fa fa-search fa-3x busca_icon"></i>
+
+                {{--
+                       <i class="fa fa-search fa-3x busca_icon"></i>
+                --}}
                 <form action="{{url('pesquisar')}}" method="get">
                     <input id="busca-cursor" placeholder="Digite aqui...." type="text" name="texto" value="{{request()->get('texto')}}" class="header_pesquisa">
-                    <select class="categorias" name="categoria">
-                        @if(isset($getArray['categoria']))
-                            <option value="{{$getArray['categoria']}}" selected>{{$getArray['categoria']}}</option>
-                        @else
-                            <option value="" selected>O que é?</option>
-                        @endif
+                    {{-- <select class="categorias" name="categoria">
+                        <option value="" selected>O que é?</option>
                         @forelse(\App\Models\Categoria::orderBy('id')->where('categoria_id',0)->get() as $z)
-                            <option value="{{$z->nome}}">{{$z->nome}}</option>
+                            <option value="{{$z->id}}">{{$z->nome}}</option>
                         @empty
                             <li class="cor_black">Sem Categoria</li>
                         @endforelse
                     </select>
                     <select name="estado" class="estados" id="id_estados">
-                        @if(isset($getArray['estado']))
-                        <option value="{{$getArray['estado']}}" selected>{{$getArray['estado']}}</option>
-                        @else
-                            <option value="" selected>Qual local?</option>
-                        @endif
+                        <option value="" selected>Qual local?
+                        </option>
                         @forelse(\App\Models\Uf::orderBy('id')->get() as $z)
-                            <option value="{{$z->uf}}">{{$z->uf}}</option>
+                             <option value="{{$z->sigla}}">{{$z->uf}}</option>
                         @empty
                             <li class="cor_black">Sem Categoria</li>
                         @endforelse
                     </select>
-                    <button class="btn_busca"><i class="fa fa-search fa-lg b_pes"></i> pesquisar</button>
+                     <button class="btn_busca"><i class="fa fa-search fa-lg b_pes"></i> pesquisar</button>--}}
+
+                    <button style="background: none;float: right"><i class=" fa fa-search fa-3x busca_icon"></i></button>
                 </form>
             </div>
         </div>

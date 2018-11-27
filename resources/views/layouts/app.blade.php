@@ -17,7 +17,9 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
     <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i,800,800i" rel="stylesheet">
     <script src="https://code.jquery.com/jquery-3.2.1.js"></script>
+{{--
     <script src="{{ asset('js/valida.js') }}"></script>
+--}}
     <script src="{{ asset('js/app.js') }}"></script>
     <script>
 
@@ -52,7 +54,7 @@
         </a>
         <span class="saudacao">
             @guest
-                Olá! <a href="{{ route('login') }}">Entre</a> ou <a href="{{ route('register') }}">cadastre-se</a>
+                Olá! <a href="{{ route('login') }}/#acess_login">Entre</a> ou <a href="{{ route('register') }}">cadastre-se</a>
             @else
                Olá,  <b>{{ Auth::user()->name }} {{Auth::user()->sobrenome}}</b>
             @endguest
@@ -90,10 +92,6 @@
             </li>
         </ul>
 
-        <section class="intro swing">
-            <a href="#"><h1>Encontre tudo</h1></a>
-        </section>
-        <p class="tagline">do comércio agropecuário em um só local...</p>
     </header>
     <section class="header_op">
         <h1 class="fontzero"> Pesquisar produtos na plataforma Tenon </h1>
@@ -129,14 +127,14 @@
                    <i class="fa fa-user fa-lg"></i> Meus anúncios
                </span>
            </a>
-            <a href="{{url ('anuncio/novo')}}#anunciar">
+            <a href="{{url ('anuncio/novo')}}#acess_login">
                <span class="anunciar swing">
                    <i class="fa fa-bullhorn fa-lg"></i> Inserir anúncio
                </span>
             </a>
        @endif
     @else
-       <a href="{{url ('anuncio/novo')}}#anunciar">
+       <a href="{{url ('anuncio/novo')}}#acess_login">
        <span class="anunciar2 swing">
            <i class="fa fa-bullhorn fa-lg"></i> Inserir anúncio
        </span>
@@ -144,28 +142,32 @@
     @endif
 <div class="bg_busca">
    <div class="busca">
+{{--
        <i class="fa fa-search fa-3x busca_icon"></i>
-       <form action="{{url('pesquisar')}}" method="get">
+--}}
+      <form action="{{url('pesquisar')}}" method="get">
            <input id="busca-cursor" placeholder="Digite aqui...." type="text" name="texto" value="{{request()->get('texto')}}" class="header_pesquisa">
-           <select class="categorias" name="categoria">
-               <option value="" selected>O que é?</option>
-               @forelse(\App\Models\Categoria::orderBy('id')->where('categoria_id',0)->get() as $z)
-                   <option value="{{$z->id}}">{{$z->nome}}</option>
-               @empty
-                   <li class="cor_black">Sem Categoria</li>
-               @endforelse
-           </select>
-           <select name="estado" class="estados" id="id_estados">
-               <option value="" selected>Qual local?
-               </option>
-               @forelse(\App\Models\Uf::orderBy('id')->get() as $z)
-                    <option value="{{$z->sigla}}">{{$z->uf}}</option>
-               @empty
-                   <li class="cor_black">Sem Categoria</li>
-               @endforelse
-           </select>
-           <button class="btn_busca"><i class="fa fa-search fa-lg b_pes"></i> pesquisar</button>
-       </form>
+          {{-- <select class="categorias" name="categoria">
+              <option value="" selected>O que é?</option>
+              @forelse(\App\Models\Categoria::orderBy('id')->where('categoria_id',0)->get() as $z)
+                  <option value="{{$z->id}}">{{$z->nome}}</option>
+              @empty
+                  <li class="cor_black">Sem Categoria</li>
+              @endforelse
+          </select>
+          <select name="estado" class="estados" id="id_estados">
+              <option value="" selected>Qual local?
+              </option>
+              @forelse(\App\Models\Uf::orderBy('id')->get() as $z)
+                   <option value="{{$z->sigla}}">{{$z->uf}}</option>
+              @empty
+                  <li class="cor_black">Sem Categoria</li>
+              @endforelse
+          </select>
+           <button class="btn_busca"><i class="fa fa-search fa-lg b_pes"></i> pesquisar</button>--}}
+
+          <button style="background: none;float: right"><i class=" fa fa-search fa-3x busca_icon"></i></button>
+      </form>
    </div>
 </div>
 </section>

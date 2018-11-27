@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends('layouts.limpo')
 <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 @section('content')
     @if(Auth::user()->where('id', auth()->user()->id))
@@ -16,24 +16,24 @@
                </div>
             @endif--}}
         @empty
-            <div class="center info_cfg">
+            {{--<div class="center info_cfg">
                 <h1 style="font-size: 2em">Novo Anúncio</h1>
                 <ul class="menu_u" style="margin-top:-25px;">
                     <li class="text-right">
-                       {{-- <a title="Assinatura" class="botao cor_black" href="?pg=assinatura"><i class="fa fa-star fa-lg"></i> &nbsp; Assinatura </a>|
+                       --}}{{-- <a title="Assinatura" class="botao cor_black" href="?pg=assinatura"><i class="fa fa-star fa-lg"></i> &nbsp; Assinatura </a>|
 
                         <a title="Depoimento" class="botao cor_black" href="?pg=feedback"><i class="fa fa-list-alt  fa-lg"></i> &nbsp; Feedback </a>|
 
                         <a title="Leilão" class="botao cor_black" href="?pg=leilao"><i class="fa fa-legal  fa-lg"></i> &nbsp; Leilão </a>|
---}}
+--}}{{--
                         <a title="Configurações" class="botao cor_black" href="config"><i class="fa fa-cog  fa-lg"></i> &nbsp; Configurações </a>
 
                     </li>
-                </ul>{{--
+                </ul>--}}{{--
                 <div class="cor_black notify2" style="margin-top:10px;">
                     <b>{{Auth::user()->name}}</b> lembre-se, de sempre manter seus dados atualizados, para melhor contato!!
-                </div>--}}
-            </div>
+                </div>--}}{{--
+            </div>--}}
             <main class="conteudo" id="anunciar">
                 <section id="default2" style="padding:50px 100px;">
                     <h3 class="text-center">Qual Categoria?</h3>
