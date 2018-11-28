@@ -183,7 +183,7 @@
                         <span class="cor_black" style="font-size:13px;"> /{{$z->descricao->tipo or ''}}</span>
                      </p>
                      <p class="desc_artigo">
-                         {{str_limit($z->descricao->descricao, 30)}}
+                         {{str_limit($z->descricao, 30)}}
                      </p>
                      <div class="data">
                          <date><i class="fa fa-calendar"></i> {{$z->created_at->format('d/m/Y')}}</date>

@@ -1,61 +1,10 @@
-@extends('layouts.app')
+@extends('layouts.limpo')
 <script src="https://www.cssscript.com/demo/beautiful-native-javascript-alert-replacement-sweet-alert/lib/sweet-alert.js"></script>
 <link rel="stylesheet" type="text/css" href="https://www.cssscript.com/demo/beautiful-native-javascript-alert-replacement-sweet-alert/lib/sweet-alert.css">
 @section('content')
     <main class="conteudo">
     @auth
-        <div class="info_cfg">
-            @if(auth()->user()->tipo_id == "2" || auth()->user()->tipo_id == "3")
-                <h1 style="font-size: 2em"  id="anuncios">Meus Anuncios</h1>
-                <ul class="menu_u" style="margin-top:-25px;">
-                    <li class="text-right">
-                       {{-- <a title="Assinatura" class="botao cor_black" href="#"><i class="fa fa-star fa-lg"></i> &nbsp; Assinatura </a>|
 
-                        <a title="Depoimento" class="botao cor_black" href="#"><i class="fa fa-list-alt  fa-lg"></i> &nbsp; Feedback </a>|
-
-                        <a title="Leilão" class="botao cor_black" href="#"><i class="fa fa-legal  fa-lg"></i> &nbsp; Leilão </a>|
---}}
-                        <a title="Configurações" class="botao cor_black" href="{{url('user')}}/{{auth()->user()->id}}/configuracao"><i class="fa fa-cog  fa-lg"></i> &nbsp; Configurações </a>
-
-                    </li>
-                </ul>
-            @elseif(auth()->user()->tipo_id == "4")
-                <h1 style="font-size: 2em">Minha Loja</h1>
-                <ul class="menu_u" style="margin-top:-25px;">
-                    <li class="text-right">
-                        <a title="Assinatura" class="botao cor_black" href="#"><i class="fa fa-star fa-lg"></i> &nbsp; Assinatura </a>|
-
-                        <a title="Depoimento" class="botao cor_black" href="#"><i class="fa fa-list-alt  fa-lg"></i> &nbsp; Feedback </a>|
-
-                        <a title="Leilão" class="botao cor_black" href="#"><i class="fa fa-legal  fa-lg"></i> &nbsp; Leilão </a>|
-
-                        <a title="Configurações" class="botao cor_black" href="{{url('user')}}/{{auth()->user()->id}}/configuracao"><i class="fa fa-cog  fa-lg"></i> &nbsp; Configurações </a>
-
-                    </li>
-                </ul>
-            @elseif(auth()->user()->tipo_id == '1')
-                <{{--h1 style="font-size: 2em">Anuncios</h1>
-                    <ul class="menu_u" style="margin-top:-25px;">
-                        <li class="text-right">
-                            <a title="Assinatura" class="botao cor_black" href="{{url('user')}}"><i class="fa fa-group fa-lg"></i> &nbsp; Usuários </a> &nbsp;|
-                            <a title="Usuários" class="botao cor_black" href="{{url('user')}}/"><i class="fa fa-legal  fa-lg"></i> &nbsp; Leilão </a> &nbsp;|
-                            <a title="Anúncios" class="botao cor_black" href="{{url('user')}}/{{auth()->user()->id}}"><i class="fa fa-bullhorn  fa-lg"></i> &nbsp; Anúncios </a> &nbsp;|
-                            <a title="Configurações" class="botao cor_black" href="config"><i class="fa fa-cog  fa-lg"></i> Configurações </a>
-                        </li>
-                    </ul>--}}
-            @endif
-        </div>
-        <div class="text-center @if(auth()->user()->status_id == '1') notify2 @elseif(auth()->user()->status_id == '0') notify @else notify3 @endif cor_black"  id="alerta" style="margin-top:10px;">
-            @if(auth()->user()->status_id == '1')
-                Parabéns <b>{{auth()->user()->name }}</b> você está <b>Ativado</b> :)
-            @elseif(auth()->user()->status_id == '0')
-                Desculpe <b>{{auth()->user()->name }}</b> sua conta  está <b>Pendente</b>!!
-                <div class="text-center" id="sucesso" style="display:none;margin-bottom:10px;padding:20px;background-color: #63d3f8;border:1px solid #18aecb">
-                </div>
-            @else
-                Desculpe <b>{{auth()->user()->name }}</b> sua conta  está <b>Bloqueada</b>!!
-            @endif
-        </div>
         @if(auth()->user()->status_id == '1' and auth()->user()->id == $data->id)
             {{--@if($usuario->tipo_id == '2' || $usuario->loja_link == null)
                 <div class="text-center notify cor_black">
@@ -215,7 +164,80 @@
             @if(auth()->user()->tipo_id == '1')
             @elseif(auth()->user()->tipo_id  == '2')
             <section id="destaque">
-                <div class="perfil_user_cat left cor_black">
+                <div class="info_cfg">
+                    <div id="user_left">
+                        <h2>Olá, Elias</h2>
+                        <br>
+                        <p>Minha conta está <span style="border-radius:2px;padding:1px 4px;background-color: #24f489;">
+                                @if(auth()->user()->status_id == '1')
+                                   <b>Ativado</b> :)
+                                @elseif(auth()->user()->status_id == '0')
+                                   <b>Pendente</b>!!
+                                @else
+                                   <b>Bloqueada</b>!!
+                                @endif
+                                </span>
+                        <p>
+                            sou um membro desde <b>{{$data->created_at->format('d/m/Y')}}</b>
+                        </p>
+                        <p>minha conta é <b>
+                            @if(auth()->user()->tipo_id == 2)
+                                Pessoa Juridica
+                                @elseif(auth()->user()->tipo_id == 3)
+                                Pessoa Física
+                                @elseif(auth()->user()->tipo_id == 4)
+                                Logista
+                                @endif</b>
+                        </p>
+                    </div>
+                    <div class="user_avatar">
+                        <img src="https://cdn1.iconfinder.com/data/icons/user-pictures/101/malecostume-512.png">
+                    </div>
+                    <div id="user_right">
+                        <h2>Meus Anúncios</h2>
+                    </div>
+                    {{--@if(auth()->user()->tipo_id == "2" || auth()->user()->tipo_id == "3")
+                        <ul class="menu_u" style="margin-top:-25px;">
+                            <li class="text-right">
+                                --}}{{-- <a title="Assinatura" class="botao cor_black" href="#"><i class="fa fa-star fa-lg"></i> &nbsp; Assinatura </a>|
+
+                                 <a title="Depoimento" class="botao cor_black" href="#"><i class="fa fa-list-alt  fa-lg"></i> &nbsp; Feedback </a>|
+
+                                 <a title="Leilão" class="botao cor_black" href="#"><i class="fa fa-legal  fa-lg"></i> &nbsp; Leilão </a>|
+         --}}{{--
+                                <a title="Configurações" class=" cor_black" href="{{url('user')}}/{{auth()->user()->id}}/configuracao"><i class="fa fa-cog  fa-lg"></i> &nbsp; Configurações </a>
+
+                            </li>
+                        </ul>
+                    @elseif(auth()->user()->tipo_id == "4")
+                        <h1 style="font-size: 2em">Minha Loja</h1>
+                        <ul class="menu_u" style="margin-top:-25px;">
+                            <li class="text-right">
+                                <a title="Assinatura" class="botao cor_black" href="#"><i class="fa fa-star fa-lg"></i> &nbsp; Assinatura </a>|
+
+                                <a title="Depoimento" class="botao cor_black" href="#"><i class="fa fa-list-alt  fa-lg"></i> &nbsp; Feedback </a>|
+
+                                <a title="Leilão" class="botao cor_black" href="#"><i class="fa fa-legal  fa-lg"></i> &nbsp; Leilão </a>|
+
+                                <a title="Configurações" class="botao cor_black" href="{{url('user')}}/{{auth()->user()->id}}/configuracao"><i class="fa fa-cog  fa-lg"></i> &nbsp; Configurações </a>
+
+                            </li>
+                        </ul>
+                    @elseif(auth()->user()->tipo_id == '1')
+                        <--}}{{--h1 style="font-size: 2em">Anuncios</h1>
+                    <ul class="menu_u" style="margin-top:-25px;">
+                        <li class="text-right">
+                            <a title="Assinatura" class="botao cor_black" href="{{url('user')}}"><i class="fa fa-group fa-lg"></i> &nbsp; Usuários </a> &nbsp;|
+                            <a title="Usuários" class="botao cor_black" href="{{url('user')}}/"><i class="fa fa-legal  fa-lg"></i> &nbsp; Leilão </a> &nbsp;|
+                            <a title="Anúncios" class="botao cor_black" href="{{url('user')}}/{{auth()->user()->id}}"><i class="fa fa-bullhorn  fa-lg"></i> &nbsp; Anúncios </a> &nbsp;|
+                            <a title="Configurações" class="botao cor_black" href="config"><i class="fa fa-cog  fa-lg"></i> Configurações </a>
+                        </li>
+                    </ul>--}}{{--
+                    @endif--}}
+                </div>
+                <span class="separator cor_black top_15">
+                </span>
+                <div class="left cor_black top_15">
                     <h3>Total de Anuncios</h3>
                     <p style="margin:20px">
                     <h5 style="background-color: #96caff;padding: 10px 0px 10px 0px ;margin:3px 0px 3px 0px;border-radius:3px;"><span style="background-color: #f5f5f5;border:1px dotted #e5e5e5;padding: 15px;margin:1px 5px;border-radius:3px"><b>{{\App\Models\Anuncio::withTrashed()->where('user_id', auth()->user()->id)->count() + \App\Models\Anuncio::where('user_id', auth()->user()->id)->where('status_id', 0)->where('status_id', 1)->where('status_id', 2)->where('status_id', 3)->count()}}</b></span>Total</h5>
@@ -242,14 +264,14 @@
                     <div class="sub_anuncio"><i class="fa fa-clock-o" style="font-size:18px"></i> Anúncios Pendentes
                     <p style="font-size:1em;margin-top:-7px;margin-right:-20px;padding:7px;float: right;background-color: #d9d9d9">Total <b>{{\App\Models\Anuncio::all()->where('user_id', auth()->user()->id)->where('status_id', 0)->count()}}</b></p>
                     </div>
-                    @forelse(\App\Models\Anuncio::all()->where('user_id', auth()->user()->id)->where('status_id', 0) as $z)
+                    @forelse($anuncio->where('user_id', auth()->user()->id)->where('status_id', 0)->take(5) as $z)
                         <aside class="anuncios">
                             <div style="position:relative;float:left;width:100%;padding-right: 2px;">
                                 <div class="foto fade" style="margin-bottom:0px;margin-right:10px;width:250px;height: 160px;position:relative;float:left;">
                                         <img src="{{url('app/media/anuncio')}}/{{$z->fotos->base64 or 'image.jpeg'}}" alt="Imagem">
                                 </div>
                                 <h3 style="font-weight: 600;margin-top:5px;">{{$z->titulo}}</h3>
-                                    <p style="height: 102px;">// {{str_limit($z->descricao->descricao, 200)}}
+                                    <p style="height: 102px;">// {{str_limit($z->descricao or '', 200)}}
                                     </p>
                                         {{--{{$z->user_id}} - {{auth()->user()->id}}--}}
 
@@ -271,22 +293,13 @@
 
                            <div class="text-center" style="position:relative;float:right;padding: 10px;width:100%;background-color: #f4f4f4;"> Não há registro!</div>
                     @endforelse
-                    {{--
-                        @if($anuncio)
-                        @if($anuncio->links())
-                            {!! $anuncio->links() !!}
-                        @else
-
-                        @endif
-                        @endif
-                     --}}
                 </div>
 
                 <div class="perfil_user_anuncio right cor_black" style="width: 80%;padding:20px">
                     <div class="sub_anuncio"><i class="fa fa-check" style="font-size:18px"></i> Anúncios Ativos
                     <p style="font-size:1em;margin-top:-7px;margin-right:-20px;padding:7px;float: right;background-color: #d9d9d9">Total <b>{{\App\Models\Anuncio::all()->where('user_id', auth()->user()->id)->where('status_id', 1)->count()}}</b></p>
                     </div>
-                @forelse(\App\Models\Anuncio::all()->where('user_id', auth()->user()->id)->where('status_id', 1)->where('status_pagamento', 1) as $z)
+                @forelse($anuncio->where('user_id', auth()->user()->id)->where('status_id', 1)->where('status_pagamento', 1) as $z)
                         <aside class="anuncios">
                                 <div class="wrapper">
 
@@ -309,7 +322,7 @@
                                     </a>
                                 </div>
                                 <h3 style="font-weight: 600;margin-top:5px;">{{$z->titulo}}</h3>
-                                <p style="height: 102px;">// {{str_limit($z->descricao->descricao, 200)}}</p>
+                                <p style="height: 102px;">// {{str_limit($z->descricao or '', 200)}}</p>
                                 {{--{{$z->user_id}} - {{auth()->user()->id}}--}}
 
 
@@ -325,8 +338,7 @@
                         <hr class="style12">
                     @empty
                     @endforelse
-
-                    @forelse(\App\Models\Anuncio::all()->where('user_id', auth()->user()->id)->where('status_id', 1)->where('status_pagamento', 0) as $z)
+                    @forelse($anuncio->where('user_id', auth()->user()->id)->where('status_id', 1)->where('status_pagamento', 0) as $z)
                         <aside class="anuncios">
                             <div style="position:relative;float:left;width:100%;padding-right: 2px;">
                                 {{-- <div style="margin-right:20px;height:100%;;width:auto;max-width:200px;padding: 2px;border: 1px dotted #ccc">
@@ -340,7 +352,7 @@
                                     </a>
                                 </div>
                                 <h3 style="font-weight: 600;margin-top:5px;">{{$z->titulo}}</h3>
-                                <p style="height: 102px;">// {{str_limit($z->descricao->descricao, 200)}}</p>
+                                <p style="height: 102px;">// {{str_limit($z->descricao or '', 200)}}</p>
                                 {{--{{$z->user_id}} - {{auth()->user()->id}}--}}
 
 
@@ -360,15 +372,12 @@
                             @else
                         @endif
                     @endforelse
-                    {{--
                         @if($anuncio)
-                        @if($anuncio->links())
-                            {!! $anuncio->links() !!}
-                        @else
-
+                            @if($anuncio->links())
+                                {!! $anuncio->links() !!}
+                            @else
+                            @endif
                         @endif
-                        @endif
-                     --}}
                 </div>
             </section>
         @elseif(auth()->user()->tipo_id == '3')

@@ -1,9 +1,14 @@
 @extends('layouts.limpo')
 @section('content')
     <div class="bg_login"></div>
-    <section id="destaque" style="position: absolute;
-top: 0; bottom: 1;
-left: 0; right: 0;width:50%;color:#000;">
+    <section id="destaque" style="
+left:50%;
+top:50%;
+margin-left:-25%; /* Metade do valor da Largura */
+margin-top:-250px; /* Metade da valor da Altura */
+width:50%; /* Valor da Largura */
+position:absolute;
+color:#000;">
                 <form class="form-horizontal" method="POST" action="{{ route('login') }}">
                     {{ csrf_field() }}
                     <section id="login">

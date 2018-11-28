@@ -1,10 +1,17 @@
-@extends('layouts.app')
-
+@extends('layouts.limpo')
 @section('content')
-    <main class="conteudo">
-        <section id="default2">
-            <section id="login">
+    <div class="bg_login"></div>
+    <section id="destaque" style="
+left:50%;
+top:50%;
+margin-left:-25%; /* Metade do valor da Largura */
+margin-top:-150px; /* Metade da valor da Altura */
+width:50%; /* Valor da Largura */
+position:absolute;
+color:#000;">
+        <section id="login">
                 <h1 class="text-center">Relembrar Senha</h1>
+            <br>
                 <div class="panel-body">
                     @if (session('status'))
                         <div class="alert alert-success">
@@ -40,5 +47,4 @@
                     </form>
             </section>
         </section>
-    </main>
 @endsection

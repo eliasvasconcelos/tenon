@@ -8,22 +8,23 @@ use App\Models\DescricaoAnuncio;
 use App\Models\UserTipo;
 use App\User;
 use App\Models\Categoria;
+use App\Models\Comentario;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Input;
 use Illuminate\Support\Facades\Storage;
-use phpDocumentor\Reflection\Types\Null_;
 
 class AnuncioController extends DefaultController
 {
-    protected $model, $midia, $user, $descricao , $request;
+    protected $model, $midia, $user, $descricao , $comentario , $request;
     protected $view = 'anuncio';
 
-    function __construct(Anuncio $model, AnuncioFoto $midia, DescricaoAnuncio $descricao, User $user, Request $request)
+    function __construct(Anuncio $model, AnuncioFoto $midia, Comentario $comentario, DescricaoAnuncio $descricao, User $user, Request $request)
 
     {
         $this->model = $model;
         $this->midia = $midia;
         $this->user = $user;
+        $this->comentario = $comentario;
         $this->descricao = $descricao;
         $this->request = $request;
     }
@@ -31,13 +32,14 @@ class AnuncioController extends DefaultController
     public function show($id)
     {
      /*  $data = $this->model->find($id);*/
-         $data = $this->model->where("id", $id)->first();
+         $data = $this->model->where("id", $id)->first();/*
+         $comentario = $this->model->where("id", $id)->first();*/
          if($data->status_id != 1)
         {
             return redirect("home");
         }
         else{
-            return view("$this->view.show", compact('data'));
+            return view("$this->view.show", compact('data' , 'comentario'));
         }
     }
 
@@ -201,6 +203,7 @@ class AnuncioController extends DefaultController
         $return['base64'] = $avatar;
         $data['base64'] = $avatar;
         $data['anuncio_id'] = $store->id;
+        $data['user_id'] =  auth()->user()->id;
         $this->midia->create($data);
         $create = [];
         $create['anuncio_id'] =  $store->id;
@@ -209,6 +212,7 @@ class AnuncioController extends DefaultController
         $create['tipo'] = $this->request->get('tipo');
         $this->descricao->create($create);
     }
+
         return 100;
         /*
 
@@ -233,6 +237,14 @@ class AnuncioController extends DefaultController
          AnuncioFoto::create($data);
 
          return 1;*/
+    }
+
+    public function comentario(){
+        $coment['user_id'] =  auth()->user()->id;
+        $coment['anuncio_id'] = $this->request->get('tp');
+        $coment['mensagem'] = $this->request->get('mensagem');
+        $this->comentario->create($coment);
+        return 100;
     }
 
     public function anuncio_update($id)

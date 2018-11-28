@@ -43,4 +43,9 @@ class Anuncio extends Model
     {
         return $this->hasOne(DescricaoAnuncio::class, 'anuncio_id', 'id');
     }
+
+    public function comentarios()
+    {
+        return $this->hasOne(Comentario::class, 'anuncio_id', 'id');
+    }
 }

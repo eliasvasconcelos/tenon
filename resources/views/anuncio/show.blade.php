@@ -4,7 +4,7 @@
     <main class="conteudo">
 
         <div class="nome_cat">
-            <img src="../img/arrow.png" alt="" class="left top_5" width="40px">
+            <img src="../../img/arrow.png" alt="" class="left top_5" width="40px">
             Membro desde
         </div>
         <div class="thumb">
@@ -38,51 +38,23 @@
         <section id="default2">
             <div class="img_anuncio left">
                 @if($data->premium == 1)
-                    <div class="fotorama"
-                         data-width="100%"
-                         data-autoplay="true"
-                         data-loop="true"
-                         data-shuffle="true"
-                         data-fit="contain"
-                         data-arrows="false"
-                         data-trackpad="false"
-                         data-swipe="false"
-                         data-transition="crossfade"
-                         data-ratio="16/9"
-                         data-click="true"
-                         data-allowfullscreen="true"
-                         data-nav="thumbs">
+                    <div class="fotorama" data-width="100%" data-autoplay="true" data-loop="true" data-shuffle="true" data-fit="contain" data-arrows="false" data-trackpad="false" data-swipe="false" data-transition="crossfade" data-ratio="16/9" data-click="true" data-allowfullscreen="true" data-nav="thumbs">
                         @forelse($data->album as $z)
                             <img src="{{url('app/media/anuncio')}}/{{$z->base64 or 'image.jpeg'}}" alt="Imagem">
                         @empty
                         @endforelse
                     </div>
                 @elseif($data->premium == 0)
-                    <div class="fotorama"
-                         data-width="100%"
-                         data-autoplay="true"
-                         data-loop="true"
-                         data-shuffle="true"
-                         data-fit="contain"
-                         data-arrows="false"
-                         data-trackpad="false"
-                         data-swipe="false"
-                         data-transition="crossfade"
-                         data-ratio="16/9"
-                         data-click="true"
-                         data-allowfullscreen="true"
-                         data-nav="thumbs">
-                            @forelse($data->album as $z)
+                    <div class="fotorama" data-width="100%" data-autoplay="true" data-loop="true" data-shuffle="true" data-fit="contain" data-arrows="false" data-trackpad="false" data-swipe="false" data-transition="crossfade" data-ratio="16/9" data-click="true" data-allowfullscreen="true" data-nav="thumbs">
+                        @forelse($data->album as $z)
                             <img src="{{url('app/media/anuncio')}}/{{$z->base64 or 'image.jpeg'}}" alt="Imagem">
-                            @empty
+                        @empty
                             <img src="{{url('app/media/anuncio')}}/{{'image.jpeg'}}" alt="Imagem">
                         @endforelse
                     </div>
                 @endif
                 <section id="default">
-
-
-                    <p>// Descrição : <b>{{$data->descricao->descricao or ''}}</b></p>
+                    <p>// Descrição : <b>{{$data->descricao->descricao->descricao or ''}}</b></p>
                 </section>
 
             </div>
@@ -252,6 +224,33 @@
         </section>
 
         <section id="destaque">
+            <h2 class="text-center" id="comentario">Comentários</h2>
+            <hr class="style12">
+            @forelse($data->comentarios->where('anuncio_id', $data->id)->get() as $z)
+                <div class="comentario left" style="padding:20px;">
+                    <img src="{{url('img')}}/{{$z->user->avatar or ''}}"  class="left" style="position: absolute;height: 40px;background-color: #ca195a">
+                    <div class="contcoment left" style="width:960px;margin-left:50px;">
+                        <h4 class="left">{{$z->user->name or ''}} - </h4> <h6 class="left">perguntou em {{$z->created_at->format('d/m/Y')}} às {{$z->created_at->format('H:i')}}</h6>
+                        <br><span style="">{{nl2br($z->mensagem)}}</span>
+                    </div>
+                </div>
+                @empty
+            @endforelse
+
+            <form id="form-comentario">
+            {{ csrf_field() }}
+                <input type="hidden" name="tp" value="{{$data->id}}">
+                <section id="login">
+                    <label for="name"></label>
+                    <textarea type="text" rows="7" name="mensagem" class="form-control" placeholder="Qual a sua pergunta?"></textarea>
+                    <a class="btn btn-success" onclick="save('comentario', '{{url('anuncio')}}/{{$data->id}}/comentario');"><i class="fa fa-save"></i>
+                        Enviar Comentário
+                    </a>
+                </section>
+            </form>
+        </section>
+
+        <section id="destaque">
             <h1 class="fontzero">Nossos Produtos em Destaque</h1>
 
             <span class="titulo">
@@ -294,7 +293,7 @@
                         <span class="cor_black" style="font-size:13px;"> /animal  </span>
                     </p>
                     <p class="desc_artigo">
-                        {{$data->descricao->descricao or ''}}
+                        {{$data->descricao->descricao->descricao or ''}}
                     </p>
                     <div class="data">
                         <date><i class="fa fa-calendar"></i> {{$value->created_at->format('d/m/Y')}}</date>
@@ -312,4 +311,32 @@
     </main>
     <link  href="{{asset ('css')}}/fotorama.css" rel="stylesheet"> <!-- 3 KB -->
     <script src="{{asset ('js')}}/fotorama.js"></script> <!-- 16 KB -->
+    <script>
+    function save(form, link) {
+    var dataForm = $('#form-' + form).serialize();
+    var id = $("#" + form + "_id").val();
+    var metodo;
+    if (id > 0) {
+    metodo = 'PUT';
+    link = link + '/' + id;
+    } else {
+    metodo = 'PUT';
+    }
+    ajax(link, metodo, dataForm);
+    }
+
+    function ajax(link, metodo, dataForm) {
+    jQuery.ajax({
+    url: link,
+    data: dataForm,
+    cache: false,
+    method: metodo,
+    }).done(function (data) {
+        if(window.top==window) {
+            setTimeout(location.href = "{{url("anuncio")}}/{{$data->id}}");
+        };
+    }).fail(function () {
+    });
+    }
+    </script>
 @endsection

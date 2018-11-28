@@ -53,7 +53,7 @@
                         </ul>
                     @endfor
                         </section>
-                        <form id="form-anuncio" class="form" style="display: none;">
+                        <form id="form-anuncio" style="display: none;">
                             {!! csrf_field() !!}
                             <input type="hidden" id="categoria_id" name="categoria_id" value="">
                             <input type="hidden" id="user_id" name="user_id" value="{{auth()->user()->id}}">

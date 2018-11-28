@@ -67,9 +67,9 @@ class UserController extends DefaultController
     {
         if (auth()->user()->profile == $id) {
             $data = $this->model->where("profile", $id)->first();
-            /*  $usuario = $this->model->where($id)->first();
-                $anuncio = $this->anuncio->where('user_id', $usuario->id)->orderBy('id','DESC')->paginate(10);*/
-            return view("$this->view.show", compact( 'data'));
+            /*  $usuario = $this->model->where($id)->first(); */
+            $anuncio = $this->anuncio->where('user_id', $data->id)->orderBy('id','DESC')->paginate(5);
+            return view("$this->view.show", compact( 'data', 'anuncio'));
         } else {
             return redirect()->back();
         }

@@ -1,8 +1,9 @@
-@extends('layouts.app')
-
+@extends('layouts.limpo')
 @section('content')
-    <main class="conteudo">
-        <section id="default2">
+    <div class="bg_login"></div>
+    <section id="destaque" style="position: absolute;
+top: 0; bottom: 1;
+left: 0; right: 0;width:50%;color:#000;">
             <section id="login">
                 <h1 class="text-center">Relembrar Senha</h1>
                     <form class="form-horizontal" method="POST" action="{{ route('password.request') }}">
@@ -61,6 +62,5 @@
                         </div>
                     </form>
             </section>
-        </section>
-    </main>
+            </section>
 @endsection

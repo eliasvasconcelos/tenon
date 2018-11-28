@@ -21,6 +21,7 @@ Route::group(['middleware' => ['auth']], function (){
 
     Route::put('user/{id}', 'UserController@update');
     Route::put('user/anuncio', 'UserController@anuncio');
+    Route::put('anuncio/{id}/comentario', 'AnuncioController@comentario');
     Route::get('anuncio/{id}/delete', 'AnuncioController@destroy');
     Route::get('user/{id}/configuracao/edit', 'UserController@configuracao');
     Route::get('user/{id}/configuracao', 'UserController@configuracao');
