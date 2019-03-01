@@ -1,4 +1,3 @@
-@extends('layouts.header')
 @extends('layouts.app')
 @section('content')
     <main class="conteudo">
@@ -183,7 +182,7 @@
                         <span class="cor_black" style="font-size:13px;"> /{{$z->descricao->tipo or ''}}</span>
                      </p>
                      <p class="desc_artigo">
-                         {{str_limit($z->descricao, 30)}}
+                         {{str_limit($z->descricao->descricao, 30)}}
                      </p>
                      <div class="data">
                          <date><i class="fa fa-calendar"></i> {{$z->created_at->format('d/m/Y')}}</date>
@@ -262,7 +261,7 @@
          </section>--}}
      </main>
 
-    {{-- <section style="width: 100%;background-color: #63d3f8;float: left">
+   {{-- <section style="width: 100%;background-color: #63d3f8;float: left">
          <section style="color:#000;width: 1140px;background-color: #63d3f8;margin:auto;margin-top:30px;margin-bottom:30px">
              <h1 style="font-size:1.7em;margin:30px 0px">// Região</h1>
 
@@ -277,7 +276,6 @@
                  <a href="#" style="color: #000;">Brasil</a>,
          </section>
      </section>--}}
-
    {{--<section id="compartilhar">
          <div class="bg">
              <div class="width">

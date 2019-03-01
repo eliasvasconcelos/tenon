@@ -1,4 +1,4 @@
-@extends('layouts.limpo')
+@extends('layouts.search')
 <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 @section('content')
     @if(Auth::user()->where('id', auth()->user()->id))
@@ -57,6 +57,7 @@
                             {!! csrf_field() !!}
                             <input type="hidden" id="categoria_id" name="categoria_id" value="">
                             <input type="hidden" id="user_id" name="user_id" value="{{auth()->user()->id}}">
+                            <input type="hidden" id="uf_id" name="uf_id" value="{{auth()->user()->uf_id}}">
                             <div id="imagem_base64"></div>
                             <div id="base64"></div>
                             <section style="width: 100%;padding:50px 0px;margin-top:40px;background-color: #f7f7f7;border-radius:3px;border:1px solid #f5f5f5">
@@ -95,6 +96,17 @@
                                             <option value="Cabeça">Cabeça</option>
                                             <option value="Arroba">Arroba</option>
                                             <option value="Animal">Animal</option>
+                                        </select>
+                                        <select name="apitidao_id" class="form-control" style="padding: 6px;">
+                                            <option value="">Selecione</option>
+                                            @forelse(\App\Models\Apitidao::all() as $z)
+                                                @if($z->id == auth()->user()->id)
+                                                    <option value="{{$z->id}}" selected>{{$z->nome}}</option>
+                                                @else
+                                                    <option value="{{$z->id}}">{{$z->nome}}</option>
+                                                @endif
+                                            @empty
+                                            @endforelse
                                         </select>
                                     </section>
                                 </section>
@@ -137,7 +149,7 @@
                                             <input name="uf" style="width: 100%" type="text" id="uf" class="form-control" disabled>
                                 </section>
                             </section>--}}
-                              {{--  <div style="float: left;width: 100%;">
+                                <div style="float: left;width: 100%;">
                                             <h3>Localização</h3>
                                         <select  class="form-control" name="uf_id" id="uf_id">
                                             @forelse(\App\Models\Uf::all() as $z)
@@ -150,7 +162,7 @@
                                             @empty
                                             @endforelse
                                         </select>
-                                </div>--}}
+                                </div>
                                 {{--<div class="form-group">
                                     <div class="input-group">
                                         <div class="input-group-addon">Preço</div>

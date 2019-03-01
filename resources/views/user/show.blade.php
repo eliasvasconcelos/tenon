@@ -1,16 +1,17 @@
-@extends('layouts.limpo')
+@extends('layouts.search')
 <script src="https://www.cssscript.com/demo/beautiful-native-javascript-alert-replacement-sweet-alert/lib/sweet-alert.js"></script>
 <link rel="stylesheet" type="text/css" href="https://www.cssscript.com/demo/beautiful-native-javascript-alert-replacement-sweet-alert/lib/sweet-alert.css">
 @section('content')
     <main class="conteudo">
     @auth
-
-        @if(auth()->user()->status_id == '1' and auth()->user()->id == $data->id)
-            {{--@if($usuario->tipo_id == '2' || $usuario->loja_link == null)
+    @if(auth()->user()->status_id == '1' and auth()->user()->id == $data->id)
+        {{--
+            @if($usuario->tipo_id == '2' || $usuario->loja_link == null)
                 <div class="text-center notify cor_black">
                     Notamos que você não personalizou o seu link de acesso para a sua loja virtual, faça agora mesmo <b>clique aqui</b>
                 </div>
-            @endif--}}
+            @endif
+        --}}
     @endauth
         {{--<section id="leiloes">
             <div class="user_anuncio">
@@ -37,16 +38,14 @@
             </div>
         </section>--}}
         @if(auth()->user()->status_id == '1')
-           {{-- <section id="leiloes">
+            {{--<section id="leiloes">
                 <div class="user_anuncio fade" style="width:150px;height: 150px">
                     <a href="{{url('user')}}/{{auth()->user()->id}}">
-                        --}}{{--
                             <img src="{{$z->fotos->base64 or '../img/image.jpeg'}}" alt="Imagem">
-                        --}}{{--
-                        <img src="@if(auth()->user()->foto_perfil == null) {{asset ('img/sem-foto.png')}} @else {{auth()->user()->foto_perfil}} @endif">
+                        <img src="@if(auth()->user()->foto_perfil == null) {{asset ('img/default.jpg')}} @else {{auth()->user()->foto_perfil}} @endif">
                     </a>
                 </div>
-                    --}}{{--<div class="descricao_anuncio" style="margin-left:170px">
+                  <div class="descricao_anuncio" style="margin-left:170px">
                         <h3>Oi, {{auth()->user()->name}}</h3>
                         @if(auth()->user()->tipo_id == "2" || auth()->user()->tipo_id == "4")
                             Pessoa Jurídica
@@ -63,9 +62,9 @@
                         @if(auth()->user()->tipo_id == "4")
                             <h1 style="font-size: 2em">Minha Loja</h1>
                         @endif
-                    </div>--}}{{--
-            </section>--}}
-            {{--<section id="default2">
+                    </div>
+            </section>
+            <section id="default2">
                 <div class="perfil_user_cat left cor_black">
                     <h3>Total de Anuncios</h3>
                     <p style="margin:20px">
@@ -95,35 +94,16 @@
 8                            <div class="left" style="background-color: #f5f5f5;padding: 2px;border: 1px dotted #ccc">
                                 <div class="foto fade" style="width:250px;height: 160px;">
                                     <a href="{{url('anuncio')}}/{{$z->id}}">
-                                        --}}{{--   <img src="{{$z->fotos->base64 or '../img/image.jpeg'}}" alt="Imagem">
-                                          --}}{{--
-                                        <span class="hidden" style="display: none">{{$aa = 0}}</span>
-                                        @forelse($z->album as $x)
-                                            @if($x->base64 == null)
-                                            @else
-                                                <span class="hidden" style="display: none">{{$aa = 1}}</span>
-                                                <img src="{{$x->base64}}" alt="Imagem">
-                                                @break
-                                            @endif
-                                        @empty
-                                            <img src="{{'../img/image.jpeg'}}" alt="Imagem">
-                                        @endforelse
-                                        @if($aa == 0)
-                                            <img src="{{'../img/image.jpeg'}}" alt="Imagem">
-                                        @endif
+                                         <img src="{{url('app/media/anuncio')}}/{{$z->fotos->base64 or '../img/image.jpeg'}}" alt="Imagem">
                                     </a>
                                 </div>
---}}{{--
-                                <a href="../anuncio/{{$z->id}}"><img src="{{$z->fotos->base64 or '../img/image.jpeg'}}" alt="Imagem" height="130px" width="200"></a>
---}}{{--
                             </div>
                             <div style="height: 140px;margin-left:230px">
                                 <h3 style="font-weight: 600;text-color:#000;">{{$z->titulo}}</h3>
-                                // {{$z->descricao}}
+                                // {{$z->descricao->descricao or ''}}
                                 <br />Postado por: <b>{{$z->user->name or ''}}</b>
                                 <br />Data: <b>{{$z->user->created_at or ''}}</b>
                                 <br/><br/>
-                                --}}{{--{{$z->user_id}} - {{auth()->user()->id}}--}}{{--
                                 <a class="cor_black" style="padding: 10px 20px;background-color: #2ab27b;border:1px solid #f4f4f4" href="{{url ('anuncio')}}/{{$z->id}}/edit">Editar</a>
                                 @if($z->premium == 1)
                                     |<a class="cor_black" style="padding: 10px 20px;background-color: #c596ff;border:1px solid #f4f4f4" href="#">Premium</a>
@@ -133,9 +113,8 @@
                                     | <a class="cor_black" style="padding: 10px 20px;background-color: #24f489;border:1px solid #f4f4f4" href="{{url ('anuncio')}}/{{$z->id}}/update?status=1">Ativar</a>
                                 @elseif($z->status_id == 1)
                                     | <a class="cor_black" style="padding: 10px 20px;background-color: #ffc863;border:1px solid #f4f4f4" href="{{url ('anuncio')}}/{{$z->id}}/update?status=0">Desativar</a>
-                                    --}}{{--
+
                                       <a class="cor_black" style="padding: 10px 20px;background-color: #ffc863;border:1px solid #e5e5e5" href="{{url ('anuncio')}}/{{$z->id}}/edit">Pendente</a> |
-                                    --}}{{--
                                 @endif
                                 @elseif($z->status_id == 2)
                                     | <a class="cor_black" style="padding: 10px 20px;background-color: #24f489;border:1px solid #f4f4f4" href="{{url ('anuncio')}}/{{$z->id}}/update?status=1">Ativar</a>
@@ -150,14 +129,14 @@
                     @empty
                         Não há registro!
                     @endforelse
---}}{{--
+
                     @if($anuncio)
                         @if($anuncio->links())
                             {!! $anuncio->links() !!}
                         @else
 
                         @endif
-                    @endif--}}{{--
+                    @endif
                 </div>
             </section>--}}
 
@@ -165,33 +144,33 @@
             @elseif(auth()->user()->tipo_id  == '2')
             <section id="destaque">
                 <div class="info_cfg">
+                    <div class="user_avatar">
+                        <img src="https://blacksaildivision.com/wp-content/uploads/2015/03/centos-users-and-groups-624x390.jpg">
+                    </div>
                     <div id="user_left">
-                        <h2>Olá, Elias</h2>
+                        <h2>Elias</h2>
                         <br>
-                        <p>Minha conta está <span style="border-radius:2px;padding:1px 4px;background-color: #24f489;">
+                        <p><span style="border-radius:2px;padding:1px 4px;background-color: #24f489;">
                                 @if(auth()->user()->status_id == '1')
-                                   <b>Ativado</b> :)
+                                    <b>Ativado</b> :)
                                 @elseif(auth()->user()->status_id == '0')
-                                   <b>Pendente</b>!!
+                                    <b>Pendente</b>!!
                                 @else
-                                   <b>Bloqueada</b>!!
+                                    <b>Bloqueada</b>!!
                                 @endif
                                 </span>
                         <p>
                             sou um membro desde <b>{{$data->created_at->format('d/m/Y')}}</b>
                         </p>
                         <p>minha conta é <b>
-                            @if(auth()->user()->tipo_id == 2)
-                                Pessoa Juridica
+                                @if(auth()->user()->tipo_id == 2)
+                                    Pessoa Juridica
                                 @elseif(auth()->user()->tipo_id == 3)
-                                Pessoa Física
+                                    Pessoa Física
                                 @elseif(auth()->user()->tipo_id == 4)
-                                Logista
+                                    Logista
                                 @endif</b>
                         </p>
-                    </div>
-                    <div class="user_avatar">
-                        <img src="https://cdn1.iconfinder.com/data/icons/user-pictures/101/malecostume-512.png">
                     </div>
                     <div id="user_right">
                         <h2>Meus Anúncios</h2>
@@ -268,7 +247,7 @@
                         <aside class="anuncios">
                             <div style="position:relative;float:left;width:100%;padding-right: 2px;">
                                 <div class="foto fade" style="margin-bottom:0px;margin-right:10px;width:250px;height: 160px;position:relative;float:left;">
-                                        <img src="{{url('app/media/anuncio')}}/{{$z->fotos->base64 or 'image.jpeg'}}" alt="Imagem">
+                                    <img src="{{url('app/media/anuncio')}}/{{$z->fotos->base64 or 'image.jpeg'}}" alt="Imagem">
                                 </div>
                                 <h3 style="font-weight: 600;margin-top:5px;">{{$z->titulo}}</h3>
                                     <p style="height: 102px;">// {{str_limit($z->descricao or '', 200)}}

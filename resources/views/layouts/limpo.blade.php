@@ -5,11 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
-
     <title>{{ config('app.name', 'Tenon') }}</title>
     <meta name="Description" content="">
     <meta name="author" content="Elias Vasconcelos">
-    <meta keywords="">
     <link rel="shortcut icon" href="">
     <link rel="stylesheet" href="{{ asset('css/style.css') }}">
     <link rel="stylesheet" href="{{ asset('css/resolucao.css') }}">

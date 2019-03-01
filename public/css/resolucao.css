@@ -54,7 +54,7 @@
 @media screen and (min-width: 640px){
 	
 .topo{
-    height:300px;
+    height:180px;
 }
 .logo{
     margin: 5px auto;
@@ -163,7 +163,7 @@ h1 {
     font-size: 2em;
 }
 .topo{
-    height:370px;
+    height:200px;
 }
 .topo_search{
     height:170px;
@@ -200,7 +200,7 @@ h1 {
     visibility:hidden;
 }
 .header_pesquisa{
-    width: 34%;
+    width: 90%;
     float: left;
 }
 .categorias{
@@ -251,10 +251,6 @@ h1 {
 }
 
 @media screen and (min-width: 960px){
-	
-.topo{
-    height:400px;
-}
 .topo_search{
     height:200px;
 }
@@ -263,9 +259,6 @@ h1 {
 }
 .menu{
     width: 40%;
-}	
-.header_pesquisa{
-    width: 45%;
 }
 
 .anunciar2{
@@ -299,11 +292,6 @@ h1 {
 .oculta{
 	display: block;
 }
-.topo{
-    margin-top: -1px;
-    padding:  2% 5%;
-    height : 268px;
-}
 .topo_search{
     margin-top: -1px;
     padding:  2% 5%;
@@ -333,9 +321,6 @@ margin-top: -47px;
     width :20% ;
     margin: 0px 75px 0px 0px ;
 }
-.header_pesquisa{
-    width: 48%;
-}	
 #destaque .item{
     width: 23%;
     margin-left: 1.6%;
@@ -381,7 +366,6 @@ margin-top: -47px;
 }
 .bg_busca{
     width: 1140px;
-	
 }
 .header_op{
     float: none;
@@ -392,11 +376,6 @@ margin-top: -47px;
 }
 .anunciar2{
     margin-right: 95px;
-}
-.anunciar{
-}
-.header_pesquisa{
-    width: 58%;
 }
 .conteudo{
     width: 1138px; 

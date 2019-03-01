@@ -12,7 +12,7 @@ class Anuncio extends Model
 
     protected $dates = ['deleted_at'];
 
-    protected $fillable = ['user_id', 'categoria_id', 'titulo', 'uf_id', 'premium', 'status_id'];
+    protected $fillable = ['user_id', 'categoria_id', 'titulo', 'uf_id', 'premium', 'status_id', 'apitidao_id'];
 
     public function categoria()
     {
@@ -47,5 +47,9 @@ class Anuncio extends Model
     public function comentarios()
     {
         return $this->hasOne(Comentario::class, 'anuncio_id', 'id');
+    }
+    public function apitidao()
+    {
+        return $this->hasOne(Apitidao::class, 'id', 'id');
     }
 }

@@ -2,7 +2,6 @@
 
 @section('content')
     <main class="conteudo">
-
         <div class="nome_cat">
             <img src="../../img/arrow.png" alt="" class="left top_5" width="40px">
             Membro desde
@@ -54,7 +53,7 @@
                     </div>
                 @endif
                 <section id="default">
-                    <p>// Descrição : <b>{{$data->descricao->descricao->descricao or ''}}</b></p>
+                    <p>// Descrição : <b>{{$data->descricao->descricao or ''}}</b></p>
                 </section>
 
             </div>
@@ -224,19 +223,26 @@
         </section>
 
         <section id="destaque">
-            <h2 class="text-center" id="comentario">Comentários</h2>
+            <h2 class="text-center" id="comentario">Perguntas</h2>
             <hr class="style12">
-            @forelse($data->comentarios->where('anuncio_id', $data->id)->get() as $z)
-                <div class="comentario left" style="padding:20px;">
-                    <img src="{{url('img')}}/{{$z->user->avatar or ''}}"  class="left" style="position: absolute;height: 40px;background-color: #ca195a">
-                    <div class="contcoment left" style="width:960px;margin-left:50px;">
-                        <h4 class="left">{{$z->user->name or ''}} - </h4> <h6 class="left">perguntou em {{$z->created_at->format('d/m/Y')}} às {{$z->created_at->format('H:i')}}</h6>
-                        <br><span style="">{{nl2br($z->mensagem)}}</span>
+            @if($data->comentarios != null)
+                @forelse($data->comentarios->where('anuncio_id', $data->id)->get() as $z)
+                    <div class="comentario left" style="padding:20px;">
+                        <img src="{{url('img')}}/{{$z->user->avatar or ''}}"  class="left" style="position: absolute;height: 40px;border-radius:5px">
+                        <div class="contcoment left" style="width:960px;margin-left:50px;">
+                            <h4 class="left"><b>{{$z->user->name or ''}} </b></h4>
+                            <span class="left" style="width:100%;margin:10px 0px;padding:20px;border:1px solid #ccc;border-radius:10px">
+                                <span  class="left"  style="width:100%;">{{nl2br($z->mensagem)}}</span>
+                                <h6 class="left"  style="width:100%;margin-top:5px">perguntou em <b style="color: #4c4c4c;">{{$z->created_at->format('d/m/Y')}} às {{$z->created_at->format('H:i')}}</b></h6>
+                            </span>
+                        </div>
                     </div>
-                </div>
-                @empty
-            @endforelse
-
+                    @empty
+                @endforelse
+            @else
+                <div class="text-center"> Sem Comentários!!</div>
+            @endif
+        @auth
             <form id="form-comentario">
             {{ csrf_field() }}
                 <input type="hidden" name="tp" value="{{$data->id}}">
@@ -248,6 +254,7 @@
                     </a>
                 </section>
             </form>
+        @endauth
         </section>
 
         <section id="destaque">

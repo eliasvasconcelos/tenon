@@ -2,9 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Anuncio;
 use App\Models\Categoria;
-use http\Url;
 use Illuminate\Http\Request;
 
 class CategoriaController extends DefaultController
@@ -17,13 +15,11 @@ class CategoriaController extends DefaultController
         $this->model = $model;
         $this->request = $request;
     }
-
+/*
     public function index()
     {
         $data = $this->model->where('categoria_id', 0)->get();
         return view("$this->view.index", compact('data'));
-    }
-
-
+    }*/
 }
 

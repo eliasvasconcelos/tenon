@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Anuncio;
 use App\Models\AnuncioFoto;
+use App\Models\Apitidao;
 use App\Models\DescricaoAnuncio;
 use App\Models\UserTipo;
 use App\User;
@@ -15,10 +16,10 @@ use Illuminate\Support\Facades\Storage;
 
 class AnuncioController extends DefaultController
 {
-    protected $model, $midia, $user, $descricao , $comentario , $request;
+    protected $model, $midia, $user, $descricao , $comentario , $apitidao , $request;
     protected $view = 'anuncio';
 
-    function __construct(Anuncio $model, AnuncioFoto $midia, Comentario $comentario, DescricaoAnuncio $descricao, User $user, Request $request)
+    function __construct(Anuncio $model, AnuncioFoto $midia,Apitidao $apitidao, Comentario $comentario, DescricaoAnuncio $descricao, User $user, Request $request)
 
     {
         $this->model = $model;
@@ -26,6 +27,7 @@ class AnuncioController extends DefaultController
         $this->user = $user;
         $this->comentario = $comentario;
         $this->descricao = $descricao;
+        $this->apitidao = $apitidao;
         $this->request = $request;
     }
 
@@ -75,57 +77,95 @@ class AnuncioController extends DefaultController
 
         return 1;
     }
-
-    public function Pesquisar()
+  /*  public function search(Array $data, $totalPage)
     {
-        /*if (Input::has('texto') == false) {
-            return redirect('/');
-        }*/
-        ini_set('memory_limit', '-1');
+        $historics = $this->where(function ($query) use ($data) {
+            if (isset($data['id']))
+                $query->where('id', $data['id']);
+            if (isset($data['date']))
+                $query->where('date', $data['date']);
+            if (isset($data['type']))
+                $query->where('type', $data['type']);
+        })
+            // ->where('user_id', auth()->user()->id)
+            ->userAuth()
+            ->with(['userSender'])
+            ->paginate($totalPage);
+        //->toSql();dd($historics);
+        return $historics;
+    }*/
+    public function pesquisar()
+    {
+       ini_set('memory_limit', '-1');
         set_time_limit(0);
         if (!$this->request->all()) {
             $getArray = [];
             $data = [];
         } else {
             $getArray = $this->request->all();
-            $data_inicial = '';
-            $data_final = '';
-            $status_id = '';
-            $motivo_id = '';
-            $canal_id = '';
-            $operador_id = '';
-            $tempo = '';
+            $categoria = '';
+            $titulo = '';
+            $descricao = '';
+            $aptidao = '';
             foreach ($this->request->all() as $nome_campo => $valor) {
                 $comando = "\$" . $nome_campo . "='" . $valor . "';";
                 eval($comando);
             }
-            $busca = Anuncio::select('anuncios.*')->where('status_id', 1);
-            if ($status_id != '') {
-                $busca->where('status_id', $status_id);
+            $busca = Anuncio::select('anuncios.*');
+
+            if ($categoria != '') {
+                $busca->join('categorias', function ($join) use ($categoria) {
+                    $join->on('anuncios.categoria_id', '=', 'categorias.id')
+                        ->where(function ($query) use ($categoria) {
+                            if ($categoria != '') {
+                                $query->where('anuncios.categoria_id', 'like', "%$categoria%");
+                                $query->orwhere('categorias.nome', 'like', "%$categoria%");
+                            }
+                        });
+                });
             }
-            if ($motivo_id != '') {
-                $busca->where('motivo_id', $motivo_id);
+            if ($titulo != '') {
+                $busca->orwhere('titulo', $titulo);
             }
-            if ($canal_id != '') {
-                $busca->where('canal_id', $canal_id);
+            if ($descricao != '') {
+                $busca->join('descricao_anuncios', function ($join) use ($descricao) {
+                    $join->on('anuncios.categoria_id', '=', 'descricao_anuncios.anuncio_id')
+                        ->where(function ($query) use ($descricao) {
+                            if ($descricao != '') {
+                                $query->where('descricao_anuncios.descricao', 'like', "%$descricao%");
+                            }
+                        });
+                });
             }
-            if ($tempo != '') {
-                $busca->where('tm', $tempo);
+            if ($titulo != '') {
+                $busca->orwhere('corte', $titulo);
             }
-            if ($operador_id != '') {
-                $busca->where('operador_id', $operador_id);
-            }
-            if ($data_inicial != '') {
-                $busca->where('canal_protocolos.created_at', '>=', "$data_inicial 00:00:00");
-            }
-            if ($data_final != '') {
-                $busca->where('canal_protocolos.created_at', '<=', "$data_final 23:59:59");
+            if ($aptidao != '') {
+                $busca->join('apitidaos', function ($join) use ($aptidao) {
+                    $join->on('anuncios.apitidao_id', '=', 'apitidaos.id')
+                        ->where(function ($query) use ($aptidao) {
+                            if ($aptidao != '') {
+                                $query->where('apitidaos.sigla', 'like', "%$aptidao%");
+                            }
+                        });
+                });
             }
             $busca->orderBy('id', 'desc');
             $data = $busca->get();
         }
-        return view("$this->view.search", compact('data', 'getArray'));
-    /*
+
+
+       return view("$this->view.search", compact('data', 'getArray'));
+    }
+/*    public function Pesquisar(Array $data)
+    {
+        /*if (Input::has('texto') == false) {
+            return redirect('/');
+        }
+
+
+
+
 
         $t = Input::get('texto');
         $busca = Anuncio::where('status_id', 1)
@@ -135,7 +175,6 @@ class AnuncioController extends DefaultController
 
         return view("$this->view.search")->with('result', $busca);*/
 
-    }
 
     public function destroy($id)
     {
@@ -152,13 +191,16 @@ class AnuncioController extends DefaultController
         }
     }
 
-    public function novo()
+    public function create()
     {
-        if(Auth()->user()->status_id == 0){
-            return redirect("user/".Auth()->user()->profile."#alerta");
+        if(Auth()->user()){
+            if(Auth()->user()->status_id == 0){
+                return redirect("user/".Auth()->user()->profile."#alerta");
+            }
+            return view("$this->view.cad");
+        }else{
+            return redirect("login");
         }
-        return view("$this->view.cad");
-
         /* $inserir = $this->model->create([
              'user_id' =>   1,
              'categoria_id' =>  4,
@@ -203,6 +245,7 @@ class AnuncioController extends DefaultController
         $return['base64'] = $avatar;
         $data['base64'] = $avatar;
         $data['anuncio_id'] = $store->id;
+        $data['apitidao_id'] = $store->apitidao_id;
         $data['user_id'] =  auth()->user()->id;
         $this->midia->create($data);
         $create = [];
