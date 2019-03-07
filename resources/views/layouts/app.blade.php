@@ -25,7 +25,7 @@
         $(document).ready(function() {
             var nav = $('.top_esq');
             $(window).scroll(function () {
-                if ($(this).scrollTop() > 540) {
+                if ($(this).scrollTop() > 300) {
                     nav.addClass("fixo");
                 } else {
                     nav.removeClass("fixo");
@@ -35,7 +35,7 @@
         $(document).ready(function() {
             var nav = $('.cat_principal');
             $(window).scroll(function () {
-                if ($(this).scrollTop() > 540) {
+                if ($(this).scrollTop() > 300) {
                     nav.addClass("cat_fixa");
                 } else {
                     nav.removeClass("cat_fixa");
@@ -146,25 +146,24 @@
 --}}
       <form action="{{url('pesquisar')}}" method="get">
            <input id="busca-cursor" placeholder="Digite aqui...." type="text" name="texto" value="{{request()->get('texto')}}" class="header_pesquisa">
-          {{-- <select class="categorias" name="categoria">
+          {{--<select class="categorias" name="categoria">
               <option value="" selected>O que é?</option>
               @forelse(\App\Models\Categoria::orderBy('id')->where('categoria_id',0)->get() as $z)
                   <option value="{{$z->id}}">{{$z->nome}}</option>
               @empty
                   <li class="cor_black">Sem Categoria</li>
               @endforelse
-          </select>
-          <select name="estado" class="estados" id="id_estados">
-              <option value="" selected>Qual local?
-              </option>
-              @forelse(\App\Models\Uf::orderBy('id')->get() as $z)
-                   <option value="{{$z->sigla}}">{{$z->uf}}</option>
-              @empty
-                  <li class="cor_black">Sem Categoria</li>
-              @endforelse
-          </select>
+              </select>
+              <select name="estado" class="estados" id="id_estados">
+                  <option value="" selected>Qual local?
+                  </option>
+                  @forelse(\App\Models\Uf::orderBy('id')->get() as $z)
+                       <option value="{{$z->sigla}}">{{$z->uf}}</option>
+                  @empty
+                      <li class="cor_black">Sem Categoria</li>
+                  @endforelse
+              </select>
            <button class="btn_busca"><i class="fa fa-search fa-lg b_pes"></i> pesquisar</button>--}}
-
           <button style="background: none;float: right"><i class=" fa fa-search fa-3x busca_icon"></i></button>
       </form>
    </div>
